@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Date;
-import java.util.Random;
 
 public class Oferta {
 
@@ -92,7 +91,6 @@ public class Oferta {
 	}
 	@Override
 	public int hashCode() {
-		int n = 9;
 		int numero = (int) Math.random();
 		System.out.println(numero);
 		return numero;
