@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,20 +15,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Añadir Demanda</title>
 </head>
-<body>
+<body class="formulario">
 <form:form class="form-horizontal" method="post" modelAttribute="demanda">
   <fieldset>
     <legend>Nueva Demanda</legend>
-    <div class="form-group">
-      <label for="codigoDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Demanda</label>
-
-      <div class="col-md-2">
-        <form:input path="codigoDemanda" type="text" class="form-control" id="codigoDemanda" placeholder="Codigo demanda"></form:input>
-      </div>
-      <div>
-      	<form:errors path="codigoDemanda" cssClass="error"/>
-      </div>
-    </div>
     <div class="form-group">
       <label for="descripcion" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion</label>
 
@@ -98,8 +88,8 @@
     </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="button" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Añadir</button>
+        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
       </div>
     </div>
   </fieldset>

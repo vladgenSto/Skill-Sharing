@@ -18,7 +18,6 @@
 <h1>Lista de Demandas</h1>
 <table class="table table-hover">
 <tr>
-<th>Codigo Demanda</th>
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
@@ -28,7 +27,6 @@
 </tr>
 <c:forEach items="${listaDemandasUsuario}" var="demanda">
 <tr>
-<th>${demanda.codigoDemanda}</th>
 <th>${demanda.descripcion}</th>
 <th>${demanda.fechaInicio}</th>
 <th>${demanda.fechaFin}</th>
@@ -45,7 +43,6 @@
 <h1>Lista de Ofertas</h1>
 <table class="table table-hover">
 <tr>
-<th>Codigo Oferta</th>
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
@@ -55,7 +52,6 @@
 </tr>
 <c:forEach items="${listaOfertasRelacionadas}" var="oferta">
 <tr>
-<th>${oferta.codigoOferta}</th>
 <th>${oferta.descripcion}</th>
 <th>${oferta.fechaInicio}</th>
 <th>${oferta.fechaFin}</th>

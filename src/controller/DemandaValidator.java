@@ -18,11 +18,8 @@ public class DemandaValidator {
 	
 	public void validate(Object obj, Errors errors) {
 		Demanda demanda = (Demanda) obj;
-//		if (demanda.getCodigoDemanda().trim().equals(""))
-//			errors.rejectValue("codigoDemanda", "obligatori", "Este campo es obligatorio");
-//		if (demanda.getCodigoDemanda().length() > 9)
-//			errors.rejectValue("codigoDemanda", "obligatori", "Este campo supera los 9 caracteres");
-//		
+		if (demanda.getDescripcion().trim().equals(""))
+			errors.rejectValue("descripcion", "obligatori", "Este campo es obligatorio");
 		if (demanda.getDescripcion().length() > 200)
 			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
 
@@ -34,6 +31,7 @@ public class DemandaValidator {
 			errors.rejectValue("fechaInicio", "obligatori", "Fecha posterior a la final");
 			errors.rejectValue("fechaFin", "obligatori", "Fecha inferior a la inicial");
 		}
+		
 		if (demanda.getDniEstudiante().trim().equals(""))
 			errors.rejectValue("dniEstudiante", "obligatori", "Este campo es obligatorio");
 		if (demanda.getDniEstudiante().length() > 9)

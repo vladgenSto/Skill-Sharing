@@ -27,6 +27,7 @@ import domain.UserDetails;
 @RequestMapping(value="/oferta")
 public class OfertaController {
 
+	private Oferta oferta;
 	private OfertaDAO ofertaDao;
 	private HabilidadDAO habilidadDao;
 	
@@ -57,6 +58,11 @@ public class OfertaController {
 	public String addOferta(Model model){
 		model.addAttribute("oferta",new Oferta());
 		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
+		Date fecha = new Date();
+		model.addAttribute("fechaInicio", fecha);
+		int year = fecha.getYear() + 1;
+		fecha.setYear(year);
+		model.addAttribute("fechaFin", fecha);
 		return "oferta/add";
 	}
 	
@@ -75,6 +81,7 @@ public class OfertaController {
 	@RequestMapping(value="/update/{codigoOferta}",method=RequestMethod.GET)
 	public String editOferta(Model model, @PathVariable int codigoOferta){
 		model.addAttribute("oferta",ofertaDao.getOferta(codigoOferta));
+		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 		return "oferta/update";
 	}
 	

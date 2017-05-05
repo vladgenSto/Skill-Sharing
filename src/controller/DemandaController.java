@@ -86,6 +86,7 @@ public class DemandaController {
 	@RequestMapping(value="/update/{codigoDemanda}",method=RequestMethod.GET)
 	public String editDemanda(Model model, @PathVariable int codigoDemanda){
 		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
+		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 		return "demanda/update";
 	}
 	

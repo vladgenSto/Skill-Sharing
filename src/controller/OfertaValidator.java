@@ -19,12 +19,6 @@ public class OfertaValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Oferta oferta=(Oferta) obj;
-//		if(oferta.getCodigoOferta() == 0){
-//			errors.rejectValue("codigoOferta", "obligatorio","Este campo es obligatorio");
-//		}
-//		if (oferta.getCodigoOferta().length() > 9) {
-//			errors.rejectValue("codigoDemanda", "obligatori", "Este campo supera los 9 caracteres");
-//		}
 		if(oferta.getDescripcion().trim().equals("")){
 			errors.rejectValue("descripcion", "obligatorio","Este campo es obligatorio");
 		}else if (oferta.getDescripcion().length() > 200)
@@ -43,7 +37,7 @@ public class OfertaValidator implements Validator{
 		}else if(oferta.getDniEstudiante().length()>9){
 			errors.rejectValue("dniEstudiante", "obligatorio","Este campo supera los 9 caracteres");
 		}
-		if(oferta.getNombreHabilidad().trim().equals("")){
+		if(oferta.getNombreHabilidad().trim().equals("---Elige---")){
 			errors.rejectValue("nombreHabilidad", "obligatorio","Este campo es obligatorio");
 		}else if (oferta.getNombreHabilidad().length() > 30)
 			errors.rejectValue("nombreHabilidad", "obligatori", "Este campo supera los 30 caracteres");

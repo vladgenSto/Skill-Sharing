@@ -18,7 +18,6 @@
 <h1>Lista de Ofertas</h1>
 <table class="table table-hover">
 <tr>
-<th>Codigo Oferta</th>
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
@@ -28,7 +27,6 @@
 </tr>
 <c:forEach items="${listaOfertasUsuario}" var="oferta">
 <tr>
-<th>${oferta.codigoOferta}</th>
 <th>${oferta.descripcion}</th>
 <th>${oferta.fechaInicio}</th>
 <th>${oferta.fechaFin}</th>

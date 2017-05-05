@@ -18,6 +18,13 @@
 	background-color: #ffe082;
 }
 
+.formulario {
+	background-color: #ffe082;
+	top: 15px;
+	left: 15px;
+	position: relative;
+}
+
 /*Intro*/
 
 h4:first-letter {

@@ -13,25 +13,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ripples.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></link>
-
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 
 <title>Añadir Oferta</title>
 </head>
-<body>		
+<body class="formulario">		
 <form:form class="form-horizontal" method="post" modelAttribute="oferta">
   <fieldset>
     <legend>Nueva Oferta</legend>
-<!--     <div class="form-group"> -->
-<!--       <label for="codigoOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Oferta</label> -->
-
-<!--       <div class="col-md-2"> -->
-<%--         <form:input path="codigoOferta" type="text" class="form-control" id="codigoOferta" placeholder="Codigo oferta"></form:input> --%>
-<!--       </div> -->
-<!--       <div> -->
-<%--       	<form:errors path="codigoOferta" cssClass="error"/> --%>
-<!--       </div> -->
-<!--     </div> -->
     <div class="form-group">
       <label for="descripcion" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion</label>
 
@@ -47,7 +36,7 @@
       <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
 
       <div class="col-md-2">
-        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicio}"></form:input>
       </div>
       <div>
       	<form:errors path="fechaInicio" cssClass="error"/>
@@ -57,7 +46,7 @@
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
       <div class="col-md-2">
-        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFin}"></form:input>
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
@@ -101,8 +90,8 @@
     </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="button" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Añadir</button>
+        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
       </div>
     </div>
   </fieldset>
