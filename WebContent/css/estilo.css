@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+
+/* Estil aplicat al cos de la pàgina */
+
+@import url("bootstrap.css");
+@import url("bootstrap-material-design.css");
+@import url("ripples.min.css");
+@import url("datepicker.css")
+/* @import url("datepicker.min.css") */
+
+.loggeduser { 
+	color: gray;				
+	text-align: right;
+	margin-right: 10pt;
+}
+
+.fondo {
+	background-color: #ffe082;
+}
+
+/*Intro*/
+
+h4:first-letter {
+	font-size: 200%;
+	color: #000000; 
+	font-weight: bold;
+}
+
+/* @media (max-width: 100px) { */
+/*     .full-bg-img, */
+/*     .view { */
+/*         height: auto; */
+/*         position: relative; */
+/*     } */
+/* } */
+
+
+/* @media (max-width: 992px) { */
+/*     .description { */
+/*         padding-top: 7rem; */
+/*         text-align: center; */
+/*     } */
+/* } */
+
+
+
