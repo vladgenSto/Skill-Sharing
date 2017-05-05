@@ -15,31 +15,9 @@ public class Oferta {
 	public Oferta() {
 		super();
 	}
-	public Oferta(int codigoOferta, String descripcion, Date fechaInicio, Date fechaFin, String dniEstudiante,
-			String nombreHabilidad, String nivelHabilidad) {
-		super();
-		this.codigoOferta = codigoOferta;
-		this.descripcion = descripcion;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.dniEstudiante = dniEstudiante;
-		this.nombreHabilidad = nombreHabilidad;
-		this.nivelHabilidad = nivelHabilidad;
-	}
-
-	@Override
-	public String toString() {
-		return "Oferta [codigoOferta=" + codigoOferta + ", descripcion=" + descripcion + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + ", dniEstudiante=" + dniEstudiante + ", nombreHabilidad=" + nombreHabilidad
-				+ ", nivelHabilidad=" + nivelHabilidad + "]";
-	}
 
 	public int getCodigoOferta() {
-		return codigoOferta;
-	}
-
-	public void setCodigoOferta() {
-		this.codigoOferta = this.hashCode();
+		return this.hashCode();
 	}
 
 	public String getDescripcion() {
@@ -89,11 +67,19 @@ public class Oferta {
 	public void setNivelHabilidad(String nivelHabilidad) {
 		this.nivelHabilidad = nivelHabilidad;
 	}
+	
+	
 	@Override
 	public int hashCode() {
-		int numero = (int) Math.random();
-		System.out.println(numero);
-		return numero;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((dniEstudiante == null) ? 0 : dniEstudiante.hashCode());
+		result = prime * result + ((fechaFin == null) ? 0 : fechaFin.hashCode());
+		result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
+		result = prime * result + ((nivelHabilidad == null) ? 0 : nivelHabilidad.hashCode());
+		result = prime * result + ((nombreHabilidad == null) ? 0 : nombreHabilidad.hashCode());
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -104,9 +90,44 @@ public class Oferta {
 		if (getClass() != obj.getClass())
 			return false;
 		Oferta other = (Oferta) obj;
-		if (codigoOferta != other.codigoOferta)
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (dniEstudiante == null) {
+			if (other.dniEstudiante != null)
+				return false;
+		} else if (!dniEstudiante.equals(other.dniEstudiante))
+			return false;
+		if (fechaFin == null) {
+			if (other.fechaFin != null)
+				return false;
+		} else if (!fechaFin.equals(other.fechaFin))
+			return false;
+		if (fechaInicio == null) {
+			if (other.fechaInicio != null)
+				return false;
+		} else if (!fechaInicio.equals(other.fechaInicio))
+			return false;
+		if (nivelHabilidad == null) {
+			if (other.nivelHabilidad != null)
+				return false;
+		} else if (!nivelHabilidad.equals(other.nivelHabilidad))
+			return false;
+		if (nombreHabilidad == null) {
+			if (other.nombreHabilidad != null)
+				return false;
+		} else if (!nombreHabilidad.equals(other.nombreHabilidad))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Oferta [codigoOferta=" + codigoOferta + ", descripcion=" + descripcion + ", fechaInicio=" + fechaInicio
+				+ ", fechaFin=" + fechaFin + ", dniEstudiante=" + dniEstudiante + ", nombreHabilidad=" + nombreHabilidad
+				+ ", nivelHabilidad=" + nivelHabilidad + "]";
 	}
 	
 }

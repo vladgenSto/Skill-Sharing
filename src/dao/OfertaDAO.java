@@ -30,7 +30,7 @@ public class OfertaDAO {
 		@Override
 		public Colaboracion mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Colaboracion colaboracion = new Colaboracion();
-			colaboracion.setCodigoOferta(rs.getString("codigoOferta"));
+//			colaboracion.setCodigoOferta(rs.getString("codigoOferta"));
 			colaboracion.setCodigoDemanda(rs.getString("codigoDemanda"));
 			colaboracion.setHoras(rs.getInt("horas"));
 			colaboracion.setPuntuacion(rs.getInt("puntuacion"));
@@ -44,7 +44,7 @@ public class OfertaDAO {
 		@Override
 		public Oferta mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Oferta oferta = new Oferta();
-			oferta.setCodigoOferta();
+			
 			oferta.setDescripcion(rs.getString("descripcion"));
 			oferta.setFechaInicio(rs.getDate("fechaInicio"));
 			oferta.setFechaFin(rs.getDate("fechaFin"));
@@ -87,9 +87,9 @@ public class OfertaDAO {
 
 	public void addOferta(Oferta oferta) {
 		this.jdbcTemplate.update(
-				"insert into Oferta(codigoOferta, descripcion, fechaInicio, fechaFin, dniEstudiante,nombreHabilidad,nivelHabilidad) values(?, ?, ?, ?, ? ,? ,?)",
-				oferta.getCodigoOferta(), oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(),
-				oferta.getDniEstudiante(), oferta.getNombreHabilidad(), oferta.getNivelHabilidad());
+				"insert into Oferta(descripcion, fechaInicio, fechaFin, dniEstudiante,nombreHabilidad,nivelHabilidad, codigoOferta) values(?, ?, ?, ?, ? ,? ,?)",
+				oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(),
+				oferta.getDniEstudiante(), oferta.getNombreHabilidad(), oferta.getNivelHabilidad(), oferta.getCodigoOferta());
 	}
 
 	public void updateOferta(Oferta oferta) {
