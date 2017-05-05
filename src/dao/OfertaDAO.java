@@ -30,8 +30,8 @@ public class OfertaDAO {
 		@Override
 		public Colaboracion mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Colaboracion colaboracion = new Colaboracion();
-//			colaboracion.setCodigoOferta(rs.getString("codigoOferta"));
-			colaboracion.setCodigoDemanda(rs.getString("codigoDemanda"));
+			colaboracion.setCodigoOferta(rs.getInt("codigoOferta"));
+			colaboracion.setCodigoDemanda(rs.getInt("codigoDemanda"));
 			colaboracion.setHoras(rs.getInt("horas"));
 			colaboracion.setPuntuacion(rs.getInt("puntuacion"));
 			colaboracion.setComentarios(rs.getString("comentarios"));
@@ -44,13 +44,14 @@ public class OfertaDAO {
 		@Override
 		public Oferta mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Oferta oferta = new Oferta();
-			
+			oferta.setCodigoOferta(rs.getInt("CodigoOferta"));
 			oferta.setDescripcion(rs.getString("descripcion"));
 			oferta.setFechaInicio(rs.getDate("fechaInicio"));
 			oferta.setFechaFin(rs.getDate("fechaFin"));
 			oferta.setDniEstudiante(rs.getString("dniEstudiante"));
 			oferta.setNombreHabilidad(rs.getString("nombreHabilidad"));
 			oferta.setNivelHabilidad(rs.getString("nivelHabilidad"));
+//			oferta.setCodigoOferta();
 			return oferta;
 		}
 	}
@@ -79,13 +80,14 @@ public class OfertaDAO {
                 new OfertaMapper());
     }
 	
-	public Oferta getOferta(String codigoOferta) {
+	public Oferta getOferta(int codigoOferta) {
 		return this.jdbcTemplate.queryForObject(
 				"select codigoOferta, descripcion, fechaInicio, fechaFin, dniEstudiante, nombreHabilidad, nivelHabilidad from oferta where codigoOferta=?",
 				new Object[] { codigoOferta }, new OfertaMapper());
 	}
 
 	public void addOferta(Oferta oferta) {
+		oferta.setCodigoOferta();
 		this.jdbcTemplate.update(
 				"insert into Oferta(descripcion, fechaInicio, fechaFin, dniEstudiante,nombreHabilidad,nivelHabilidad, codigoOferta) values(?, ?, ?, ?, ? ,? ,?)",
 				oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(),
@@ -93,6 +95,7 @@ public class OfertaDAO {
 	}
 
 	public void updateOferta(Oferta oferta) {
+//		oferta.setCodigoOferta();
 		this.jdbcTemplate.update(
 				"update Oferta set descripcion=?, fechaInicio=?, fechaFin=?, dniEstudiante=?, nombreHabilidad=?, nivelHabilidad=? where codigoOferta = ?",
 				oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(), oferta.getDniEstudiante(),

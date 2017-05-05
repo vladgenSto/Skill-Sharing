@@ -15,12 +15,12 @@ public class ColaboracionValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Colaboracion colaboracion=(Colaboracion) obj;
-		if(colaboracion.getCodigoOferta().trim().equals("")){
-			errors.rejectValue("codigoOferta", "obligatorio","Este campo es obligatorio");
-		}
-		if(colaboracion.getCodigoDemanda().trim().equals("")){
-			errors.rejectValue("codigoDemanda", "obligatorio","Este campo es obligatorio");
-		}
+//		if(colaboracion.getCodigoOferta().trim().equals("")){
+//			errors.rejectValue("codigoOferta", "obligatorio","Este campo es obligatorio");
+//		}
+//		if(colaboracion.getCodigoDemanda().trim().equals("")){
+//			errors.rejectValue("codigoDemanda", "obligatorio","Este campo es obligatorio");
+//		}
 		if (colaboracion.getPuntuacion() < 1 || colaboracion.getPuntuacion() > 5) {
 			errors.rejectValue("puntuacion", "obligatorio","Este campo tiene que estar entre 1 y 5");
 		}

@@ -28,8 +28,8 @@ public class ColaboracionDAO {
 		@Override
 		public Colaboracion mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Colaboracion colaboracion = new Colaboracion();
-			colaboracion.setCodigoOferta(rs.getString("codigoOferta"));
-			colaboracion.setCodigoDemanda(rs.getString("codigoDemanda"));
+			colaboracion.setCodigoOferta(rs.getInt("codigoOferta"));
+			colaboracion.setCodigoDemanda(rs.getInt("codigoDemanda"));
 			colaboracion.setHoras(rs.getInt("horas"));
 			colaboracion.setPuntuacion(rs.getInt("puntuacion"));
 			colaboracion.setComentarios(rs.getString("comentarios"));

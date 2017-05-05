@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.HabilidadDAO;
 import dao.OfertaDAO;
-import dao.UserDAO;
 import domain.Oferta;
 import domain.UserDetails;
 
@@ -30,7 +29,6 @@ public class OfertaController {
 
 	private OfertaDAO ofertaDao;
 	private HabilidadDAO habilidadDao;
-	private UserDAO userDAO;
 	
 	@Autowired
 	public void setOfertaDao(OfertaDAO ofertaDao){
@@ -42,10 +40,6 @@ public class OfertaController {
 		this.habilidadDao = habilidadDao;
 	}
 	
-	@Autowired
-	public void setUserDao(UserDAO userDao) {
-		this.userDAO = userDao;
-	}
 	
 	@InitBinder     
 	public void initBinder(WebDataBinder binder){
@@ -79,7 +73,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/update/{codigoOferta}",method=RequestMethod.GET)
-	public String editOferta(Model model, @PathVariable String codigoOferta){
+	public String editOferta(Model model, @PathVariable int codigoOferta){
 		model.addAttribute("oferta",ofertaDao.getOferta(codigoOferta));
 		return "oferta/update";
 	}
@@ -94,7 +88,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/delete/{codigoOferta}")
-	public String processDelete(@PathVariable String codigoOferta, HttpSession session){
+	public String processDelete(@PathVariable int codigoOferta, HttpSession session){
 		ofertaDao.deleteOferta(ofertaDao.getOferta(codigoOferta));
 		this.actualizaListaOfertas(session);
 		return "redirect:../list.html";

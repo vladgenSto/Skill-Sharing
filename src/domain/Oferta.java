@@ -17,8 +17,16 @@ public class Oferta {
 	}
 
 	public int getCodigoOferta() {
-		return this.hashCode();
+		return codigoOferta;
 	}
+	
+	public void setCodigoOferta(int codigoOferta){
+		this.codigoOferta=codigoOferta;
+	}
+	
+	public void setCodigoOferta(){
+		this.codigoOferta=this.hashCode();
+	} 
 
 	public String getDescripcion() {
 		return descripcion;

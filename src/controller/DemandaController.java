@@ -84,7 +84,7 @@ public class DemandaController {
 	}
 	
 	@RequestMapping(value="/update/{codigoDemanda}",method=RequestMethod.GET)
-	public String editDemanda(Model model, @PathVariable String codigoDemanda){
+	public String editDemanda(Model model, @PathVariable int codigoDemanda){
 		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
 		return "demanda/update";
 	}
@@ -99,7 +99,7 @@ public class DemandaController {
 	}
 	
 	@RequestMapping(value="/delete/{codigoDemanda}")
-	public String processDelete(@PathVariable String codigoDemanda, HttpSession session){
+	public String processDelete(@PathVariable int codigoDemanda, HttpSession session){
 		demandaDao.deleteDemanda(demandaDao.getDemanda(codigoDemanda));
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
@@ -132,6 +132,9 @@ public class DemandaController {
                     }
                 }
                 session.setAttribute("listaOfertasRelacionadas", listaOfertasRelacionadas);
+            }else{
+                session.setAttribute("listaOfertasRelacionadas", new ArrayList<Oferta>());
+
             }
         }
     }

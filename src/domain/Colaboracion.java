@@ -3,7 +3,7 @@ package domain;
 public class Colaboracion {
 
 	private int codigoOferta;
-	private String codigoDemanda;
+	private int codigoDemanda;
 	private int horas;
 	private int puntuacion;
 	private String comentarios;
@@ -13,7 +13,7 @@ public class Colaboracion {
 		super();
 	}
 
-	public Colaboracion(int codigoOferta, String codigoDemanda, int horas, int puntuacion, String comentarios) {
+	public Colaboracion(int codigoOferta, int codigoDemanda, int horas, int puntuacion, String comentarios) {
 		this.codigoOferta = codigoOferta;
 		this.codigoDemanda = codigoDemanda;
 		this.horas = horas;
@@ -25,15 +25,15 @@ public class Colaboracion {
 		return codigoOferta;
 	}
 
-//	public void setCodigoOferta(String codigoOferta) {
-//		this.codigoOferta = codigoOferta;
-//	}
+	public void setCodigoOferta(int codigoOferta) {
+		this.codigoOferta = codigoOferta;
+	}
 
-	public String getCodigoDemanda() {
+	public int getCodigoDemanda() {
 		return codigoDemanda;
 	}
 
-	public void setCodigoDemanda(String codigoDemanda) {
+	public void setCodigoDemanda(int codigoDemanda) {
 		this.codigoDemanda = codigoDemanda;
 	}
 

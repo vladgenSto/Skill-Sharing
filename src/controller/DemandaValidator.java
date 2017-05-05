@@ -18,11 +18,11 @@ public class DemandaValidator {
 	
 	public void validate(Object obj, Errors errors) {
 		Demanda demanda = (Demanda) obj;
-		if (demanda.getCodigoDemanda().trim().equals(""))
-			errors.rejectValue("codigoDemanda", "obligatori", "Este campo es obligatorio");
-		if (demanda.getCodigoDemanda().length() > 9)
-			errors.rejectValue("codigoDemanda", "obligatori", "Este campo supera los 9 caracteres");
-		
+//		if (demanda.getCodigoDemanda().trim().equals(""))
+//			errors.rejectValue("codigoDemanda", "obligatori", "Este campo es obligatorio");
+//		if (demanda.getCodigoDemanda().length() > 9)
+//			errors.rejectValue("codigoDemanda", "obligatori", "Este campo supera los 9 caracteres");
+//		
 		if (demanda.getDescripcion().length() > 200)
 			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
 
