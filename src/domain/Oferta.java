@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Oferta {
@@ -41,9 +40,7 @@ public class Oferta {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio() {
-		this.fechaInicio = new Date();
-	}
+	
 	
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;

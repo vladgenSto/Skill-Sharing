@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,13 +57,14 @@ public class OfertaController {
 	
 	@RequestMapping(value="/add")
 	public String addOferta(Model model){
+		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
 		model.addAttribute("oferta",new Oferta());
 		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 		Date fecha = new Date();
-		model.addAttribute("fechaInicio", fecha);
+		model.addAttribute("fechaInicio", formato.format(fecha));
 		int year = fecha.getYear() + 1;
 		fecha.setYear(year);
-		model.addAttribute("fechaFin", fecha);
+		model.addAttribute("fechaFin", formato.format(fecha));
 		return "oferta/add";
 	}
 	

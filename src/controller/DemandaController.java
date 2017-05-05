@@ -64,8 +64,14 @@ public class DemandaController {
 	
 	@RequestMapping(value="/add")
 	public String addDemanda(Model model){
+		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
 		model.addAttribute("demanda",new Demanda());
 		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
+		Date fecha = new Date();
+		model.addAttribute("fechaInicio", formato.format(fecha));
+		int year = fecha.getYear() + 1;
+		fecha.setYear(year);
+		model.addAttribute("fechaFin", formato.format(fecha));
 		return "demanda/add";
 	}
 	

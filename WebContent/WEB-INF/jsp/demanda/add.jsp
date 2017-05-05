@@ -34,7 +34,7 @@
       <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
 
       <div class="col-md-2">
-        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" placeholder="mm/dd/yyyy" value="${fechaInicio}"></form:input>
       </div>
       <div>
       	<form:errors path="fechaInicio" cssClass="error"/>
@@ -44,7 +44,7 @@
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
       <div class="col-md-2">
-        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" placeholder="mm/dd/yyyy" value="${fechaFin}"></form:input>
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
