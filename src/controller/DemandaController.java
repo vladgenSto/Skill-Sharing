@@ -97,7 +97,7 @@ public class DemandaController {
 	}
 	
 	@RequestMapping(value="update/{codigoDemanda}",method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String codigoDemanda,@ModelAttribute("demanda") Demanda demanda, BindingResult bindingResult, HttpSession session){
+	public String processUpdateSubmit(@PathVariable int codigoDemanda,@ModelAttribute("demanda") Demanda demanda, BindingResult bindingResult, HttpSession session){
 		if(bindingResult.hasErrors())
 			return "demanda/update";
 		demandaDao.updateDemanda(demanda);
@@ -106,8 +106,9 @@ public class DemandaController {
 	}
 	
 	@RequestMapping(value="/buscar/{codigoDemanda}",method=RequestMethod.GET)
-	public String buscarOfertas(Model model, @PathVariable int codigoDemanda, @ModelAttribute("demanda") Demanda demanda){
-		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
+	public String buscarOfertas(Model model, @PathVariable int codigoDemanda){
+		Demanda demanda=demandaDao.getDemanda(codigoDemanda);
+		model.addAttribute("demanda",demanda);
 		model.addAttribute("listaOfertasRelacionadas", ofertaDao.getOfertasRelacionadas(demanda.getNombreHabilidad(), demanda.getDniEstudiante()));
 		return "demanda/buscar";
 	}

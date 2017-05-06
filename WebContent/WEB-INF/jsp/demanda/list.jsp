@@ -36,7 +36,7 @@
 <th>${demanda.nivelHabilidad}</th>
 <th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
 <th><a href="delete/${demanda.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
-<th><a href="buscar.jsp" class="btn btn-raised btn btn-info">Buscar</a></th>
+<th><a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-raised btn btn-info">Buscar</a></th>
 </tr>
 </c:forEach>
 </table>
