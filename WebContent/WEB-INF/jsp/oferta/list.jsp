@@ -38,7 +38,7 @@
 </tr>
 </c:forEach>
 </table>
-<a href="add.html" class="btn btn-raised btn-primary">Añadir Oferta</a>
+<a href="add.html" class="btn btn-raised btn-primary">Añadir</a>
 
 </jsp:body>
 </t:paginabasicaUsuario>

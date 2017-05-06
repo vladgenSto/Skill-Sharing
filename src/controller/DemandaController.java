@@ -105,6 +105,13 @@ public class DemandaController {
 		return "redirect:../list.html";
 	}
 	
+	@RequestMapping(value="/buscar/{codigoDemanda}",method=RequestMethod.GET)
+	public String buscarOfertas(Model model, @PathVariable int codigoDemanda, @ModelAttribute("demanda") Demanda demanda){
+		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
+		model.addAttribute("listaOfertasRelacionadas", ofertaDao.getOfertasRelacionadas(demanda.getNombreHabilidad(), demanda.getDniEstudiante()));
+		return "demanda/buscar";
+	}
+	
 	@RequestMapping(value="/delete/{codigoDemanda}")
 	public String processDelete(@PathVariable int codigoDemanda, HttpSession session){
 		demandaDao.deleteDemanda(demandaDao.getDemanda(codigoDemanda));

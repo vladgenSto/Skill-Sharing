@@ -24,6 +24,7 @@
 <th>DNI del estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
+<th>Opciones</th>
 </tr>
 <c:forEach items="${listaDemandasUsuario}" var="demanda">
 <tr>
@@ -35,33 +36,11 @@
 <th>${demanda.nivelHabilidad}</th>
 <th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
 <th><a href="delete/${demanda.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
+<th><a href="buscar.jsp" class="btn btn-raised btn btn-info">Buscar</a></th>
 </tr>
 </c:forEach>
 </table>
-<a href="add.html" class="btn btn-raised btn-primary">Anyadir Demanda</a>
-
-<h1>Lista de Ofertas</h1>
-<table class="table table-hover">
-<tr>
-<th>Descripcion</th>
-<th>Fecha de Inicio</th>
-<th>Fecha Fin</th>
-<th>DNI del estudiante</th>
-<th>Nombre de la habilidad</th>
-<th>Nivel de la habilidad</th>
-</tr>
-<c:forEach items="${listaOfertasRelacionadas}" var="oferta">
-<tr>
-<th>${oferta.descripcion}</th>
-<th>${oferta.fechaInicio}</th>
-<th>${oferta.fechaFin}</th>
-<th>${oferta.dniEstudiante}</th>
-<th>${oferta.nombreHabilidad}</th>
-<th>${oferta.nivelHabilidad}</th>
-</tr>
-</c:forEach>
-</table>
-
+<a href="add.html" class="btn btn-raised btn-primary">Añadir</a>
 </jsp:body>
 </t:paginabasicaUsuario>
 </html>

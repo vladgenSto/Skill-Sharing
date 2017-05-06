@@ -32,40 +32,42 @@
       </div>
       </div>
       <div class="form-group">
-      <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
+<!--       <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label> -->
 
       <div class="col-md-2">
-        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" hidden="true"></form:input>
+<!--         <span class="help-block">(mm/dd/yyyy)</span> -->
       </div>
       <div>
-      	<form:errors path="fechaInicio" cssClass="error"/>
+<%--       	<form:errors path="fechaInicio" cssClass="error"/> --%>
       </div>
     </div>
     <div class="form-group">
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
       <div class="col-md-2">
-        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" placeholder="mm/dd/yyyy"></form:input>
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin"></form:input>
+        <span class="help-block">(mm/dd/yyyy)</span>
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="dniEstudiante" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI Estudiante</label>
+<!--       <label for="dniEstudiante" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI Estudiante</label> -->
 
       <div class="col-md-2">
-        <form:input path="dniEstudiante" type="text" class="form-control" id="dniEstudiante" placeholder="DNI" value="${user.dniEstudiante}"/>
+        <form:input path="dniEstudiante" type="text" class="form-control" id="dniEstudiante" placeholder="DNI" value="${user.dniEstudiante}" hidden="true"/>
       </div>
       <div>
-      	<form:errors path="dniEstudiante" cssClass="error"/>
+<%--       	<form:errors path="dniEstudiante" cssClass="error"/> --%>
       </div>
     </div>
     <div class="form-group">
-      <label for="nombreHabilidad" class="col-md-2 control-label" style="color: black; font-size: medium;">Nombre Habilidad</label>
+<!--       <label for="nombreHabilidad" class="col-md-2 control-label" style="color: black; font-size: medium;">Nombre Habilidad</label> -->
 
       <div class="col-md-2">
-        <form:select id="nombre" class="form-control" name="nombre" path="nombreHabilidad">
+        <form:select id="nombre" class="form-control" name="nombre" path="nombreHabilidad" hidden="true">
         	<option>${demanda.nombreHabilidad}</option>
         	<c:forEach items="${listaHabilidades}" var="habilidad">
         	<option>${habilidad.nombre}</option>

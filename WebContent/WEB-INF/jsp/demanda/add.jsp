@@ -34,7 +34,8 @@
       <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
 
       <div class="col-md-2">
-        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" placeholder="mm/dd/yyyy" value="${fechaInicio}"></form:input>
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicio}"></form:input>
+        <span class="help-block">(mm/dd/yyyy)</span>
       </div>
       <div>
       	<form:errors path="fechaInicio" cssClass="error"/>
@@ -44,20 +45,21 @@
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
       <div class="col-md-2">
-        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" placeholder="mm/dd/yyyy" value="${fechaFin}"></form:input>
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFin}"></form:input>
+        <span class="help-block">(mm/dd/yyyy)</span> 
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="dniEstudiante" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI Estudiante</label>
+<!--       <label for="dniEstudiante" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI Estudiante</label> -->
 
       <div class="col-md-2">
-        <form:input path="dniEstudiante" type="text" class="form-control" id="dniEstudiante" placeholder="DNI" value="${user.dniEstudiante}"/>
+        <form:input path="dniEstudiante" type="text" class="form-control" id="dniEstudiante" placeholder="DNI" value="${user.dniEstudiante}" hidden="true"/>
       </div>
       <div>
-      	<form:errors path="dniEstudiante" cssClass="error"/>
+<%--       	<form:errors path="dniEstudiante" cssClass="error"/> --%>
       </div>
     </div>
     <div class="form-group">
