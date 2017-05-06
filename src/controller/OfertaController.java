@@ -1,7 +1,6 @@
 package controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,6 @@ import domain.UserDetails;
 @RequestMapping(value="/oferta")
 public class OfertaController {
 
-	private Oferta oferta;
 	private OfertaDAO ofertaDao;
 	private HabilidadDAO habilidadDao;
 	

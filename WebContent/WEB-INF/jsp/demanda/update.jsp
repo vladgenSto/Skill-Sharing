@@ -20,6 +20,7 @@
   <fieldset>
     <legend>Actualiza Demanda</legend>
     <div class="form-group">
+    <form:hidden path="codigoDemanda" value="${demanda.codigoDemanda}"/>
       <label for="descripcion" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion</label>
 
       <div class="col-md-4">
@@ -65,7 +66,7 @@
 
       <div class="col-md-2">
         <form:select id="nombre" class="form-control" name="nombre" path="nombreHabilidad">
-        	<option>---Elige---</option>
+        	<option>${demanda.nombreHabilidad}</option>
         	<c:forEach items="${listaHabilidades}" var="habilidad">
         	<option>${habilidad.nombre}</option>
         	</c:forEach>
@@ -76,7 +77,7 @@
       <label for="nivelHabilidad" class="col-md-2 control-label" style="color: black; font-size: medium;">Nivel Habilidad</label>
       <div class="col-md-2">
         <form:select id="nivelHabilidad" class="form-control" name="nivel" path="nivelHabilidad">
-        	<option>---Elige---</option>
+        	<option>${demanda.nivelHabilidad}</option>
         	<option>Iniciacion</option>
         	<option>Intermedio</option>
         	<option>Experto</option>
