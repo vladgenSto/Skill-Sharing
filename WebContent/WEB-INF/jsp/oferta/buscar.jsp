@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Todas las ofertas</title>
 </head>
+<t:paginabasicaUsuario>
 <body class="fondo">
 <h1>Todas las ofertas existentes</h1>
 <table class="table table-hover">
@@ -36,4 +37,5 @@
 </c:forEach>
 </table>
 </body>
+</t:paginabasicaUsuario>
 </html>

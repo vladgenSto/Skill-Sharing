@@ -13,9 +13,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Ofertas relacionadas</title>
 </head>
-<body>
+<t:paginabasicaUsuario title="Ofertas relacionadas">
+<body class="fondo">
 <fieldset>
-<legend>Lista de Ofertas</legend>
+<h1>Ofertas relacionadas</h1>
 <table class="table table-hover">
 <tr>
 <th>Descripcion</th>
@@ -33,11 +34,11 @@
 <th>${oferta.dniEstudiante}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
-<th><a href="${pageContext.request.contextPath}/colaboracion/add/${oferta.codigoOferta}, ${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Crear colaboracion</a></th>
-<!-- Falta retocar esto  -->
+<th><a href="${pageContext.request.contextPath}/colaboracion/add/${oferta.codigoOferta}, ${demanda.codigoDemanda}.html" class="btn btn-raised btn-primary">Crear colaboracion</a></th>
 </tr>
 </c:forEach>
 </table>
 </fieldset>
 </body>
+</t:paginabasicaUsuario>
 </html>

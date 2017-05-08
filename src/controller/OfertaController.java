@@ -53,6 +53,12 @@ public class OfertaController {
 		return "oferta/list";
 	}
 	
+	@RequestMapping(value="/buscar")
+	public String listarTodasLasOfertas(Model model){
+		model.addAttribute("ofertas",ofertaDao.getOfertas());
+		return "oferta/buscar";
+	}
+	
 	@RequestMapping(value="/add")
 	public String addOferta(Model model){
 		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
