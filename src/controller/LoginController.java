@@ -34,7 +34,6 @@ class UserValidator implements Validator{
 		UserDetails user=(UserDetails) obj;
 		if(user.getUsername().trim().equals(""))
 			errors.rejectValue("username", "obligatorio","Este campo es obligatorio");
-
 		if(user.getPassword().trim().equals(""))
 			errors.rejectValue("password", "obligatorio","Este campo es obligatorio");		
 	}
@@ -68,7 +67,7 @@ public class LoginController {
         
         user=userDao.loadUserByName(user.getUsername(), user.getPassword());
         if(user == null){
-            bindingResult.rejectValue("password", "badpw","Contrasenya incorrecta");
+            bindingResult.rejectValue("password", "badpw","Usuario o contraseña incorrectos");
             return "login";
         }
         session.setAttribute("user", user);

@@ -43,7 +43,7 @@
 <br>
 <h3>Todas las ofertas disponibles</h3>
 <br>
-<th><a href="${pageContext.request.contextPath}/buscar.jsp" class="btn btn-raised btn btn-info">Mostrar</a></th>
+<th><a href="${pageContext.request.contextPath}/oferta/buscar.html" class="btn btn-raised btn btn-info">Mostrar</a></th>
 
 </jsp:body>
 </t:paginabasicaUsuario>

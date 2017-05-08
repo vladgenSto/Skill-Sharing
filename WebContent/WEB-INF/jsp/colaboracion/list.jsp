@@ -31,13 +31,11 @@
 <th>${colaboracion.horas}</th>
 <th>${colaboracion.puntuacion}</th>
 <th>${colaboracion.comentarios}</th>
-<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-default">Editar</a></th>
-<th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-default">Borrar</a></th>
+<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
+<th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
 </tr>
 </c:forEach>
 </table>
-<a href="add.html" class="btn btn-default">Anyadir Colaboracion</a>
-
 </jsp:body>
 </t:paginabasicaUsuario>
 </html>

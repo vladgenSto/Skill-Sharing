@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,13 @@ public class UserDAO {
 	}
 	
 	public UserDetails loadUserByName(String username,String password){
-		UserDetails user=this.jdbcTemplate.queryForObject("select * from usuarios where usuario=? and pwd=?", new Object[]{username,password},new UserMapper());
+		UserDetails user;
+		try {
+			user=this.jdbcTemplate.queryForObject("select * from usuarios where usuario=? and pwd=?", new Object[]{username,password},new UserMapper());
+
+		} catch (EmptyResultDataAccessException ex) {
+			user = null;
+		}
 		if(user == null){
 			return null;
 		}

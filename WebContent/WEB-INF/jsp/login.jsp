@@ -75,11 +75,15 @@
 										<i class="fa fa-user prefix"></i>
 										<form:input path="username" type="text" id="form3"
 											class="form-control" placeholder="Usuario"></form:input>
+										<form:errors path="username" cssClass="error"/>
+											
 									</div>
 									<div class="md-form">
 										<i class="fa fa-lock prefix"></i>
 										<form:input path="password" type="text" id="form2"
 											class="form-control" placeholder="Contraseña"></form:input>
+										<form:errors path="password" cssClass="error"/>
+											
 									</div>
 									<br>
 									<div class="text-center">
