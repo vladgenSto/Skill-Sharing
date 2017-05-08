@@ -33,7 +33,7 @@
 <th>${oferta.dniEstudiante}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
-<th><a href="update/${demanda.codigoDemanda}.html  "WebContent/WEB-INF/jsp/colaboracion/add.jsp"" class="btn btn-raised btn-yellow">Crear colaboracion</a></th>
+<th><a href="${pageContext.request.contextPath}/colaboracion/add/${oferta.codigoOferta}, ${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Crear colaboracion</a></th>
 <!-- Falta retocar esto  -->
 </tr>
 </c:forEach>

@@ -41,7 +41,7 @@ public class ColaboracionDAO {
 		return this.jdbcTemplate.query("select * from colaboracion", new ColaboracionMapper());
 	}
 	
-	public Colaboracion getColaboracion(String codigoOferta, String codigoDemanda) {
+	public Colaboracion getColaboracion(int codigoOferta, int codigoDemanda) {
 		return this.jdbcTemplate.queryForObject("select * from colaboracion where codigoOferta=? and codigoDemanda=?", new Object[]{codigoOferta, codigoDemanda}, new ColaboracionMapper());
 	}
 	

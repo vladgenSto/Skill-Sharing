@@ -19,12 +19,12 @@
 <table>
 <tr>
 <td><form:label path="codigoOferta">Codigo Oferta</form:label>
-<td><form:input path="codigoOferta"/></td>
+<td><form:input path="codigoOferta" value="${oferta.codigoOferta}"/></td>
 <td><form:errors path="codigoOferta" cssClass="error"/></td>
 </tr>
 <tr>
 <td><form:label path="codigoDemanda">Codigo Demanda</form:label>
-<td><form:input path="codigoDemanda"/></td>
+<td><form:input path="codigoDemanda" value="${demanda.codigoDemanda}"/></td>
 <td><form:errors path="codigoDemanda" cssClass="error"/></td>
 </tr>
 <tr>

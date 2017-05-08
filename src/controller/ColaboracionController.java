@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ColaboracionDAO;
+import dao.DemandaDAO;
+import dao.OfertaDAO;
 import domain.Colaboracion;
 
 @Controller
@@ -17,10 +19,22 @@ import domain.Colaboracion;
 public class ColaboracionController {
 
 	private ColaboracionDAO colaboracionDao;
+	private OfertaDAO ofertaDao;
+	private DemandaDAO demandaDao;
 
 	@Autowired
 	public void setColaboracionDao(ColaboracionDAO colaboracionDao) {
 		this.colaboracionDao = colaboracionDao;
+	}
+	
+	@Autowired
+	public void setOfertaDao(OfertaDAO ofertaDao){
+		this.ofertaDao=ofertaDao;
+	}
+	
+	@Autowired
+	public void setDemandaDao(DemandaDAO demandaDao){
+		this.demandaDao=demandaDao;
 	}
 	
 	@RequestMapping(value="/list")
@@ -29,30 +43,32 @@ public class ColaboracionController {
 		return "colaboracion/list";
 	}
 	
-	@RequestMapping(value="/add")
-	public String addColaboracion(Model model) {
+	@RequestMapping(value="/add/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
+	public String addColaboracion(Model model,@PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		model.addAttribute("colaboracion", new Colaboracion());
+		model.addAttribute("oferta",ofertaDao.getOferta(codigoOferta));
+		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
 		return "colaboracion/add";
 	}
 	
-	@RequestMapping(value="add", method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
+	@RequestMapping(value="add/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
+	public String processAddSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda,@ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
 		ColaboracionValidator cv=new ColaboracionValidator();
 		cv.validate(colaboracion, bindingResult);
 		if (bindingResult.hasErrors())
 			return "colaboracion/add";
 		colaboracionDao.addColaboracion(colaboracion);
-		return "redirect:list.html";
+		return "redirect:../list.html";
 	}
 	
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
-	public String editColaboracion(Model model, @PathVariable String codigoOferta, @PathVariable String codigoDemanda) {
+	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
 		return "colaboracion/update";
 	}
 	
 	@RequestMapping(value="update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable String codigoOferta, @PathVariable String codigoDemanda, @ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, @ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "colaboracion/update";
 		colaboracionDao.updateColaboracion(colaboracion);
@@ -60,7 +76,7 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/delete/{codigoOferta}, {codigoDemanda}")
-	public String processDelete(@PathVariable String codigoOferta, @PathVariable String codigoDemanda) {
+	public String processDelete(@PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		colaboracionDao.deleteColaboracion(colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
 		return "redirect:../list.html";
 	}
