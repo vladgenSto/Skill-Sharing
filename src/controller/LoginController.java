@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.OfertaDAO;
 import dao.UserDAO;
@@ -52,6 +53,9 @@ public class LoginController {
 	@Autowired
 	private DemandaDAO demandaDao;
 	
+	@Autowired
+	private ColaboracionDAO colaboracionDao;
+	
 	@RequestMapping("/login")
 	public String login(Model model){
 		model.addAttribute("user",new UserDetails());
@@ -87,6 +91,7 @@ public class LoginController {
                 }
                 session.setAttribute("listaOfertasRelacionadas", listaOfertasRelacionadas);
             }
+            session.setAttribute("listaColaboracionesUsuario", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()));
             return "redirect:indexUsuario.jsp";
             }
     }

@@ -18,14 +18,24 @@
 <form:form method="post" modelAttribute="colaboracion">
 <table>
 <tr>
-<td><form:label path="codigoOferta">Codigo Oferta</form:label>
-<td><form:input path="codigoOferta" value="${oferta.codigoOferta}"/></td>
-<td><form:errors path="codigoOferta" cssClass="error"/></td>
+<%-- <td><form:label path="codigoOferta">Codigo Oferta</form:label> --%>
+<td><form:input path="codigoOferta" value="${oferta.codigoOferta}" hidden="true"/></td>
+<%-- <td><form:errors path="codigoOferta" cssClass="error"/></td> --%>
 </tr>
 <tr>
-<td><form:label path="codigoDemanda">Codigo Demanda</form:label>
-<td><form:input path="codigoDemanda" value="${demanda.codigoDemanda}"/></td>
-<td><form:errors path="codigoDemanda" cssClass="error"/></td>
+<td><label>Descripcion Oferta</label>
+<td><input value="${oferta.descripcion}"/></td>
+<td><form:errors cssClass="error"/></td>
+</tr>
+<tr>
+<%-- <td><form:label path="codigoDemanda">Codigo Demanda</form:label> --%>
+<td><form:input path="codigoDemanda" value="${demanda.codigoDemanda}" hidden="true"/></td>
+<%-- <td><form:errors path="codigoDemanda" cssClass="error"/></td> --%>
+</tr>
+<tr>
+<td><label>Descripcion Demanda</label>
+<td><input value="${demanda.descripcion}"/></td>
+<td><form:errors cssClass="error"/></td>
 </tr>
 <tr>
 <td><form:label path="horas">Horas</form:label>

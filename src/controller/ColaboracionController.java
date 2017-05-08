@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.OfertaDAO;
 import domain.Colaboracion;
+import domain.UserDetails;
 
 @Controller
 @RequestMapping(value="/colaboracion")
@@ -38,8 +41,11 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listColaboracion(Model model) {
-		model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+	public String listColaboracion(Model model, HttpSession session) {
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("colaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()));
+		}
 		return "colaboracion/list";
 	}
 	

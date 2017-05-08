@@ -56,4 +56,9 @@ public class ColaboracionDAO {
 	public void deleteColaboracion(Colaboracion colaboracion) {
 		this.jdbcTemplate.update("delete from Colaboracion where codigoOferta=? and codigoDemanda=?", colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda());
 	}
+	
+	public List<Colaboracion> getColaboracionesUsuario(String dniEstudiante) {
+		return this.jdbcTemplate.query("select c.* from oferta as o join colaboracion as c using(codigoOferta) join demanda as d using(codigoDemanda) where o.dniEstudiante='"+dniEstudiante+"' or d.dniEstudiante='"+dniEstudiante+"'", new ColaboracionMapper());
+	}
+	
 }
