@@ -57,8 +57,12 @@ public class DemandaController {
 	 }
 	
 	@RequestMapping(value="/list")
-	public String listDemanda(Model model){
-		model.addAttribute("demandas",demandaDao.getDemandas());
+	public String listDemanda(Model model,HttpSession session){
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user != null){
+			List<Demanda> demandasValidasUsuario=this.filtrarDemandas(new Date(), demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+			model.addAttribute("listaDemandasUsuario",demandasValidasUsuario);
+		}
 		return "demanda/list";
 	}
 	
@@ -153,5 +157,14 @@ public class DemandaController {
             }
         }
     }
-	
+	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
+		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
+		for(Demanda demanda:listaDemandas){
+			if(!demanda.getFechaFin().before(fecha))
+				demandasValidas.add(demanda);
+			else
+				demandaDao.deleteDemanda(demanda);
+		}
+		return demandasValidas;
+	}
 }

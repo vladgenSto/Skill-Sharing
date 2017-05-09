@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -74,9 +75,10 @@ public class LoginController {
         if(user.getUsername().trim().equals("admin"))
             return "redirect:indexAdmin.jsp";
         else{
-            List<Demanda> listaDemandas=demandaDao.getDemandasUsuario(user.getDniEstudiante());
-            session.setAttribute("listaOfertasUsuario", ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
-            session.setAttribute("listaDemandasUsuario", demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+            List<Demanda> listaDemandas=this.filtrarDemandas(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+            List<Oferta> listaOfertas=this.filtrarOfertas(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
+            session.setAttribute("listaOfertasUsuario", listaOfertas);
+            session.setAttribute("listaDemandasUsuario", listaDemandas);
             if(!listaDemandas.isEmpty()){
                 ArrayList<Oferta>listaOfertasRelacionadas=new ArrayList<Oferta>();
                 for(Demanda demanda:listaDemandas){
@@ -96,4 +98,27 @@ public class LoginController {
 		session.invalidate();
 		return "logout";
 	}
+	
+	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
+		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
+		for(Demanda demanda:listaDemandas){
+			if(!demanda.getFechaFin().before(fecha))
+				demandasValidas.add(demanda);
+			else
+				demandaDao.deleteDemanda(demanda);
+		}
+		return demandasValidas;
+	}
+	
+	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
+		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
+		for(Oferta oferta:listaOfertas){
+			if(!oferta.getFechaFin().before(fecha))
+				ofertasValidas.add(oferta);
+			else
+				ofertaDao.deleteOferta(oferta);
+		}
+		return ofertasValidas;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,14 +49,19 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listOferta(Model model){
-		model.addAttribute("ofertas",ofertaDao.getOfertas());
+	public String listOferta(Model model, HttpSession session){
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user != null){
+			List<Oferta> ofertasValidasUsuarios=this.filtrarOfertas(new Date(), ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
+			model.addAttribute("listaOfertasUsuario",ofertasValidasUsuarios);
+		}
 		return "oferta/list";
 	}
 	
 	@RequestMapping(value="/buscar")
 	public String listarTodasLasOfertas(Model model){
-		model.addAttribute("ofertas",ofertaDao.getOfertas());
+		List<Oferta> ofertasValidas=this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+		model.addAttribute("ofertas",ofertasValidas);
 		return "oferta/buscar";
 	}
 	
@@ -112,4 +118,15 @@ public class OfertaController {
         List<Oferta>listaOfertas=ofertaDao.getOfertasUsuario(user.getDniEstudiante());
         session.setAttribute("listaOfertasUsuario", listaOfertas);
     }
+	
+	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
+		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
+		for(Oferta oferta:listaOfertas){
+			if(!oferta.getFechaFin().before(fecha))
+				ofertasValidas.add(oferta);
+			else
+				ofertaDao.deleteOferta(oferta);
+		}
+		return ofertasValidas;
+	}
 }
