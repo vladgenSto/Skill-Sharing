@@ -5,9 +5,9 @@
 <p class="loggeduser">
 <c:choose>
 <c:when test='${user == null}'>
-No autenticat <a href="${pageContext.request.contextPath}/login.html">Entrar</a> </c:when>
+No autenticado <a href="${pageContext.request.contextPath}/login.html">Entrar</a> </c:when>
 <c:otherwise>
-Autenticat com ${user.username}
-<a href="${pageContext.request.contextPath}/logout.html">Eixir</a> </c:otherwise>
+Autenticado como ${user.username}
+<a href="${pageContext.request.contextPath}/logout.html">Salir</a> </c:otherwise>
 </c:choose>
 </p>
