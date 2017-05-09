@@ -80,7 +80,7 @@
 									</div>
 									<div class="md-form">
 										<i class="fa fa-lock prefix"></i>
-										<form:input path="password" type="text" id="form2"
+										<form:input path="password" type="password" id="form2"
 											class="form-control" placeholder="Contraseña"></form:input>
 										<form:errors path="password" cssClass="error"/>
 											

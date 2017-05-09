@@ -13,8 +13,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Anyadir Colaboracion</title>
 </head>
+<t:paginabasicaUsuario>
 <body>
-<h2>Nueva Colaboracion</h2>
+<h2>Nueva Colaboracion</h2><br>
 <form:form method="post" modelAttribute="colaboracion">
 <table>
 <tr>
@@ -23,46 +24,54 @@
 <%-- <td><form:errors path="codigoOferta" cssClass="error"/></td> --%>
 </tr>
 <tr>
-<td><label>Descripcion Oferta</label>
-<td><input value="${oferta.descripcion}"/></td>
-<td><form:errors cssClass="error"/></td>
-</tr>
-<tr>
 <%-- <td><form:label path="codigoDemanda">Codigo Demanda</form:label> --%>
 <td><form:input path="codigoDemanda" value="${demanda.codigoDemanda}" hidden="true"/></td>
 <%-- <td><form:errors path="codigoDemanda" cssClass="error"/></td> --%>
 </tr>
 <tr>
-<td><label>Descripcion Demanda</label>
-<td><input value="${demanda.descripcion}"/></td>
-<td><form:errors cssClass="error"/></td>
+<td><form:label path="descripcionOferta">Descripcion Oferta</form:label>
+<td><form:input path="descripcionOferta" value="${oferta.descripcion}"/></td>
+<td><form:errors path="descripcionOferta" cssClass="descripcionOferta"/></td>
 </tr>
 <tr>
-<td><form:label path="horas">Horas</form:label>
-<td><form:input path="horas"/></td>
-<td><form:errors path="horas" cssClass="error"/></td>
+<td><form:label path="descripcionDemanda">Descripcion Demanda</form:label>
+<td><form:input path="descripcionDemanda" value="${demanda.descripcion}"/></td>
+<td><form:errors path="descripcionDemanda" cssClass="descripcionDemanda"/></td>
 </tr>
 <tr>
-<td><form:label path="puntuacion">Puntuacion</form:label>
-<td><form:select class="form-control" name="puntuacion" style="width:70%" path="puntuacion">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</form:select></td>
-<td><form:errors path="puntuacion" cssClass="error"/></td>
+<td><form:label path="fechaInicio">Fecha de inicio</form:label>
+<td><form:input path="fechaInicio" value="${fechaInicio}"/></td>
 </tr>
 <tr>
-<td><form:label path="comentarios">Comentarios</form:label>
-<td><form:input path="comentarios"/></td>
-<td><form:errors path="comentarios" cssClass="error"/></td>
+<td><form:label path="fechaFin">Fecha de fin</form:label>
+<td><form:input path="fechaFin" value="${fechaFin}"/></td>
 </tr>
 <tr>
-<td colspan="2"><input type="submit" value="Anyadir Colaboracion"></td>
+<%-- <td><form:label path="horas">Horas</form:label> --%>
+<td><form:input path="horas" value="--" hidden="true"/></td>
+<%-- <td><form:errors path="horas" cssClass="error"/></td> --%>
+</tr>
+<tr>
+<%-- <td><form:label path="puntuacion">Puntuacion</form:label> --%>
+<%-- <td><form:select class="form-control" name="puntuacion" style="width:70%" path="puntuacion"> --%>
+<!--   <option>1</option> -->
+<!--   <option>2</option> -->
+<!--   <option>3</option> -->
+<!--   <option>4</option> -->
+<!--   <option>5</option> -->
+<%-- </form:select></td> --%>
+<%-- <td><form:errors path="puntuacion" cssClass="error"/></td> --%>
+<td><form:input path="puntuacion" hidden="true" value="--"/></td>
+</tr>
+<tr>
+<%-- <td><form:label path="comentarios">Comentarios</form:label> --%>
+<td><form:input path="comentarios" value="--" hidden="true"/></td>
+<%-- <td><form:errors path="comentarios" cssClass="error"/></td> --%>
 </tr>
 </table>
+<br>
+<input type="submit" value="Anyadir Colaboracion">
 </form:form>
-
 </body>
+</t:paginabasicaUsuario>
 </html>

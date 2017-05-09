@@ -30,9 +30,13 @@ public class ColaboracionDAO {
 			Colaboracion colaboracion = new Colaboracion();
 			colaboracion.setCodigoOferta(rs.getInt("codigoOferta"));
 			colaboracion.setCodigoDemanda(rs.getInt("codigoDemanda"));
-			colaboracion.setHoras(rs.getInt("horas"));
-			colaboracion.setPuntuacion(rs.getInt("puntuacion"));
+			colaboracion.setHoras(rs.getString("horas"));
+			colaboracion.setPuntuacion(rs.getString("puntuacion"));
 			colaboracion.setComentarios(rs.getString("comentarios"));
+			colaboracion.setDescripcionOferta(rs.getString("descripcionOferta"));
+			colaboracion.setDescripcionDemanda(rs.getString("descripcionDemanda"));
+			colaboracion.setFechaInicio(rs.getDate("fechaInicio"));
+			colaboracion.setFechaFin(rs.getDate("fechaFin"));
 			return colaboracion;
 		}
 	}
@@ -46,19 +50,14 @@ public class ColaboracionDAO {
 	}
 	
 	public void addColaboracion(Colaboracion colaboracion) {
-		this.jdbcTemplate.update("insert into Colaboracion(codigoOferta,codigoDemanda,horas,puntuacion,comentarios) values(?,?,?,?,?)", colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda(), colaboracion.getHoras(), colaboracion.getPuntuacion(), colaboracion.getComentarios());
+		this.jdbcTemplate.update("insert into Colaboracion(codigoOferta,codigoDemanda,horas,puntuacion,comentarios,descripcionOferta,descripcionDemanda,fechaInicio,fechaFin) values(?,?,?,?,?,?,?,?,?)", colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda(), colaboracion.getHoras(), colaboracion.getPuntuacion(), colaboracion.getComentarios(),colaboracion.getDescripcionOferta(),colaboracion.getDescripcionDemanda(),colaboracion.getFechaInicio(),colaboracion.getFechaFin());
 	}
 	
 	public void updateColaboracion(Colaboracion colaboracion) {
-		this.jdbcTemplate.update("update colaboracion set horas=?, puntuacion=?, comentarios=? where codigoOferta=? and codigoDemanda=?", colaboracion.getHoras(), colaboracion.getPuntuacion(), colaboracion.getComentarios(), colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda());
+		this.jdbcTemplate.update("update colaboracion set horas=?, puntuacion=?, comentarios=?,descripcionOferta=?,descripcionDemanda=?,fechaFin=? where codigoOferta=? and codigoDemanda=?", colaboracion.getHoras(), colaboracion.getPuntuacion(), colaboracion.getComentarios(),colaboracion.getDescripcionOferta(),colaboracion.getDescripcionDemanda(),colaboracion.getFechaFin(), colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda());
 	}
 	
 	public void deleteColaboracion(Colaboracion colaboracion) {
 		this.jdbcTemplate.update("delete from Colaboracion where codigoOferta=? and codigoDemanda=?", colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda());
 	}
-	
-	public List<Colaboracion> getColaboracionesUsuario(String dniEstudiante) {
-		return this.jdbcTemplate.query("select c.* from oferta as o join colaboracion as c using(codigoOferta) join demanda as d using(codigoDemanda) where o.dniEstudiante='"+dniEstudiante+"' or d.dniEstudiante='"+dniEstudiante+"'", new ColaboracionMapper());
-	}
-	
 }

@@ -13,34 +13,43 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Actualizar Colaboracion</title>
 </head>
+<t:paginabasicaUsuario>
 <body>
+<h2>Valora la colaboración</h2><br>
 <form:form method="post" modelAttribute="colaboracion">
 <table>
 <tr>
-<td><form:label path="codigoOferta">Codigo Oferta</form:label></td>
-<td><form:input path="codigoOferta"/></td>
+<td><form:input path="codigoOferta" hidden="true"/></td>
 </tr>
 <tr>
-<td><form:label path="codigoDemanda">Codigo demanda</form:label></td>
-<td><form:input path="codigoDemanda"/></td>
+<td><form:input path="codigoDemanda" hidden="true"/></td>
 </tr>
 <tr>
-<td><form:label path="horas">Horas</form:label></td>
+<td><form:input path="descripcionOferta" hidden="true"/></td>
+</tr>
+<tr>
+<td><form:input path="descripcionDemanda" hidden="true"/></td>
+</tr>
+<tr>
+<td><form:label path="fechaFin">Fecha de fin</form:label>
+<td><form:input path="fechaFin" value="${fechaFin}"/></td>
+</tr>
+<tr>
+<td><form:label path="horas">Horas</form:label>
 <td><form:input path="horas"/></td>
 </tr>
 <tr>
-<td><form:label path="puntuacion">Puntuacion</form:label></td>
+<td><form:label path="puntuacion">Puntuacion</form:label>
 <td><form:input path="puntuacion"/></td>
 </tr>
 <tr>
-<td><form:label path="comentarios">Comentarios</form:label></td>
+<td><form:label path="comentarios">Comentarios</form:label>
 <td><form:input path="comentarios"/></td>
 </tr>
-<tr>
-<td colspan="2"><input type="submit" value="Actualiza Colaboracion"/></td>
-</tr>
 </table>
+<br>
+<input type="submit" value="Terminar Colaboracion"/>
 </form:form>
-
 </body>
+</t:paginabasicaUsuario>
 </html>

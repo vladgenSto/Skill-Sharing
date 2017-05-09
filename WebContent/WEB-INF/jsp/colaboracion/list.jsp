@@ -18,20 +18,24 @@
 <h1>Lista de Colaboraciones</h1>
 <table class="table table-hover">
 <tr>
-<th>Codigo Oferta</th>
-<th>Codigo Demanda</th>
+<th>Descripcion Oferta</th>
+<th>Descripcion Demanda</th>
 <th>Horas</th>
 <th>Puntuacion</th>
 <th>Comentarios</th>
+<th>Fecha inicio</th>
+<th>Fecha fin</th>
 </tr>
 <c:forEach items="${colaboraciones}" var="colaboracion">
 <tr>
-<th>${colaboracion.codigoOferta}</th>
-<th>${colaboracion.codigoDemanda}</th>
+<th>${colaboracion.descripcionOferta}</th>
+<th>${colaboracion.descripcionDemanda}</th>
 <th>${colaboracion.horas}</th>
 <th>${colaboracion.puntuacion}</th>
 <th>${colaboracion.comentarios}</th>
-<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
+<th>${colaboracion.fechaInicio}</th>
+<th>${colaboracion.fechaFin}</th>
+<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-yellow">Terminar</a></th>
 <th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
 </tr>
 </c:forEach>

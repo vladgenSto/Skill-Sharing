@@ -1,6 +1,7 @@
 package controller;
 
-import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,6 @@ import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.OfertaDAO;
 import domain.Colaboracion;
-import domain.UserDetails;
 
 @Controller
 @RequestMapping(value="/colaboracion")
@@ -41,11 +41,8 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listColaboracion(Model model, HttpSession session) {
-		UserDetails user = (UserDetails) session.getAttribute("user");
-		if (user != null) {
-			model.addAttribute("colaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()));
-		}
+	public String listColaboracion(Model model) {
+		model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
 		return "colaboracion/list";
 	}
 	
@@ -54,6 +51,13 @@ public class ColaboracionController {
 		model.addAttribute("colaboracion", new Colaboracion());
 		model.addAttribute("oferta",ofertaDao.getOferta(codigoOferta));
 		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
+		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
+		Date fecha=new Date();
+		model.addAttribute("fechaInicio",formato.format(fecha));
+		int year=fecha.getYear();
+		year+=1;
+		fecha.setYear(year);
+		model.addAttribute("fechaFin",formato.format(fecha));
 		return "colaboracion/add";
 	}
 	
@@ -70,6 +74,12 @@ public class ColaboracionController {
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
 	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
+		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
+		Date fecha=new Date();
+		int year=fecha.getYear();
+		year+=1;
+		fecha.setYear(year);
+		model.addAttribute("fechaFin",formato.format(fecha));
 		return "colaboracion/update";
 	}
 	

@@ -32,8 +32,8 @@ public class OfertaDAO {
 			Colaboracion colaboracion = new Colaboracion();
 			colaboracion.setCodigoOferta(rs.getInt("codigoOferta"));
 			colaboracion.setCodigoDemanda(rs.getInt("codigoDemanda"));
-			colaboracion.setHoras(rs.getInt("horas"));
-			colaboracion.setPuntuacion(rs.getInt("puntuacion"));
+			colaboracion.setHoras(rs.getString("horas"));
+			colaboracion.setPuntuacion(rs.getString("puntuacion"));
 			colaboracion.setComentarios(rs.getString("comentarios"));
 			return colaboracion;
 		}

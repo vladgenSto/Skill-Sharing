@@ -48,11 +48,8 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listOferta(Model model, HttpSession session){
-		UserDetails user = (UserDetails) session.getAttribute("user");
-		if (user != null) {
-			model.addAttribute("listaOfertasUsuario",ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
-		}
+	public String listOferta(Model model){
+		model.addAttribute("ofertas",ofertaDao.getOfertas());
 		return "oferta/list";
 	}
 	

@@ -57,11 +57,8 @@ public class DemandaController {
 	 }
 	
 	@RequestMapping(value="/list")
-	public String listDemanda(Model model, HttpSession session){
-		UserDetails user = (UserDetails) session.getAttribute("user");
-		if (user != null) {
-			model.addAttribute("listaDemandasUsuario",demandaDao.getDemandasUsuario(user.getDniEstudiante()));
-		}
+	public String listDemanda(Model model){
+		model.addAttribute("demandas",demandaDao.getDemandas());
 		return "demanda/list";
 	}
 	
