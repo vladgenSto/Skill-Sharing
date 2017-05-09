@@ -14,40 +14,67 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>Anyadir Estudiante</title>
 </head>
-<body>
-<h2>Nuevo Estudiante</h2>
-<form:form method="post" modelAttribute="estudiante">
-<table class="table">
-<tr>
-<td><form:label path="dni">DNI</form:label></td>
-<td><form:input path="dni"/></td>
-<td><form:errors path="dni" cssClass="error"/></td>
-</tr>
-<tr>
-<td><form:label path="nombre">Nombre</form:label></td>
-<td><form:input path="nombre"/></td>
-<td><form:errors path="nombre" cssClass="error"/></td>
-</tr>
-<tr>
-<td><form:label path="licenciatura">Licenciatura</form:label></td>
-<td><form:input path="licenciatura"/></td>
-<td><form:errors path="licenciatura" cssClass="error"/></td>
-</tr>
-<tr>
-<td><form:label path="curso">Curso</form:label></td>
-<td><form:input path="curso"/></td>
-<td><form:errors path="curso" cssClass="error"/></td>
-</tr>
-<tr>
-<td><form:label path="correo">Email</form:label></td>
-<td><form:input path="correo"/></td>
-<td><form:errors path="correo" cssClass="error"/></td>
-</tr>
-<tr>
-<td colspan="2"><input type="submit" value="Anyadir Estudiante"></td>
-</tr>
-</table>
-</form:form>
+<body class="formulario">
+<form:form class="form-horizontal" method="post" modelAttribute="estudiante">
+  <fieldset>
+    <legend>Nuevo Estudiante</legend>
+    <div class="form-group">
+      <label for="dni" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI</label>
 
+      <div class="col-md-2">
+        <form:input path="dni" type="text" class="form-control" id="dni" placeholder="DNI"></form:input>
+      </div>
+      <div>
+      	<form:errors path="dni" cssClass="error"/>
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="nombre" class="col-md-2 control-label" style="color: black; font-size: medium;">Nombre</label>
+
+      <div class="col-md-2">
+        <form:input path="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre"></form:input>
+      </div>
+      <div>
+      	<form:errors path="nombre" cssClass="error"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="licenciatura" class="col-md-2 control-label" style="color: black; font-size: medium;">Licenciatura</label>
+
+      <div class="col-md-2">
+        <form:input path="licenciatura" type="text" class="form-control" id="licenciatura" placeholder="Licenciatura"></form:input>
+      </div>
+      <div>
+      	<form:errors path="licenciatura" cssClass="error"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="curso" class="col-md-2 control-label" style="color: black; font-size: medium;">Curso</label>
+
+      <div class="col-md-2">
+        <form:input path="curso" type="text" class="form-control" id="curso" placeholder="Curso"/>
+      </div>
+      <div>
+      	<form:errors path="curso" cssClass="error"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="correo" class="col-md-2 control-label" style="color: black; font-size: medium;">Correo</label>
+
+      <div class="col-md-2">
+      	<form:input path="correo" type="text" class="form-control" id="correo" placeholder="Correo"/>
+      </div>
+      <div>
+     	<form:errors path="correo" cssClass="error"/>	
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-6 col-md-offset-2">
+        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
+      </div>
+    </div>
+  </fieldset>
+</form:form>
 </body>
 </html>

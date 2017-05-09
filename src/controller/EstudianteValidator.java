@@ -22,11 +22,15 @@ public class EstudianteValidator implements Validator {
 		if (estudiante.getNombre().length() > 30)
 			errors.rejectValue("nombre", "obligatori", "Este campo supera los 30 caracteres");
 		
-		if (estudiante.getCurso().length() > 50)
-			errors.rejectValue("correo", "obligatori", "Este campo supera los 50 caracteres");
+		if (estudiante.getLicenciatura().trim().equals(""))
+			errors.rejectValue("licenciatura", "obligatori", "Este campo es obligatorio");
+		if (estudiante.getNombre().length() > 50)
+			errors.rejectValue("licenciatura", "obligatori", "Este campo supera los 50 caracteres");
 		
+		if (estudiante.getCurso().trim().equals(""))
+			errors.rejectValue("curso", "obligatori", "Este campo es obligatorio");
 		if (estudiante.getCurso().length() > 10)
-			errors.rejectValue("correo", "obligatori", "Este campo supera los 10 caracteres");
+			errors.rejectValue("curso", "obligatori", "Este campo supera los 10 caracteres");
 		
 		if (estudiante.getCorreo().trim().equals(""))
 			errors.rejectValue("correo", "obligatori", "Este campo es obligatorio");

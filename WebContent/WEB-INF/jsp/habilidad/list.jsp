@@ -27,19 +27,12 @@
 <th>${habilidad.nombre}</th>
 <th>${habilidad.nivel}</th>
 <th>${habilidad.descripcion}</th>
-<th><a href="update/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-default">Editar</a></th>
-<th><a href="delete/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-default">Borrar</a></th>
+<th><a href="update/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-raised btn-yellow">Editar</a></th>
+<th><a href="delete/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-raised btn-warning">Borrar</a></th>
 </tr>
 </c:forEach>
 </table>
-<a href="add.html" class="btn btn-default">Anyadir Habilidad</a>
-<script src="js/jQuery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/ripples.min.js"></script>
-<script>
-	$.maaterial.init();
-</script>
+<a href="add.html" class="btn btn-raised btn-primary">Añadir</a>
 </jsp:body>
 </t:paginabasicaAdmin>
 </html>

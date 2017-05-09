@@ -13,31 +13,39 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Anyadir Habilidad</title>
 </head>
-<body>
-<h2>Nueva Habilidad</h2>
-<form:form method="post" modelAttribute="habilidad">
-<table class="table">
-<tr>
-<td><form:label path="nombre">Nombre</form:label></td>
-<td><form:input path="nombre"/></td>
-<td><form:errors path="nombre" cssClass="error"/></td>
-<tr>
-<td><form:label path="descripcion">Descripcion</form:label></td>
-<td><form:input path="descripcion"/></td>
-<td><form:errors path="descripcion" cssClass="error"/></td>
-</tr>
-<tr>
-<td colspan="2"><input type="submit" value="Anyadir Habilidad"></td>
-</tr>
-</table>
-</form:form>
 
-<script src="js/jQuery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/material.min.js"></script>
-<script src="js/ripples.min.js"></script>
-<script>
-	$.maaterial.init();
-</script>
+<body class="formulario">
+<form:form class="form-horizontal" method="post" modelAttribute="habilidad">
+  <fieldset>
+    <legend>Nueva Habilidad</legend>
+    <div class="form-group">
+      <label for="nombre" class="col-md-2 control-label" style="color: black; font-size: medium;">Nombre</label>
+
+      <div class="col-md-2">
+        <form:input path="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre"></form:input>
+      </div>
+      <div>
+      	<form:errors path="nombre" cssClass="error"/>
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="descripcion" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion</label>
+
+      <div class="col-md-4">
+        <form:textarea path="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripcion"></form:textarea>
+        <span class="help-block">Una pequeña descripcion sobre lo que ira la habilidad.</span>
+      </div>
+      <div>
+      	<form:errors path="descripcion" cssClass="error"/>
+      </div>
+      </div>
+    <div class="form-group">
+      <div class="col-md-6 col-md-offset-2">
+        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
+      </div>
+    </div>
+  </fieldset>
+</form:form>
 </body>
 </html>

@@ -31,13 +31,12 @@
 <th>${estudiante.licenciatura}</th>
 <th>${estudiante.curso}</th>
 <th>${estudiante.correo}</th>
-<th><a href="update/${estudiante.dni}.html" class="btn btn-default">Editar</a></th>
-<th><a href="delete/${estudiante.dni}.html" class="btn btn-default">Borrar</a></th>
+<th><a href="update/${estudiante.dni}.html" class="btn btn-raised btn-yellow">Editar</a></th>
+<th><a href="delete/${estudiante.dni}.html" class="btn btn-raised btn-warning">Borrar</a></th>
 </tr>
 </c:forEach>
 </table>
-<a href="add.html" class="btn btn-default">Anyadir Estudiante</a>
-
+<a href="add.html" class="btn btn-raised btn-primary">Añadir</a>
 </jsp:body>
 </t:paginabasicaAdmin>
 </html>
