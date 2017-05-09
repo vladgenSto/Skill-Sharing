@@ -35,7 +35,7 @@
 <th>${colaboracion.comentarios}</th>
 <th>${colaboracion.fechaInicio}</th>
 <th>${colaboracion.fechaFin}</th>
-<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-yellow">Terminar</a></th>
+<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-primary">Terminar</a></th>
 <th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
 </tr>
 </c:forEach>
