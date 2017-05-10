@@ -13,65 +13,107 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Anyadir Colaboracion</title>
 </head>
-<t:paginabasicaUsuario>
-<body>
-<h2>Nueva Colaboracion</h2><br>
-<form:form method="post" modelAttribute="colaboracion">
-<table>
-<tr>
-<%-- <td><form:label path="codigoOferta">Codigo Oferta</form:label> --%>
-<td><form:input path="codigoOferta" value="${oferta.codigoOferta}" hidden="true"/></td>
-<%-- <td><form:errors path="codigoOferta" cssClass="error"/></td> --%>
-</tr>
-<tr>
-<%-- <td><form:label path="codigoDemanda">Codigo Demanda</form:label> --%>
-<td><form:input path="codigoDemanda" value="${demanda.codigoDemanda}" hidden="true"/></td>
-<%-- <td><form:errors path="codigoDemanda" cssClass="error"/></td> --%>
-</tr>
-<tr>
-<td><form:label path="descripcionOferta">Descripcion Oferta</form:label>
-<td><form:input path="descripcionOferta" value="${oferta.descripcion}"/></td>
-<td><form:errors path="descripcionOferta" cssClass="descripcionOferta"/></td>
-</tr>
-<tr>
-<td><form:label path="descripcionDemanda">Descripcion Demanda</form:label>
-<td><form:input path="descripcionDemanda" value="${demanda.descripcion}"/></td>
-<td><form:errors path="descripcionDemanda" cssClass="descripcionDemanda"/></td>
-</tr>
-<tr>
-<td><form:label path="fechaInicio">Fecha de inicio</form:label>
-<td><form:input path="fechaInicio" value="${fechaInicio}"/></td>
-</tr>
-<tr>
-<td><form:label path="fechaFin">Fecha de fin</form:label>
-<td><form:input path="fechaFin" value="${fechaFin}"/></td>
-</tr>
-<tr>
-<%-- <td><form:label path="horas">Horas</form:label> --%>
-<td><form:input path="horas" value="--" hidden="true"/></td>
-<%-- <td><form:errors path="horas" cssClass="error"/></td> --%>
-</tr>
-<tr>
-<%-- <td><form:label path="puntuacion">Puntuacion</form:label> --%>
-<%-- <td><form:select class="form-control" name="puntuacion" style="width:70%" path="puntuacion"> --%>
-<!--   <option>1</option> -->
-<!--   <option>2</option> -->
-<!--   <option>3</option> -->
-<!--   <option>4</option> -->
-<!--   <option>5</option> -->
-<%-- </form:select></td> --%>
-<%-- <td><form:errors path="puntuacion" cssClass="error"/></td> --%>
-<td><form:input path="puntuacion" hidden="true" value="--"/></td>
-</tr>
-<tr>
-<%-- <td><form:label path="comentarios">Comentarios</form:label> --%>
-<td><form:input path="comentarios" value="--" hidden="true"/></td>
-<%-- <td><form:errors path="comentarios" cssClass="error"/></td> --%>
-</tr>
-</table>
+<body class="formulario">
+<form:form class="form-horizontal" method="post" modelAttribute="colaboracion">
+<fieldset>
+<legend>Añade Colaboracion</legend>
+<div class="form-group">
+	<form:form path="codigoOferta"/>
+<!--     	<label for="codigoOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Oferta</label> -->
+		<div class="col-md-4">
+        	<form:input path="codigoOferta" class="form-control" rows="3" id="codigoOferta" hidden="true" value="${oferta.codigoOferta}"></form:input>
+      	</div>
+    	<div>
+<%--       		<form:errors path="codigoOferta" cssClass="error"/> --%>
+      	</div>
+	</div>
+<div class="form-group">
+	<form:form path="codigoDemanda"/>
+<!--     	<label for="codigoDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Demanda</label> -->
+		<div class="col-md-4">
+        	<form:input path="codigoDemanda" class="form-control" rows="3" id="codigoDemanda" hidden="true" value="${demanda.codigoDemanda}"></form:input>
+      	</div>
+    	<div>
+<%--       		<form:errors path="codigoDemanda" cssClass="error"/> --%>
+      	</div>
+	</div>
+<div class="form-group">
+	<form:form path="descripcionOferta"/>
+    	<label for="descripcionOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Oferta</label>
+		<div class="col-md-4">
+        	<form:input path="descripcionOferta" class="form-control" rows="3" id="descripcionOferta" value="${oferta.descripcion}"></form:input>
+        	<span class="help-block">Una pequeña descripcion sobre lo que ira la oferta.</span>
+      	</div>
+    	<div>
+      		<form:errors path="descripcionOferta" cssClass="error"/>
+      	</div>
+	</div>
+<div class="form-group">
+	<form:form path="descripcionDemanda" />
+    	<label for="descripcionDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Demanda</label>
+		<div class="col-md-4">
+        	<form:input path="descripcionDemanda" class="form-control" rows="3" id="descripcionDemanda" value="${demanda.descripcion}"></form:input>
+        	<span class="help-block">Una pequeña descripcion sobre lo que ira la demanda.</span>
+      	</div>
+    	<div>
+      		<form:errors path="descripcionDemanda" cssClass="error"/>
+      	</div>
+	</div>
+	<div class="form-group">
+      <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
+
+      <div class="col-md-2">
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicio}"></form:input>
+        <span class="help-block">(mm/dd/yyyy)</span>
+      </div>
+      <div>
+      	<form:errors path="fechaInicio" cssClass="error"/>
+      </div>
+    </div>
+<div class="form-group">
+      <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
+
+      <div class="col-md-2">
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFin}"></form:input>
+        <span class="help-block">(mm/dd/yyyy)</span>
+      </div>
+      <div>
+      	<form:errors path="fechaFin" cssClass="error"/>
+      </div>
+    </div>
+<div class="form-group">
+	<form:form path="horas"/>
+<!--     	<label for="horas" class="col-md-2 control-label" style="color: black; font-size: medium;">Horas</label> -->
+		<div class="col-md-4">
+        	<form:input path="horas" class="form-control" rows="3" id="horas" hidden="true" value="--"></form:input>
+      	</div>
+    	<div>
+<%--       		<form:errors path="horas" cssClass="error"/> --%>
+      	</div>
+	</div>
+<div class="form-group">
+<!--       <label for="puntuacion" class="col-md-2 control-label" style="color: black; font-size: medium;">Puntuacion</label> -->
+      <div class="col-md-2">      
+		<form:input path="puntuacion" class="form-control" rows="3" id="puntuacion" hidden="true" value="--"></form:input>
+      </div>
+      <div>
+<%--       	<form:errors path="puntuacion" cssClass="error"/> --%>
+      </div>
+    </div>
+<div class="form-group">
+	<form:form path="comentarios"/>
+<!--     	<label for="comentarios" class="col-md-2 control-label" style="color: black; font-size: medium;">Comentarios</label> -->
+		<div class="col-md-4">
+        	<form:input path="comentarios" class="form-control" rows="3" id="comentarios" hidden="true" value="--"></form:input>
+<!--         	<span class="help-block">Que le ha parecido al usuario la colaboracion</span> -->
+      	</div>
+    	<div>
+<%--       		<form:errors path="comentarios" cssClass="error"/> --%>
+      	</div>
+	</div>
 <br>
-<input type="submit" value="Anyadir Colaboracion">
+<button type="submit" class="btn btn-raised btn-primary">Añadir</button>
+</fieldset>
 </form:form>
 </body>
-</t:paginabasicaUsuario>
 </html>
