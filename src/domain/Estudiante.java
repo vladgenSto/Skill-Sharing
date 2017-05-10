@@ -1,6 +1,6 @@
 package domain;
 
-public class Estudiante {
+public class Estudiante implements InfoEstudiante{
 	private String dni;
 	private String nombre;
 	private String licenciatura;
@@ -24,11 +24,11 @@ public class Estudiante {
 		this.correo = correo;
 	}
 
-	public String getDni() {
+	public String getDniEstudiante() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDniEstudiante(String dni) {
 		this.dni = dni;
 	}
 

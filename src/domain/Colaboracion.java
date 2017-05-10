@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class Colaboracion {
+public class Colaboracion implements MetodosFecha{
 
 	private int codigoOferta;
 	private int codigoDemanda;
@@ -19,12 +19,16 @@ public class Colaboracion {
 		super();
 	}
 
-	public Colaboracion(int codigoOferta, int codigoDemanda, String horas, String puntuacion, String comentarios) {
+	public Colaboracion(int codigoOferta, int codigoDemanda, String horas, String puntuacion, String comentarios,String descripOf,String descripDem,Date fechaIni,Date fechaFin) {
 		this.codigoOferta = codigoOferta;
 		this.codigoDemanda = codigoDemanda;
 		this.horas = horas;
 		this.puntuacion = puntuacion;
 		this.comentarios = comentarios;
+		this.descripcionOferta=descripOf;
+		this.descripcionDemanda=descripDem;
+		this.fechaInicio=fechaIni;
+		this.fechaFin=fechaFin;
 	}
 
 	public int getCodigoOferta() {

@@ -20,6 +20,7 @@ import dao.DemandaDAO;
 import dao.OfertaDAO;
 import dao.UserDAO;
 import domain.Demanda;
+import domain.MetodosFecha;
 import domain.Oferta;
 import domain.UserDetails;
 
@@ -75,8 +76,8 @@ public class LoginController {
         if(user.getUsername().trim().equals("admin"))
             return "redirect:indexAdmin.jsp";
         else{
-            List<Demanda> listaDemandas=this.filtrarDemandas(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
-            List<Oferta> listaOfertas=this.filtrarOfertas(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
+            List<Demanda> listaDemandas=this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+            List<Oferta> listaOfertas=this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
             session.setAttribute("listaOfertasUsuario", listaOfertas);
             session.setAttribute("listaDemandasUsuario", listaDemandas);
             if(!listaDemandas.isEmpty()){
@@ -99,26 +100,22 @@ public class LoginController {
 		return "logout";
 	}
 	
-	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
-		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
-		for(Demanda demanda:listaDemandas){
-			if(!demanda.getFechaFin().before(fecha))
-				demandasValidas.add(demanda);
-			else
-				demandaDao.deleteDemanda(demanda);
+	private <T extends MetodosFecha> List<T> filtro(Date fecha,List<T> lista){
+		ArrayList<T> objetosValidos=new ArrayList<T>();
+		if(!lista.isEmpty()){
+			for(T elem:lista){
+				if(!elem.getFechaFin().before(fecha))
+					objetosValidos.add(elem);
+				else if(elem.getClass().equals(Oferta.class)){
+					if(!ofertaDao.deleteOferta((Oferta)elem))
+							objetosValidos.add(elem);
+				}else if(elem.getClass().equals(Demanda.class)){
+					if(!demandaDao.deleteDemanda((Demanda)elem))
+						objetosValidos.add(elem);
+				}
+			}
 		}
-		return demandasValidas;
-	}
-	
-	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
-		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
-		for(Oferta oferta:listaOfertas){
-			if(!oferta.getFechaFin().before(fecha))
-				ofertasValidas.add(oferta);
-			else
-				ofertaDao.deleteOferta(oferta);
-		}
-		return ofertasValidas;
+		return objetosValidos;
 	}
 	
 }

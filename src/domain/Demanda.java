@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class Demanda {
+public class Demanda implements MetodosFecha, InfoEstudiante{
 	private int codigoDemanda;
 	private String descripcion;
 	private Date fechaInicio;
@@ -66,8 +66,8 @@ public class Demanda {
 		return dniEstudiante;
 	}
 
-	public void setDniEstudiante(String dniEstudiante) {
-		this.dniEstudiante = dniEstudiante;
+	public void setDniEstudiante(String dni) {
+		this.dniEstudiante = dni;
 	}
 
 	public String getNombreHabilidad() {

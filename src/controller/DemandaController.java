@@ -159,11 +159,13 @@ public class DemandaController {
     }
 	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
 		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
+		if(!listaDemandas.isEmpty()){
 		for(Demanda demanda:listaDemandas){
 			if(!demanda.getFechaFin().before(fecha))
 				demandasValidas.add(demanda);
-			else
-				demandaDao.deleteDemanda(demanda);
+			else if(!demandaDao.deleteDemanda(demanda))
+				demandasValidas.add(demanda);
+		}
 		}
 		return demandasValidas;
 	}

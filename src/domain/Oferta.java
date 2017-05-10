@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class Oferta {
+public class Oferta implements MetodosFecha,InfoEstudiante{
 
 	private int codigoOferta;
 	private String descripcion;
@@ -58,8 +58,8 @@ public class Oferta {
 		return dniEstudiante;
 	}
 
-	public void setDniEstudiante(String dniEstudiante) {
-		this.dniEstudiante = dniEstudiante;
+	public void setDniEstudiante(String dni) {
+		this.dniEstudiante = dni;
 	}
 
 	public String getNombreHabilidad() {

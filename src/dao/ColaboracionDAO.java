@@ -45,9 +45,15 @@ public class ColaboracionDAO {
 		return this.jdbcTemplate.query("select * from colaboracion", new ColaboracionMapper());
 	}
 	
+	public List<Colaboracion> getColaboracionesUsuario(String dniUsuario) {
+		return this.jdbcTemplate.query("select c.* from oferta as o join colaboracion as c using(codigoOferta) join demanda as d using(codigoDemanda) where o.dniEstudiante='"+dniUsuario+"' or d.dniEstudiante='"+dniUsuario+"'", new ColaboracionMapper());
+	}
+	
 	public Colaboracion getColaboracion(int codigoOferta, int codigoDemanda) {
 		return this.jdbcTemplate.queryForObject("select * from colaboracion where codigoOferta=? and codigoDemanda=?", new Object[]{codigoOferta, codigoDemanda}, new ColaboracionMapper());
 	}
+	
+	
 	
 	public void addColaboracion(Colaboracion colaboracion) {
 		this.jdbcTemplate.update("insert into Colaboracion(codigoOferta,codigoDemanda,horas,puntuacion,comentarios,descripcionOferta,descripcionDemanda,fechaInicio,fechaFin) values(?,?,?,?,?,?,?,?,?)", colaboracion.getCodigoOferta(), colaboracion.getCodigoDemanda(), colaboracion.getHoras(), colaboracion.getPuntuacion(), colaboracion.getComentarios(),colaboracion.getDescripcionOferta(),colaboracion.getDescripcionDemanda(),colaboracion.getFechaInicio(),colaboracion.getFechaFin());

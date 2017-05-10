@@ -82,7 +82,7 @@ public class DemandaDAO {
 				demanda.getNombreHabilidad(), demanda.getNivelHabilidad(), demanda.getCodigoDemanda());
 	}
 
-	public void deleteDemanda(Demanda demanda) {
+	public boolean deleteDemanda(Demanda demanda) {
 		Colaboracion colaboracion;
 		try {
 			colaboracion = this.jdbcTemplate.queryForObject("select * from colaboracion where codigoDemanda=?",
@@ -92,7 +92,9 @@ public class DemandaDAO {
 		}
 		if (colaboracion == null) {
 			this.jdbcTemplate.update("delete from demanda where codigoDemanda = ?", demanda.getCodigoDemanda());
+			return true;
 		}
+		return false;
 	}
 	
 	public List<Demanda> getDemandasUsuario(String dniUsuario) {

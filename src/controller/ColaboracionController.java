@@ -3,6 +3,8 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.OfertaDAO;
 import domain.Colaboracion;
+import domain.UserDetails;
 
 @Controller
 @RequestMapping(value="/colaboracion")
@@ -41,8 +44,11 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listColaboracion(Model model) {
-		model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+	public String listColaboracion(Model model, HttpSession session) {
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user != null)
+			model.addAttribute("colaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()));
+		
 		return "colaboracion/list";
 	}
 	
@@ -76,9 +82,6 @@ public class ColaboracionController {
 		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
 		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
 		Date fecha=new Date();
-		int year=fecha.getYear();
-		year+=1;
-		fecha.setYear(year);
 		model.addAttribute("fechaFin",formato.format(fecha));
 		return "colaboracion/update";
 	}

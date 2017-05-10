@@ -12,9 +12,9 @@ public class EstudianteValidator implements Validator {
 	
 	public void validate(Object obj, Errors errors) {
 		Estudiante estudiante = (Estudiante) obj;
-		if (estudiante.getDni().trim().equals(""))
+		if (estudiante.getDniEstudiante().trim().equals(""))
 			errors.rejectValue("dni", "obligatori", "Este campo es obligatorio");
-		if (estudiante.getDni().length() > 9)
+		if (estudiante.getDniEstudiante().length() > 9)
 			errors.rejectValue("dni", "obligatori", "Este campo supera los 9 caracteres");
 		
 		if (estudiante.getNombre().trim().equals(""))

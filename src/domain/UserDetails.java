@@ -1,6 +1,6 @@
 package domain;
 
-public class UserDetails {
+public class UserDetails implements InfoEstudiante{
 
 	private String username;
 	private String password;
@@ -22,8 +22,8 @@ public class UserDetails {
 	public String getDniEstudiante() {
 		return dniEstudiante;
 	}
-	public void setDniEstudiante(String dniEstudiante) {
-		this.dniEstudiante = dniEstudiante;
+	public void setDniEstudiante(String dni) {
+		this.dniEstudiante = dni;
 	}
 	
 }

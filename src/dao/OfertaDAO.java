@@ -102,7 +102,7 @@ public class OfertaDAO {
 				oferta.getNombreHabilidad(), oferta.getNivelHabilidad(), oferta.getCodigoOferta());
 	}
 
-	public void deleteOferta(Oferta oferta) {
+	public boolean deleteOferta(Oferta oferta) {
 		Colaboracion colaboracion;
 		try{
 		colaboracion = this.jdbcTemplate.queryForObject("select * from colaboracion where codigoOferta=?",
@@ -111,9 +111,9 @@ public class OfertaDAO {
 			colaboracion=null;
 		}
 		if (colaboracion == null) {
-			System.out.println("La oferta no esta en una colaboracion");
 			this.jdbcTemplate.update("delete from oferta where codigoOferta = ?", oferta.getCodigoOferta());
-		}else
-			System.out.println("La oferta esta en una colaboracion");
+			return true;
+		}
+		return false;
 	}
 }

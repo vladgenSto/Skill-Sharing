@@ -121,11 +121,13 @@ public class OfertaController {
 	
 	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
 		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
+		if(!listaOfertas.isEmpty()){
 		for(Oferta oferta:listaOfertas){
 			if(!oferta.getFechaFin().before(fecha))
 				ofertasValidas.add(oferta);
-			else
-				ofertaDao.deleteOferta(oferta);
+			else if(!ofertaDao.deleteOferta(oferta))
+				ofertasValidas.add(oferta);
+		}
 		}
 		return ofertasValidas;
 	}
