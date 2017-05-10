@@ -73,7 +73,9 @@ public class ColaboracionController {
 		cv.validate(colaboracion, bindingResult);
 		if (bindingResult.hasErrors())
 			return "colaboracion/add";
-		colaboracionDao.addColaboracion(colaboracion);
+		Colaboracion comprobarColaboracion=colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
+		if(comprobarColaboracion == null)
+			colaboracionDao.addColaboracion(colaboracion);
 		return "redirect:../list.html";
 	}
 	

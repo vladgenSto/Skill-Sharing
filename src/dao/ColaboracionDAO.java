@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -50,7 +51,13 @@ public class ColaboracionDAO {
 	}
 	
 	public Colaboracion getColaboracion(int codigoOferta, int codigoDemanda) {
-		return this.jdbcTemplate.queryForObject("select * from colaboracion where codigoOferta=? and codigoDemanda=?", new Object[]{codigoOferta, codigoDemanda}, new ColaboracionMapper());
+		Colaboracion colaboracion;
+		try{
+			colaboracion=this.jdbcTemplate.queryForObject("select * from colaboracion where codigoOferta=? and codigoDemanda=?", new Object[]{codigoOferta, codigoDemanda}, new ColaboracionMapper());
+		}catch (EmptyResultDataAccessException e) {
+			colaboracion=null;
+		}
+		return colaboracion;
 	}
 	
 	
