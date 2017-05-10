@@ -48,6 +48,13 @@ public class OfertaController {
 	                         new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10));   
 	}
 	
+	@RequestMapping(value="/listAdmin")
+	public String listOfertaAdmin(Model model){
+			List<Oferta> ofertasValidas=this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+			model.addAttribute("listaOfertas",ofertasValidas);
+		return "oferta/listAdmin";
+	}
+	
 	@RequestMapping(value="/list")
 	public String listOferta(Model model, HttpSession session){
 		UserDetails user=(UserDetails)session.getAttribute("user");

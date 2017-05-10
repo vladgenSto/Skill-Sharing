@@ -43,6 +43,12 @@ public class ColaboracionController {
 		this.demandaDao=demandaDao;
 	}
 	
+	@RequestMapping(value="/listAdmin")
+	public String listColaboracion(Model model) {
+			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+		return "colaboracion/listAdmin";
+	}
+	
 	@RequestMapping(value="/list")
 	public String listColaboracion(Model model, HttpSession session) {
 		UserDetails user=(UserDetails)session.getAttribute("user");

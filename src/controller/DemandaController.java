@@ -56,6 +56,13 @@ public class DemandaController {
 	                          new CustomDateEditor(new SimpleDateFormat("dd/MM/yyyy"), true, 10));   
 	 }
 	
+	@RequestMapping(value="/listAdmin")
+	public String listDemanda(Model model){
+			List<Demanda> demandasValidas=this.filtrarDemandas(new Date(), demandaDao.getDemandas());
+			model.addAttribute("listaDemandas",demandasValidas);
+		return "demanda/listAdmin";
+	}
+	
 	@RequestMapping(value="/list")
 	public String listDemanda(Model model,HttpSession session){
 		UserDetails user=(UserDetails)session.getAttribute("user");

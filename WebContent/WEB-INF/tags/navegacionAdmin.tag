@@ -8,6 +8,9 @@
      	<li><a href="${pageContext.request.contextPath}/perfilAdmin.jsp">Perfil</a></li>
   		<li><a href="${pageContext.request.contextPath}/estudiante/list.html">Gestion de Estudiantes</a></li>
   		<li><a href="${pageContext.request.contextPath}/habilidad/list.html">Gestion de Habilidades</a></li>
+  		<li><a href="${pageContext.request.contextPath}/oferta/listAdmin.html">Consulta Ofertas</a></li>
+  		<li><a href="${pageContext.request.contextPath}/demanda/listAdmin.html">Consulta Demandas</a></li>
+  		<li><a href="${pageContext.request.contextPath}/colaboracion/listAdmin.html">Consulta Colaboraciones</a></li>
       </ul>     
     </div>
   </div>

@@ -97,7 +97,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:indexUsuario.jsp";
+		return "redirect:index.jsp";
 	}
 	
 	private <T extends MetodosFecha> List<T> filtro(Date fecha,List<T> lista){

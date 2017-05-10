@@ -21,7 +21,6 @@
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
-<th>DNI del estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
 </tr>
@@ -30,7 +29,6 @@
 <th>${oferta.descripcion}</th>
 <th>${oferta.fechaInicio}</th>
 <th>${oferta.fechaFin}</th>
-<th>${oferta.dniEstudiante}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
 <th><a href="update/${oferta.codigoOferta}.html" class="btn btn-raised btn-yellow">Editar</a></th>
