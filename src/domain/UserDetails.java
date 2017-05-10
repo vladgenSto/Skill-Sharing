@@ -1,6 +1,6 @@
 package domain;
 
-public class UserDetails implements InfoEstudiante{
+public class UserDetails{
 
 	private String username;
 	private String password;

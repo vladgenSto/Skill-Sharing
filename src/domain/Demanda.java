@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Date;
 
-public class Demanda implements MetodosFecha, InfoEstudiante{
+public class Demanda implements MetodosFecha{
 	private int codigoDemanda;
 	private String descripcion;
 	private Date fechaInicio;

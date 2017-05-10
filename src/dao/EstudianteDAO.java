@@ -28,7 +28,7 @@ public class EstudianteDAO {
 		@Override
 		public Estudiante mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Estudiante estudiante=new Estudiante();
-			estudiante.setDniEstudiante(rs.getString("dni"));
+			estudiante.setDni(rs.getString("dni"));
 			estudiante.setNombre(rs.getString("nombre"));
 			estudiante.setLicenciatura(rs.getString("licenciatura"));
 			estudiante.setCurso(rs.getString("curso"));
@@ -47,14 +47,14 @@ public class EstudianteDAO {
 	}
 	
 	public void addEstudiante(Estudiante estudiante){
-		this.jdbcTemplate.update("insert into Estudiante(dni,nombre,licenciatura,curso,correo) values(?,?,?,?,?)",estudiante.getDniEstudiante(),estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo());
+		this.jdbcTemplate.update("insert into Estudiante(dni,nombre,licenciatura,curso,correo) values(?,?,?,?,?)",estudiante.getDni(),estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo());
 	}
 	
 	public void updateEstudiante(Estudiante estudiante){
-		this.jdbcTemplate.update("update estudiante set nombre=?,licenciatura=?,curso=?,correo=? where dni=?",estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo(),estudiante.getDniEstudiante());
+		this.jdbcTemplate.update("update estudiante set nombre=?,licenciatura=?,curso=?,correo=? where dni=?",estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo(),estudiante.getDni());
 	}
 	
 	public void deleteEstudiante(Estudiante estudiante){
-		this.jdbcTemplate.update("delete from Estudiante where dni=?",estudiante.getDniEstudiante());
+		this.jdbcTemplate.update("delete from Estudiante where dni=?",estudiante.getDni());
 	}
 }
