@@ -19,7 +19,7 @@
 <fieldset>
 <legend>Volara Colaboracion</legend>
 <div class="form-group">
-	<form:hidden path="codigoOferta" value="${colaboracion.codigoOferta}"/>
+	<form:form path="codigoOferta"/>
 <!--     	<label for="codigoOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Oferta</label> -->
 		<div class="col-md-4">
         	<form:input path="codigoOferta" class="form-control" rows="3" id="codigoOferta" hidden="true"></form:input>
@@ -29,7 +29,7 @@
       	</div>
 	</div>
 <div class="form-group">
-	<form:hidden path="codigoDemanda" value="${colaboracion.codigoOferta}"/>
+	<form:form path="codigoDemanda"/>
 <!--     	<label for="codigoDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Demanda</label> -->
 		<div class="col-md-4">
         	<form:input path="codigoDemanda" class="form-control" rows="3" id="codigoDemanda" hidden="true"></form:input>
@@ -39,7 +39,7 @@
       	</div>
 	</div>
 <div class="form-group">
-	<form:hidden path="descripcionOferta" value="${colaboracion.descripcionOferta}"/>
+	<form:form path="descripcionOferta"/>
     	<label for="descripcionOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Oferta</label>
 		<div class="col-md-4">
         	<form:textarea path="descripcionOferta" class="form-control" rows="3" id="descripcionOferta"></form:textarea>
@@ -50,7 +50,7 @@
       	</div>
 	</div>
 <div class="form-group">
-	<form:hidden path="descripcionDemanda" value="${colaboracion.descripcionDemanda}"/>
+	<form:form path="descripcionDemanda" />
     	<label for="descripcionDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Demanda</label>
 		<div class="col-md-4">
         	<form:textarea path="descripcionDemanda" class="form-control" rows="3" id="descripcionDemanda"></form:textarea>
@@ -72,7 +72,7 @@
       </div>
     </div>
 <div class="form-group">
-	<form:hidden path="horas"/>
+	<form:form path="horas"/>
     	<label for="horas" class="col-md-2 control-label" style="color: black; font-size: medium;">Horas</label>
 		<div class="col-md-4">
         	<form:input path="horas" class="form-control" rows="3" id="horas"></form:input>
@@ -83,7 +83,7 @@
 	</div>
 <div class="form-group">
       <label for="puntuacion" class="col-md-2 control-label" style="color: black; font-size: medium;">Puntuacion</label>
-      <div class="col-md-2">
+      <div class="col-md-2">      
         <form:select id="puntuacion" class="form-control" name="nivel" path="puntuacion">
         	<option>1</option>
         	<option>2</option>
@@ -97,7 +97,7 @@
       </div>
     </div>
 <div class="form-group">
-	<form:hidden path="comentarios"/>
+	<form:form path="comentarios"/>
     	<label for="comentarios" class="col-md-2 control-label" style="color: black; font-size: medium;">Comentarios</label>
 		<div class="col-md-4">
         	<form:textarea path="comentarios" class="form-control" rows="3" id="comentarios"></form:textarea>

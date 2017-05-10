@@ -27,6 +27,12 @@
 
 /*Intro*/
 
+.perfil {
+	background-color: #ffe082;
+	left: 50px;
+	position: relative;
+}
+
 h4:first-letter {
 	font-size: 200%;
 	color: #000000; 
