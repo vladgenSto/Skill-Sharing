@@ -74,7 +74,7 @@ public class LoginController {
         }
         session.setAttribute("user", user);
         if(user.getUsername().trim().equals("admin"))
-            return "redirect:indexAdmin.jsp";
+            return "redirect:perfilAdmin.jsp";
         else{
             List<Demanda> listaDemandas=this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
             List<Oferta> listaOfertas=this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
@@ -90,14 +90,14 @@ public class LoginController {
                 }
                 session.setAttribute("listaOfertasRelacionadas", listaOfertasRelacionadas);
             }
-            return "redirect:indexUsuario.jsp";
+            return "redirect:perfilUsuario.jsp";
             }
     }
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "logout";
+		return "redirect:indexUsuario.jsp";
 	}
 	
 	private <T extends MetodosFecha> List<T> filtro(Date fecha,List<T> lista){

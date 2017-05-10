@@ -5,7 +5,7 @@
   <div class="container">
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-     	<li><a href="${pageContext.request.contextPath}/indexAdmin.jsp">Pagina princial</a></li>
+     	<li><a href="${pageContext.request.contextPath}/perfilAdmin.jsp">Perfil</a></li>
   		<li><a href="${pageContext.request.contextPath}/estudiante/list.html">Gestion de Estudiantes</a></li>
   		<li><a href="${pageContext.request.contextPath}/habilidad/list.html">Gestion de Habilidades</a></li>
       </ul>     
