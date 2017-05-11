@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ripples.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
-<title>Insert title here</title>
+<title>Perfil</title>
 </head>
 <t:paginabasicaAdmin title="Skill Sharing">
 <body class="perfil">

@@ -21,19 +21,21 @@
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
-<th>DNI del estudiante</th>
+<th>Estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
 </tr>
-<c:forEach items="${listaDemandas}" var="demanda">
+<c:forEach items="${listaDemandas}" var="listdemanda">
+<c:forEach items="${listdemanda.value}" var="demanda">
 <tr>
 <th>${demanda.descripcion}</th>
 <th>${demanda.fechaInicio}</th>
 <th>${demanda.fechaFin}</th>
-<th>${demanda.dniEstudiante}</th>
+<th>${listdemanda.key}</th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
 </tr>
+</c:forEach>
 </c:forEach>
 </table>
 </jsp:body>

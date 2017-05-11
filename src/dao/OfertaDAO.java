@@ -76,7 +76,7 @@ public class OfertaDAO {
 	
 	public List<Oferta> getOfertasRelacionadas(String nombreHabilidad,String dniUsuario){
         return this.jdbcTemplate.query(
-                "select codigoOferta, descripcion, fechaInicio, fechaFin, dniEstudiante, nombreHabilidad, nivelHabilidad from oferta where nombreHabilidad= '"+nombreHabilidad+"' and dniEstudiante <> '"+dniUsuario+"'",
+                "select codigoOferta, descripcion, fechaInicio, fechaFin, dniEstudiante, nombreHabilidad, nivelHabilidad from oferta where nombreHabilidad= '"+nombreHabilidad+"' and dniEstudiante = '"+dniUsuario+"'",
                 new OfertaMapper());
     }
 	
@@ -95,7 +95,6 @@ public class OfertaDAO {
 	}
 
 	public void updateOferta(Oferta oferta) {
-//		oferta.setCodigoOferta();
 		this.jdbcTemplate.update(
 				"update Oferta set descripcion=?, fechaInicio=?, fechaFin=?, dniEstudiante=?, nombreHabilidad=?, nivelHabilidad=? where codigoOferta = ?",
 				oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(), oferta.getDniEstudiante(),

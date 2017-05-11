@@ -3,7 +3,9 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.EstudianteDAO;
 import dao.HabilidadDAO;
 import dao.OfertaDAO;
+import domain.Estudiante;
 import domain.Oferta;
 import domain.UserDetails;
 
@@ -30,6 +34,7 @@ public class OfertaController {
 
 	private OfertaDAO ofertaDao;
 	private HabilidadDAO habilidadDao;
+	private EstudianteDAO estudianteDao;
 	
 	@Autowired
 	public void setOfertaDao(OfertaDAO ofertaDao){
@@ -41,6 +46,12 @@ public class OfertaController {
 		this.habilidadDao = habilidadDao;
 	}
 	
+	@Autowired
+	public void setEstudianteDao(EstudianteDAO estudianteDao){
+		this.estudianteDao=estudianteDao;
+	}
+	
+	
 	
 	@InitBinder     
 	public void initBinder(WebDataBinder binder){
@@ -50,8 +61,8 @@ public class OfertaController {
 	
 	@RequestMapping(value="/listAdmin")
 	public String listOfertaAdmin(Model model){
-			List<Oferta> ofertasValidas=this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
-			model.addAttribute("listaOfertas",ofertasValidas);
+			this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+			model.addAttribute("listaOfertas",this.getOfertasByEstudiantes());
 		return "oferta/listAdmin";
 	}
 	
@@ -67,8 +78,8 @@ public class OfertaController {
 	
 	@RequestMapping(value="/buscar")
 	public String listarTodasLasOfertas(Model model){
-		List<Oferta> ofertasValidas=this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
-		model.addAttribute("ofertas",ofertasValidas);
+		this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+		model.addAttribute("ofertas",this.getOfertasByEstudiantes());
 		return "oferta/buscar";
 	}
 	
@@ -138,4 +149,16 @@ public class OfertaController {
 		}
 		return ofertasValidas;
 	}
+	private Map<String, List<Oferta>> getOfertasByEstudiantes() {
+		List<Estudiante> listaEstudiantes=estudianteDao.getEstudiantes();
+		HashMap<String,List<Oferta>> ofertasPorEstudiante=new HashMap<String,List<Oferta>>();
+		for(Estudiante estudiante: listaEstudiantes){
+			if(!ofertasPorEstudiante.containsKey(estudiante.getNombre())){
+				ofertasPorEstudiante.put(estudiante.getNombre(), ofertaDao.getOfertasUsuario(estudiante.getDni()));
+			}
+		}
+		return ofertasPorEstudiante;
+	}
+	
+	
 }

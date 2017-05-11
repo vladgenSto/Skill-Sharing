@@ -21,19 +21,21 @@
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
-<th>DNI del estudiante</th>
+<th>Estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
 </tr>
-<c:forEach items="${ofertas}" var="oferta">
+<c:forEach items="${ofertas}" var="listoferta">
+<c:forEach items="${listoferta.value}" var="oferta">
 <tr>
 <th>${oferta.descripcion}</th>
 <th>${oferta.fechaInicio}</th>
 <th>${oferta.fechaFin}</th>
-<th>${oferta.dniEstudiante}</th>
+<th>${listoferta.key}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
 </tr>
+</c:forEach>
 </c:forEach>
 </table>
 </body>

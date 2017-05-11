@@ -42,6 +42,10 @@ public class EstudianteDAO {
 		return this.jdbcTemplate.query("select * from estudiante", new EstudianteMapper());
 	}
 	
+	public List<Estudiante> getEstudiantesDistintos(String dni){
+		return this.jdbcTemplate.query("select * from estudiante where dni <>'"+dni+"'", new EstudianteMapper());
+	}
+	
 	public Estudiante getEstudiante(String dni){
 		return this.jdbcTemplate.queryForObject("select * from estudiante where dni=?", new Object[]{dni},new EstudianteMapper());
 	}

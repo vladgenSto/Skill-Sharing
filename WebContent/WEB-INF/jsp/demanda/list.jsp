@@ -21,7 +21,6 @@
 <th>Descripcion</th>
 <th>Fecha de Inicio</th>
 <th>Fecha Fin</th>
-<th>DNI del estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
 <th>Opciones</th>
@@ -31,7 +30,6 @@
 <th>${demanda.descripcion}</th>
 <th>${demanda.fechaInicio}</th>
 <th>${demanda.fechaFin}</th>
-<th>${demanda.dniEstudiante}</th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
 <th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
