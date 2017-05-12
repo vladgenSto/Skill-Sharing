@@ -74,14 +74,17 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="add/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
-	public String processAddSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda,@ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
+	public String processAddSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda,@ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult, HttpSession session) {
 		ColaboracionValidator cv=new ColaboracionValidator();
 		cv.validate(colaboracion, bindingResult);
 		if (bindingResult.hasErrors())
 			return "colaboracion/add";
 		Colaboracion comprobarColaboracion=colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
-		if(comprobarColaboracion == null)
+		if(comprobarColaboracion == null) {
+			UserDetails user = (UserDetails) session.getAttribute("user");
 			colaboracionDao.addColaboracion(colaboracion);
+			session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
+		}
 		return "redirect:../list.html";
 	}
 	
@@ -103,8 +106,11 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/delete/{codigoOferta}, {codigoDemanda}")
-	public String processDelete(@PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
-		colaboracionDao.deleteColaboracion(colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
+	public String processDelete(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, HttpSession session) {
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		Colaboracion colaboracion = colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
+		colaboracionDao.deleteColaboracion(colaboracion);
+		session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
 		return "redirect:../list.html";
 	}
 	

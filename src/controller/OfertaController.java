@@ -97,13 +97,14 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="add",method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("oferta")Oferta oferta,BindingResult bindingResult, HttpSession session){
+	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult, HttpSession session){
 		OfertaValidator ofertaValidator=new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if(bindingResult.hasErrors()){
 			return "oferta/add";
 		}
 		ofertaDao.addOferta(oferta);
+		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());
 		this.actualizaListaOfertas(session);
 		return "redirect:list.html";
 	}
@@ -126,7 +127,9 @@ public class OfertaController {
 	
 	@RequestMapping(value="/delete/{codigoOferta}")
 	public String processDelete(@PathVariable int codigoOferta, HttpSession session){
-		ofertaDao.deleteOferta(ofertaDao.getOferta(codigoOferta));
+		Oferta oferta = ofertaDao.getOferta(codigoOferta);
+		ofertaDao.deleteOferta(oferta);
+		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());
 		this.actualizaListaOfertas(session);
 		return "redirect:../list.html";
 	}

@@ -105,6 +105,7 @@ public class DemandaController {
 			return "demanda/add";
 		}
 		demandaDao.addDemanda(demanda);
+		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
 		return "redirect:list.html";
@@ -136,7 +137,9 @@ public class DemandaController {
 	
 	@RequestMapping(value="/delete/{codigoDemanda}")
 	public String processDelete(@PathVariable int codigoDemanda, HttpSession session){
-		demandaDao.deleteDemanda(demandaDao.getDemanda(codigoDemanda));
+		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
+		demandaDao.deleteDemanda(demanda);
+		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
 		return "redirect:../list.html";

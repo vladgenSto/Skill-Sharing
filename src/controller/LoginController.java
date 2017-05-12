@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDAO;
 import dao.DemandaDAO;
+import dao.EstudianteDAO;
 import dao.OfertaDAO;
 import dao.UserDAO;
 import domain.Demanda;
+import domain.Estudiante;
 import domain.MetodosFecha;
 import domain.Oferta;
 import domain.UserDetails;
@@ -54,6 +57,12 @@ public class LoginController {
 	@Autowired
 	private DemandaDAO demandaDao;
 	
+	@Autowired
+	private EstudianteDAO estudianteDao;
+	
+	@Autowired
+	private ColaboracionDAO colaboracionDao;
+	
 	@RequestMapping("/login")
 	public String login(Model model){
 		model.addAttribute("user",new UserDetails());
@@ -61,7 +70,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-    public String checkLogin(@ModelAttribute("user") UserDetails user, BindingResult bindingResult,HttpSession session){
+    public String checkLogin(@ModelAttribute("user") UserDetails user, Estudiante estudiante, BindingResult bindingResult,HttpSession session){
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
         if(bindingResult.hasErrors())
@@ -73,13 +82,17 @@ public class LoginController {
             return "login";
         }
         session.setAttribute("user", user);
-        if(user.getUsername().trim().equals("admin"))
+        if(user.getUsername().trim().equals("admin")) {
+        	session.setAttribute("estudiante", estudianteDao.getEstudiante(user.getDniEstudiante()));
             return "redirect:perfilAdmin.jsp";
-        else{
+        }else{
+        	session.setAttribute("estudiante", estudianteDao.getEstudiante(user.getDniEstudiante()));
+        	session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
             List<Demanda> listaDemandas=this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
             List<Oferta> listaOfertas=this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
             session.setAttribute("listaOfertasUsuario", listaOfertas);
-            session.setAttribute("listaDemandasUsuario", listaDemandas);
+            session.setAttribute("numOfertas", listaOfertas.size());
+            session.setAttribute("numDemandas", listaDemandas.size());
             if(!listaDemandas.isEmpty()){
                 ArrayList<Oferta>listaOfertasRelacionadas=new ArrayList<Oferta>();
                 for(Demanda demanda:listaDemandas){

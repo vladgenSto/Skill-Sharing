@@ -24,7 +24,7 @@
 		Skill Sharing</h1>
 	</header>
 	<t:navegacionAdmin />
-	<div class="loggeduser"><t:logininfo /></div>
+	<div class="loggeduser" style="left: 80%; position: relative;"><t:logininfo /></div>
 	<div class="container">
 		<jsp:doBody />
 	</div>
