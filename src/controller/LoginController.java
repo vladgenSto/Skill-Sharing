@@ -86,7 +86,11 @@ public class LoginController {
         	session.setAttribute("estudiante", estudianteDao.getEstudiante(user.getDniEstudiante()));
             return "redirect:perfilAdmin.jsp";
         }else{
-        	session.setAttribute("estudiante", estudianteDao.getEstudiante(user.getDniEstudiante()));
+        	Estudiante est=estudianteDao.getEstudiante(user.getDniEstudiante());
+        	session.setAttribute("estudiante", est);
+        	session.setAttribute("horasDadas", est.getHorasDadas());
+        	session.setAttribute("horasRecibidas", est.getHorasRecibidas());
+        	session.setAttribute("saldo", est.getHorasDadas()-est.getHorasRecibidas());
         	session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
             List<Demanda> listaDemandas=this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
             List<Oferta> listaOfertas=this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));

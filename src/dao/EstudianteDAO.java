@@ -33,6 +33,8 @@ public class EstudianteDAO {
 			estudiante.setLicenciatura(rs.getString("licenciatura"));
 			estudiante.setCurso(rs.getString("curso"));
 			estudiante.setCorreo(rs.getString("correo"));
+			estudiante.setHorasDadas(rs.getInt("horasDadas"));
+			estudiante.setHorasRecibidas(rs.getInt("horasRecibidas"));
 			return estudiante;
 		}
 		
@@ -51,11 +53,17 @@ public class EstudianteDAO {
 	}
 	
 	public void addEstudiante(Estudiante estudiante){
-		this.jdbcTemplate.update("insert into Estudiante(dni,nombre,licenciatura,curso,correo) values(?,?,?,?,?)",estudiante.getDni(),estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo());
+		this.jdbcTemplate.update("insert into Estudiante(dni,nombre,licenciatura,curso,correo,horasDadas,horasRecibidas) values(?,?,?,?,?,?,?)",estudiante.getDni(),estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo(),estudiante.getHorasDadas(),estudiante.getHorasRecibidas());
 	}
 	
 	public void updateEstudiante(Estudiante estudiante){
 		this.jdbcTemplate.update("update estudiante set nombre=?,licenciatura=?,curso=?,correo=? where dni=?",estudiante.getNombre(),estudiante.getLicenciatura(),estudiante.getCurso(),estudiante.getCorreo(),estudiante.getDni());
+	}
+	public void updateHorasDadasEstudiante(Estudiante estudiante){
+		this.jdbcTemplate.update("update estudiante set horasDadas=? where dni=?",estudiante.getHorasDadas(),estudiante.getDni());
+	}
+	public void updateHorasRecibidasEstudiante(Estudiante estudiante){
+		this.jdbcTemplate.update("update estudiante set horasRecibidas=? where dni=?",estudiante.getHorasRecibidas(),estudiante.getDni());
 	}
 	
 	public void deleteEstudiante(Estudiante estudiante){

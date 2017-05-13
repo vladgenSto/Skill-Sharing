@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.ColaboracionDAO;
 import dao.DemandaDAO;
+import dao.EstudianteDAO;
 import dao.OfertaDAO;
 import domain.Colaboracion;
+import domain.Demanda;
+import domain.Estudiante;
+import domain.Oferta;
 import domain.UserDetails;
 
 @Controller
@@ -27,6 +31,7 @@ public class ColaboracionController {
 	private ColaboracionDAO colaboracionDao;
 	private OfertaDAO ofertaDao;
 	private DemandaDAO demandaDao;
+	private EstudianteDAO estudianteDao;
 
 	@Autowired
 	public void setColaboracionDao(ColaboracionDAO colaboracionDao) {
@@ -41,6 +46,11 @@ public class ColaboracionController {
 	@Autowired
 	public void setDemandaDao(DemandaDAO demandaDao){
 		this.demandaDao=demandaDao;
+	}
+	
+	@Autowired
+	public void setEstudianteDao(EstudianteDAO estudianteDao){
+		this.estudianteDao=estudianteDao;
 	}
 	
 	@RequestMapping(value="/listAdmin")
@@ -98,10 +108,27 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
-	public String processUpdateSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, @ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult) {
+	public String processUpdateSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, @ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult,HttpSession session) {
 		if (bindingResult.hasErrors())
 			return "colaboracion/update";
 		colaboracionDao.updateColaboracion(colaboracion);
+		Oferta ofertaEstudiante=ofertaDao.getOferta(codigoOferta);
+		Demanda demandaEstudiante=demandaDao.getDemanda(codigoDemanda);
+		Estudiante estDaHoras=estudianteDao.getEstudiante(ofertaEstudiante.getDniEstudiante());
+		int horasDadas=estDaHoras.getHorasDadas()+Integer.parseInt(colaboracion.getHoras());
+		estDaHoras.setHorasDadas(horasDadas);
+		estudianteDao.updateHorasDadasEstudiante(estDaHoras);
+		Estudiante estRecibeHoras=estudianteDao.getEstudiante(demandaEstudiante.getDniEstudiante());
+		int horasRecibidas=estRecibeHoras.getHorasRecibidas()+Integer.parseInt(colaboracion.getHoras());
+		estRecibeHoras.setHorasRecibidas(horasRecibidas);
+		estudianteDao.updateHorasRecibidasEstudiante(estRecibeHoras);
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		Estudiante est=estudianteDao.getEstudiante(user.getDniEstudiante());
+		if(user.getDniEstudiante().equals(estDaHoras.getDni()))
+			session.setAttribute("horasDadas", horasDadas);
+		else if(user.getDniEstudiante().equals(estRecibeHoras.getDni()))
+			session.setAttribute("horasRecibidas", horasRecibidas);
+		session.setAttribute("saldo", est.getHorasDadas()-est.getHorasRecibidas());
 		return "redirect:../list.html";
 	}
 	

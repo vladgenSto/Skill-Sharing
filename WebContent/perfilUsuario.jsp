@@ -31,7 +31,9 @@
 				<h3>${estudiante.nombre}</h3>
 			</div>
 			<div class="col-md-4 mb-r">
-				<h4 style="left: 70%; position: relative;">Saldo:</h4>
+<%-- 				<h4 style="left: 70%; position: relative;">Horas dadas: ${horasDadas}</h4> --%>
+<%-- 				<h4 style="left: 70%; position: relative;">Horas recibidas: ${horasRecibidas}</h4> --%>
+				<h4 style="left: 70%; position: relative;">Saldo: ${saldo}</h4>
 			</div>
 			<div class="col-md-12 mb-r">
 				<hr>

@@ -6,6 +6,8 @@ public class Estudiante{
 	private String licenciatura;
 	private String curso;
 	private String correo;
+	private int horasDadas;
+	private int horasRecibidas;
 	
 	public Estudiante(){
 		this.dni="";
@@ -62,6 +64,23 @@ public class Estudiante{
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	
+	public int getHorasDadas() {
+		return horasDadas;
+	}
+
+	public void setHorasDadas(int horasDadas) {
+		this.horasDadas = horasDadas;
+	}
+
+	public int getHorasRecibidas() {
+		return horasRecibidas;
+	}
+
+	public void setHorasRecibidas(int horasRecibidas) {
+		this.horasRecibidas = horasRecibidas;
 	}
 
 	@Override
