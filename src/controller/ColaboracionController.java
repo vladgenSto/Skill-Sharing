@@ -141,4 +141,10 @@ public class ColaboracionController {
 		return "redirect:../list.html";
 	}
 	
+	@RequestMapping(value="/estadisticas")
+	public String estadisticas(Model model, HttpSession session) {
+			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
+		return "colaboracion/estadisticas";
+	}
+	
 }

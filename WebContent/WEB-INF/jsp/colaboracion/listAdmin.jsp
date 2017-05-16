@@ -38,7 +38,7 @@
 </tr>
 </c:forEach>
 </table>
-<button type="submit" class="btn btn-raised btn-primary">Estadisticas</button>
+<a href="estadisticas.html" class="btn btn-raised btn-primary">Estadisticas</a>
 </jsp:body>
 </t:paginabasicaAdmin>
 </html>
