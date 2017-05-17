@@ -17,15 +17,17 @@
 <t:paginabasicaAdmin title="Estadisticas">
 <body>
 <canvas id="myChart" width="200" height="100"></canvas>
+<form><input type="hidden" id="estadisticasMes" value="${estadisticasMes}"></form>
 <script>
 var ctx = document.getElementById("myChart");
+var vector=document.getElementById("estadisticasMes");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3, 1, 0, 10, 11, 5, 3],
+            data: [vector],
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

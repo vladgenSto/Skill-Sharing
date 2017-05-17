@@ -2,6 +2,7 @@ package controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.EstudianteDAO;
 import dao.OfertaDAO;
+import domain.CalculadorEstadisticas;
 import domain.Colaboracion;
 import domain.Demanda;
 import domain.Estudiante;
@@ -144,7 +146,11 @@ public class ColaboracionController {
 	@RequestMapping(value="/estadisticas")
 	public String estadisticas(Model model, HttpSession session) {
 			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
-		return "colaboracion/estadisticas";
+			CalculadorEstadisticas calculador=new CalculadorEstadisticas();
+			Map<Integer,Integer> colaboracionesPorAño=calculador.colaboracionesPorAño(colaboracionDao.getColaboraciones());
+			model.addAttribute("estadisticasMes",colaboracionesPorAño.values().toString());
+			return "colaboracion/estadisticas";
+			
 	}
 	
 }
