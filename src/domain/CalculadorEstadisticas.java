@@ -10,7 +10,7 @@ import dao.OfertaDAO;
 
 public class CalculadorEstadisticas {
 
-	public Map<Integer,Integer> colaboracionesPorAño(List<Colaboracion> colaboraciones){
+	public Map<Integer,Integer> colaboracionesPorAnyo(List<Colaboracion> colaboraciones){
 		Map<Integer,Integer> colaboracionesPorMes=this.crearDiccionarioMeses();
 		Date fechaActual=new Date();
 		for(Colaboracion colaboracion:colaboraciones){
