@@ -70,7 +70,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-    public String checkLogin(@ModelAttribute("user") UserDetails user, Estudiante estudiante, BindingResult bindingResult,HttpSession session){
+    public String checkLogin(@ModelAttribute("user") UserDetails user,BindingResult bindingResult,HttpSession session){
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
         if(bindingResult.hasErrors())
@@ -78,7 +78,7 @@ public class LoginController {
         
         user=userDao.loadUserByName(user.getUsername(), user.getPassword());
         if(user == null){
-            bindingResult.rejectValue("password", "badpw","Usuario o contraseña incorrectos");
+            bindingResult.rejectValue("password", "badpw","Usuario o contrasenya incorrectos");
             return "login";
         }
         session.setAttribute("user", user);
