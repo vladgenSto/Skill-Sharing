@@ -15,15 +15,19 @@ public class Estudiante{
 		this.licenciatura="";
 		this.curso="";
 		this.correo="";
+		this.horasDadas=0;
+		this.horasRecibidas=0;
 	}
 	
 	public Estudiante(String dni, String nombre, String licenciatura, String curso,
-			String correo) {
+			String correo,int horasDadas,int horasRecibidas) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.licenciatura = licenciatura;
 		this.curso = curso;
 		this.correo = correo;
+		this.horasDadas=horasDadas;
+		this.horasRecibidas=horasRecibidas;
 	}
 
 	public String getDni() {

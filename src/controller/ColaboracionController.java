@@ -147,8 +147,8 @@ public class ColaboracionController {
 	public String estadisticas(Model model, HttpSession session) {
 			model.addAttribute("colaboraciones", colaboracionDao.getColaboraciones());
 			CalculadorEstadisticas calculador=new CalculadorEstadisticas();
-			Map<Integer,Integer> colaboracionesPorAño=calculador.colaboracionesPorAño(colaboracionDao.getColaboraciones());
-			model.addAttribute("estadisticasMes",colaboracionesPorAño);
+			Map<Integer,Integer> colaboracionesPorAnyo=calculador.colaboracionesPorAnyo(colaboracionDao.getColaboraciones());
+			model.addAttribute("estadisticasMes",colaboracionesPorAnyo);
 			return "colaboracion/estadisticas";
 			
 	}
