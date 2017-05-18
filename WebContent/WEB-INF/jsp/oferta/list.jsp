@@ -37,12 +37,6 @@
 </c:forEach>
 </table>
 <a href="add.html" class="btn btn-raised btn-primary">Añadir</a>
-<br>
-<br>
-<h2>Todas las ofertas disponibles</h2>
-<br>
-<th><a href="buscar.html" class="btn btn-raised btn btn-info">Mostrar</a></th>
-
 </jsp:body>
 </t:paginabasicaUsuario>
 </html>
