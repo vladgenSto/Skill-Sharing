@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>     
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,17 +18,27 @@
 <t:paginabasicaAdmin title="Estadisticas">
 <body>
 <canvas id="myChart" width="200" height="100"></canvas>
-<form><input type="hidden" id="estadisticasMes" value="${estadisticasMes}"></form>
+<form>
+<select id="estadisticasMes">
+<c:forEach items="${estadisticasMes}" var="elem">
+<option>${elem.value}</option>
+</c:forEach>
+</select>
+</form>
 <script>
 var ctx = document.getElementById("myChart");
-var vector=document.getElementById("estadisticasMes");
+var v = document.getElementById("estadisticasMes");
+var vector=new Array();
+for(var pos=0;pos<v.options.length;pos++){
+	vector.push(v.options.item(pos));
+}
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [{
             label: '# of Votes',
-            data: [vector],
+            data: vector,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
