@@ -96,6 +96,16 @@ public class ColaboracionController {
 			UserDetails user = (UserDetails) session.getAttribute("user");
 			colaboracionDao.addColaboracion(colaboracion);
 			session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
+//			String dniEstudianteReceptorMail="";
+//			Oferta oferta=ofertaDao.getOferta(codigoOferta);
+//			Demanda demanda=demandaDao.getDemanda(codigoDemanda);
+//			if(!oferta.getDniEstudiante().equals(user.getDniEstudiante())){
+//				dniEstudianteReceptorMail=oferta.getDniEstudiante();
+//			}else if(!demanda.getDniEstudiante().equals(user.getDniEstudiante())){
+//				dniEstudianteReceptorMail=demanda.getDniEstudiante();
+//			}
+//			Estudiante estudianteRecibeMail=estudianteDao.getEstudiante(dniEstudianteReceptorMail);
+//			MailSender.sendMail(estudianteRecibeMail.getCorreo(), "Nueva colaboracion creada", "El usuario "+user.getUsername()+" ha solicitado una colaboración contigo.");
 		}
 		return "redirect:../list.html";
 	}

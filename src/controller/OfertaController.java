@@ -77,9 +77,12 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/buscar")
-	public String listarTodasLasOfertas(Model model){
-		this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
-		model.addAttribute("ofertas",this.getOfertasByEstudiantes());
+	public String listarTodasLasOfertas(Model model,HttpSession session){
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user!=null){
+			this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+			model.addAttribute("ofertas",this.getOfertasPublicadasOtrosEstudiantes(user.getDniEstudiante()));
+		}
 		return "oferta/buscar";
 	}
 	
@@ -161,6 +164,16 @@ public class OfertaController {
 			}
 		}
 		return ofertasPorEstudiante;
+	}
+	private Map<String, List<Oferta>> getOfertasPublicadasOtrosEstudiantes(String dniUsuario){
+		List<Estudiante>otrosEstudiantes=estudianteDao.getEstudiantesDistintos(dniUsuario);
+		HashMap<String,List<Oferta>> ofertasPublicadas=new HashMap<String,List<Oferta>>();
+		for(Estudiante estudiante: otrosEstudiantes){
+			if(!ofertasPublicadas.containsKey(estudiante.getNombre())){
+				ofertasPublicadas.put(estudiante.getNombre(),ofertaDao.getOfertasUsuario(estudiante.getDni()));
+			}
+		}
+		return ofertasPublicadas;
 	}
 	
 	

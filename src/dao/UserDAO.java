@@ -17,7 +17,7 @@ import domain.UserDetails;
 
 @Repository
 public class UserDAO {
-
+	
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class UserDAO {
 			UserDetails user=new UserDetails();
 			BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
 			user.setUsername(rs.getString("usuario"));
-			user.setPassword(passwordEncryptor.encryptPassword(rs.getString("pwd")));
+			user.setPassword(rs.getString("pwd"));
 			user.setDniEstudiante(rs.getString("dniEstudiante"));
 			return user;
 		}
@@ -42,7 +42,7 @@ public class UserDAO {
 	public UserDetails loadUserByName(String username,String password){
 		UserDetails user;
 		try {
-			user=this.jdbcTemplate.queryForObject("select * from usuarios where usuario=? and pwd=?", new Object[]{username,password},new UserMapper());
+			user=this.jdbcTemplate.queryForObject("select * from usuarios where usuario=?", new Object[]{username},new UserMapper());
 
 		} catch (EmptyResultDataAccessException ex) {
 			user = null;
@@ -63,5 +63,8 @@ public class UserDAO {
 	
 	public UserDetails getUsuario(String usuario){
 		return this.jdbcTemplate.queryForObject("select * from usuarios where usuario=?", new Object[]{usuario},new UserMapper());
+	}
+	public void updateUsuario(UserDetails user) {
+		this.jdbcTemplate.update("update usuarios set pwd=? where usuario=?", user.getPassword(),user.getUsername());
 	}
 }

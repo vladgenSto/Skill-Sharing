@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,19 +64,22 @@ public class LoginController {
 	@Autowired
 	private ColaboracionDAO colaboracionDao;
 	
+	
 	@RequestMapping("/login")
 	public String login(Model model){
 		model.addAttribute("user",new UserDetails());
+//        this.ecriptarContrasenyas();
 		return "login";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
     public String checkLogin(@ModelAttribute("user") UserDetails user,BindingResult bindingResult,HttpSession session){
-        UserValidator userValidator = new UserValidator();
+		UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
         if(bindingResult.hasErrors())
             return "login";
         
+//		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
         user=userDao.loadUserByName(user.getUsername(), user.getPassword());
         if(user == null){
             bindingResult.rejectValue("password", "badpw","Usuario o contrasenya incorrectos");
@@ -84,7 +88,7 @@ public class LoginController {
         session.setAttribute("user", user);
         if(user.getUsername().trim().equals("admin")) {
         	session.setAttribute("estudiante", estudianteDao.getEstudiante(user.getDniEstudiante()));
-            return "redirect:perfilAdmin.jsp";
+        	return "redirect:perfilAdmin.jsp";
         }else{
         	Estudiante est=estudianteDao.getEstudiante(user.getDniEstudiante());
         	session.setAttribute("estudiante", est);
@@ -134,5 +138,12 @@ public class LoginController {
 		}
 		return objetosValidos;
 	}
-	
+//	private void ecriptarContrasenyas(){
+//		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
+//		List<UserDetails> usuarios=userDao.getUsuarios();
+//		for(UserDetails usuario:usuarios){
+//			usuario.setPassword(passwordEncryptor.encryptPassword(usuario.getPassword()));
+//			userDao.updateUsuario(usuario);
+//		}
+//	}
 }

@@ -69,7 +69,7 @@ public class HabilidadDAO {
     }
 	
 	public void updateHabilidad(Habilidad habilidad){
-		this.jdbcTemplate.update("UPDATE habilidad SET nombre=?,nivel=?,descripcion=?",habilidad.getNombre(),habilidad.getNivel(),habilidad.getDescripcion());
+		this.jdbcTemplate.update("UPDATE habilidad SET descripcion=? WHERE nombre=? AND nivel=?",habilidad.getDescripcion(),habilidad.getNombre(),habilidad.getNivel());
 	}
 	
 	public void deleteHabilidad(Habilidad habilidad){
