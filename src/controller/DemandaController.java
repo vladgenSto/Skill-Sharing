@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.EstudianteDAO;
 import dao.HabilidadDAO;
 import dao.OfertaDAO;
+import domain.Colaboracion;
 import domain.Demanda;
 import domain.Estudiante;
 import domain.Oferta;
@@ -39,6 +41,7 @@ public class DemandaController {
 	private HabilidadDAO habilidadDao;
 	private OfertaDAO ofertaDao;
 	private EstudianteDAO estudianteDao;
+	private ColaboracionDAO colaboracionDao;
 	
 	@Autowired
 	public void setDemandaDao(DemandaDAO demandaDao){
@@ -58,6 +61,11 @@ public class DemandaController {
 	@Autowired
 	public void setEstudianteDao(EstudianteDAO estudianteDao){
 		this.estudianteDao=estudianteDao;
+	}
+	
+	@Autowired
+	public void setColaboracionDao(ColaboracionDAO colaboracionDao){
+		this.colaboracionDao=colaboracionDao;
 	}
 	
 	@InitBinder     
@@ -143,6 +151,29 @@ public class DemandaController {
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
 		return "redirect:../list.html";
+	}
+	
+	@RequestMapping(value="/demandasCompatibles")
+	public String listDemandaCompatible(Model model,HttpSession session){
+		return "demanda/demandasCompatibles";
+	}
+	
+	@RequestMapping(value="/crearColaboracion/{codigoOferta}, {codigoDemanda}")
+	public String crearColaboracion(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, HttpSession session){
+		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
+		Oferta oferta = ofertaDao.getOferta(codigoOferta);
+		Colaboracion nuevaColaboracion = new Colaboracion();
+		nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
+		nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
+		nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
+		nuevaColaboracion.setDescripcionDemanda(demanda.getDescripcion());
+		nuevaColaboracion.setHoras("--");
+		nuevaColaboracion.setPuntuacion("--");
+		nuevaColaboracion.setComentarios("--");
+		nuevaColaboracion.setFechaInicio(new Date());
+		nuevaColaboracion.setFechaFin(demanda.getFechaFin());
+		colaboracionDao.addColaboracion(nuevaColaboracion);
+		return "redirect:/colaboracion/list.html";
 	}
 	
 	private void actualizaListaDemandas(HttpSession session){

@@ -108,4 +108,10 @@ public class DemandaDAO {
                 "select codigoDemanda, descripcion, fechaInicio, fechaFin, dniEstudiante, nombreHabilidad, nivelHabilidad from demanda where dniEstudiante<>'"+dniUsuario+"'",
                 new DemandaMapper());
     }
+    
+    public List<Demanda> getDemandasCompatibles(String dniUsuario, String nombreHabilidad, String nivelHabilidad) {
+        return this.jdbcTemplate.query(
+                "select codigoDemanda, descripcion, fechaInicio, fechaFin, dniEstudiante, nombreHabilidad, nivelHabilidad from demanda where dniEstudiante='"+dniUsuario+"' and nombreHabilidad='"+nombreHabilidad+"' and nivelHabilidad='"+nivelHabilidad+"'",
+                new DemandaMapper());
+    }
 }

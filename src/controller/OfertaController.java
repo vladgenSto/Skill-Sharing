@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import dao.ColaboracionDAO;
+import dao.DemandaDAO;
 import dao.EstudianteDAO;
 import dao.HabilidadDAO;
 import dao.OfertaDAO;
+import domain.Colaboracion;
+import domain.Demanda;
 import domain.Estudiante;
 import domain.Oferta;
 import domain.UserDetails;
@@ -35,6 +39,8 @@ public class OfertaController {
 	private OfertaDAO ofertaDao;
 	private HabilidadDAO habilidadDao;
 	private EstudianteDAO estudianteDao;
+	private DemandaDAO demandaDao;
+	private ColaboracionDAO colaboracionDao;
 	
 	@Autowired
 	public void setOfertaDao(OfertaDAO ofertaDao){
@@ -51,7 +57,15 @@ public class OfertaController {
 		this.estudianteDao=estudianteDao;
 	}
 	
+	@Autowired
+	public void setDemandaDao(DemandaDAO demandaDao){
+		this.demandaDao=demandaDao;
+	}
 	
+	@Autowired
+	public void setColaboracionDao(ColaboracionDAO colaboracionDao){
+		this.colaboracionDao=colaboracionDao;
+	}
 	
 	@InitBinder     
 	public void initBinder(WebDataBinder binder){
@@ -134,6 +148,57 @@ public class OfertaController {
 		ofertaDao.deleteOferta(oferta);
 		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());
 		this.actualizaListaOfertas(session);
+		return "redirect:../list.html";
+	}
+	
+	@RequestMapping(value="/crearColaboracion/{codigoOferta}")
+	public String crearColaboracion(@PathVariable int codigoOferta, Model model, HttpSession session){
+		Oferta oferta = ofertaDao.getOferta(codigoOferta);
+		UserDetails user = (UserDetails) session.getAttribute("user");
+		if (user != null) {
+			List<Demanda> demandasCompatibles = demandaDao.getDemandasCompatibles(user.getDniEstudiante(), oferta.getNombreHabilidad(), oferta.getNivelHabilidad());
+			if (demandasCompatibles.isEmpty()) {
+				Demanda nuevaDemanda = new Demanda();
+				nuevaDemanda.setDescripcion(oferta.getDescripcion());
+				nuevaDemanda.setDniEstudiante(user.getDniEstudiante());
+				nuevaDemanda.setFechaInicio(new Date());
+				nuevaDemanda.setFechaFin(oferta.getFechaFin());
+				nuevaDemanda.setNombreHabilidad(oferta.getNombreHabilidad());
+				nuevaDemanda.setNivelHabilidad(oferta.getNivelHabilidad());
+				nuevaDemanda.setCodigoDemanda();
+				demandaDao.addDemanda(nuevaDemanda);
+				Colaboracion nuevaColaboracion = new Colaboracion();
+				nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
+				nuevaColaboracion.setCodigoDemanda(nuevaDemanda.getCodigoDemanda());
+				nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
+				nuevaColaboracion.setDescripcionDemanda(nuevaDemanda.getDescripcion());
+				nuevaColaboracion.setHoras("--");
+				nuevaColaboracion.setPuntuacion("--");
+				nuevaColaboracion.setComentarios("--");
+				nuevaColaboracion.setFechaInicio(nuevaDemanda.getFechaInicio());
+				nuevaColaboracion.setFechaFin(nuevaDemanda.getFechaFin());
+				colaboracionDao.addColaboracion(nuevaColaboracion);
+				return "redirect:/colaboracion/list.html";
+			} else if (demandasCompatibles.size() == 1) {
+				Demanda demanda = demandasCompatibles.get(0);
+				Colaboracion nuevaColaboracion = new Colaboracion();
+				nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
+				nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
+				nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
+				nuevaColaboracion.setDescripcionDemanda(demanda.getDescripcion());
+				nuevaColaboracion.setHoras("--");
+				nuevaColaboracion.setPuntuacion("--");
+				nuevaColaboracion.setComentarios("--");
+				nuevaColaboracion.setFechaInicio(new Date());
+				nuevaColaboracion.setFechaFin(demanda.getFechaFin());
+				colaboracionDao.addColaboracion(nuevaColaboracion);
+				return "redirect:/colaboracion/list.html";
+			} else {
+				session.setAttribute("oferta", oferta);
+				session.setAttribute("listaDemandasCompatibles", demandasCompatibles);
+				return "redirect:/demanda/demandasCompatibles.html";
+			}
+		}
 		return "redirect:../list.html";
 	}
 	
