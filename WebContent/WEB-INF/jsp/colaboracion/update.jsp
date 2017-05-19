@@ -107,8 +107,10 @@
       		<form:errors path="comentarios" cssClass="error"/>
       	</div>
 	</div>
-<br>
-<button type="submit" class="btn btn-raised btn-primary">Terminar</button>
+    <div class="form-group">
+		<button type="submit" class="btn btn-raised btn-primary">Terminar</button>
+		<a href="${pageContext.request.contextPath}/colaboracion/list.html" class="btn btn-raised btn-warning">Volver</a>
+	</div>
 </fieldset>
 </form:form>
 </body>
