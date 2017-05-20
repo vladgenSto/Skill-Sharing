@@ -70,46 +70,6 @@ public class ColaboracionController {
 		return "colaboracion/list";
 	}
 	
-	@RequestMapping(value="/add/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
-	public String addColaboracion(Model model,@PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
-		model.addAttribute("colaboracion", new Colaboracion());
-		model.addAttribute("oferta",ofertaDao.getOferta(codigoOferta));
-		model.addAttribute("demanda",demandaDao.getDemanda(codigoDemanda));
-		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
-		Date fecha=new Date();
-		model.addAttribute("fechaInicio",formato.format(fecha));
-		int year=fecha.getYear();
-		year+=1;
-		fecha.setYear(year);
-		model.addAttribute("fechaFin",formato.format(fecha));
-		return "colaboracion/add";
-	}
-	
-	@RequestMapping(value="add/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
-	public String processAddSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda,@ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult, HttpSession session) {
-		ColaboracionValidator cv=new ColaboracionValidator();
-		cv.validate(colaboracion, bindingResult);
-		if (bindingResult.hasErrors())
-			return "colaboracion/add";
-		Colaboracion comprobarColaboracion=colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
-		if(comprobarColaboracion == null) {
-			UserDetails user = (UserDetails) session.getAttribute("user");
-			colaboracionDao.addColaboracion(colaboracion);
-			session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
-//			String dniEstudianteReceptorMail="";
-//			Oferta oferta=ofertaDao.getOferta(codigoOferta);
-//			Demanda demanda=demandaDao.getDemanda(codigoDemanda);
-//			if(!oferta.getDniEstudiante().equals(user.getDniEstudiante())){
-//				dniEstudianteReceptorMail=oferta.getDniEstudiante();
-//			}else if(!demanda.getDniEstudiante().equals(user.getDniEstudiante())){
-//				dniEstudianteReceptorMail=demanda.getDniEstudiante();
-//			}
-//			Estudiante estudianteRecibeMail=estudianteDao.getEstudiante(dniEstudianteReceptorMail);
-//			MailSender.sendMail(estudianteRecibeMail.getCorreo(), "Nueva colaboracion creada", "El usuario "+user.getUsername()+" ha solicitado una colaboración contigo.");
-		}
-		return "redirect:../list.html";
-	}
-	
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
 	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));

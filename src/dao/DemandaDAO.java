@@ -35,6 +35,10 @@ public class DemandaDAO {
 			colaboracion.setHoras(rs.getString("horas"));
 			colaboracion.setPuntuacion(rs.getString("puntuacion"));
 			colaboracion.setComentarios(rs.getString("comentarios"));
+			colaboracion.setDescripcionOferta(rs.getString("descripcionOferta"));
+			colaboracion.setDescripcionDemanda(rs.getString("descripcionDemanda"));
+			colaboracion.setFechaInicio(rs.getDate("fechaInicio"));
+			colaboracion.setFechaFin(rs.getDate("fechaFin"));
 			return colaboracion;
 		}
 	}

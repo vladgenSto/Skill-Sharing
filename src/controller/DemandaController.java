@@ -100,6 +100,8 @@ public class DemandaController {
 		model.addAttribute("fechaInicio", formato.format(fecha));
 		int year = fecha.getYear() + 1;
 		fecha.setYear(year);
+		Date fecha2=new Date();
+		fecha2.setYear(year);
 		model.addAttribute("fechaFin", formato.format(fecha));
 		return "demanda/add";
 	}
@@ -109,9 +111,14 @@ public class DemandaController {
 		DemandaValidator demandaValidator = new DemandaValidator();
 		demandaValidator.validate(demanda, bindingResult);
 		if(bindingResult.hasErrors()){
-			System.out.println(1);
 			return "demanda/add";
 		}
+		Date fecha = new Date();
+		int year = fecha.getYear() + 1;
+		Date fecha2=new Date();
+		fecha2.setYear(year);
+		demanda.setFechaInicio(fecha);
+		demanda.setFechaFin(fecha2);
 		demandaDao.addDemanda(demanda);
 		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
@@ -170,8 +177,12 @@ public class DemandaController {
 		nuevaColaboracion.setHoras("--");
 		nuevaColaboracion.setPuntuacion("--");
 		nuevaColaboracion.setComentarios("--");
-		nuevaColaboracion.setFechaInicio(new Date());
-		nuevaColaboracion.setFechaFin(demanda.getFechaFin());
+		Date fecha = new Date();
+		int year = fecha.getYear() + 1;
+		Date fecha2=new Date();
+		fecha2.setYear(year);
+		nuevaColaboracion.setFechaInicio(fecha);
+		nuevaColaboracion.setFechaFin(fecha2);
 		colaboracionDao.addColaboracion(nuevaColaboracion);
 		return "redirect:/colaboracion/list.html";
 	}

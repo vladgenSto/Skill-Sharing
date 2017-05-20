@@ -35,7 +35,7 @@
 <th>${listoferta.key}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
-<th><a href="${pageContext.request.contextPath}/colaboracion/add/${oferta.codigoOferta}, ${demanda.codigoDemanda}.html" class="btn btn-raised btn-primary">Crear colaboracion</a></th>
+<th><a href="${pageContext.request.contextPath}/demanda/crearColaboracion/${oferta.codigoOferta}, ${demanda.codigoDemanda}.html" class="btn btn-raised btn-primary">Crear colaboracion</a></th>
 </tr>
 </c:forEach>
 </c:forEach>

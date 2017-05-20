@@ -37,7 +37,7 @@ public class OfertaValidator implements Validator{
 		}else if(oferta.getDniEstudiante().length()>9){
 			errors.rejectValue("dniEstudiante", "obligatorio","Este campo supera los 9 caracteres");
 		}
-		if(oferta.getNombreHabilidad().trim().equals("---Elige---")){
+		if(oferta.getNombreHabilidad().trim().equals("")){
 			errors.rejectValue("nombreHabilidad", "obligatorio","Este campo es obligatorio");
 		}else if (oferta.getNombreHabilidad().length() > 30)
 			errors.rejectValue("nombreHabilidad", "obligatori", "Este campo supera los 30 caracteres");

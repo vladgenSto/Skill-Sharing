@@ -108,18 +108,26 @@ public class OfertaController {
 		Date fecha = new Date();
 		model.addAttribute("fechaInicio", formato.format(fecha));
 		int year = fecha.getYear() + 1;
-		fecha.setYear(year);
-		model.addAttribute("fechaFin", formato.format(fecha));
+		Date fecha2=new Date();
+		fecha2.setYear(year);
+		model.addAttribute("fechaFin", formato.format(fecha2));
 		return "oferta/add";
 	}
 	
 	@RequestMapping(value="add",method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult, HttpSession session){
+	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta,BindingResult bindingResult,Model model,HttpSession session){
 		OfertaValidator ofertaValidator=new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if(bindingResult.hasErrors()){
+			model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 			return "oferta/add";
 		}
+		Date fecha = new Date();
+		int year = fecha.getYear() + 1;
+		Date fecha2=new Date();
+		fecha2.setYear(year);
+		oferta.setFechaInicio(fecha);
+		oferta.setFechaFin(fecha2);
 		ofertaDao.addOferta(oferta);
 		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());
 		this.actualizaListaOfertas(session);
@@ -156,13 +164,17 @@ public class OfertaController {
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		if (user != null) {
+			Date fecha = new Date();
+			int year = fecha.getYear() + 1;
+			Date fecha2=new Date();
+			fecha2.setYear(year);
 			List<Demanda> demandasCompatibles = demandaDao.getDemandasCompatibles(user.getDniEstudiante(), oferta.getNombreHabilidad(), oferta.getNivelHabilidad());
 			if (demandasCompatibles.isEmpty()) {
 				Demanda nuevaDemanda = new Demanda();
 				nuevaDemanda.setDescripcion(oferta.getDescripcion());
 				nuevaDemanda.setDniEstudiante(user.getDniEstudiante());
-				nuevaDemanda.setFechaInicio(new Date());
-				nuevaDemanda.setFechaFin(oferta.getFechaFin());
+				nuevaDemanda.setFechaInicio(fecha);
+				nuevaDemanda.setFechaFin(fecha2);
 				nuevaDemanda.setNombreHabilidad(oferta.getNombreHabilidad());
 				nuevaDemanda.setNivelHabilidad(oferta.getNivelHabilidad());
 				nuevaDemanda.setCodigoDemanda();
@@ -175,8 +187,8 @@ public class OfertaController {
 				nuevaColaboracion.setHoras("--");
 				nuevaColaboracion.setPuntuacion("--");
 				nuevaColaboracion.setComentarios("--");
-				nuevaColaboracion.setFechaInicio(nuevaDemanda.getFechaInicio());
-				nuevaColaboracion.setFechaFin(nuevaDemanda.getFechaFin());
+				nuevaColaboracion.setFechaInicio(fecha);
+				nuevaColaboracion.setFechaFin(fecha2);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
 				return "redirect:/colaboracion/list.html";
 			} else if (demandasCompatibles.size() == 1) {
@@ -189,8 +201,8 @@ public class OfertaController {
 				nuevaColaboracion.setHoras("--");
 				nuevaColaboracion.setPuntuacion("--");
 				nuevaColaboracion.setComentarios("--");
-				nuevaColaboracion.setFechaInicio(new Date());
-				nuevaColaboracion.setFechaFin(demanda.getFechaFin());
+				nuevaColaboracion.setFechaInicio(fecha);
+				nuevaColaboracion.setFechaFin(fecha2);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
 				return "redirect:/colaboracion/list.html";
 			} else {
