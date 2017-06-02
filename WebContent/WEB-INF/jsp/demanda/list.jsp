@@ -32,9 +32,9 @@
 <th>${demanda.fechaFin}</th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
-<th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-raised btn-yellow">Editar</a></th>
-<th><a href="delete/${demanda.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
-<th><a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-raised btn btn-info">Buscar</a></th>
+<th><a href="update/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-pencil"></i></a>&nbsp
+<a href="delete/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-remove"></i></a>&nbsp
+<a href="buscar/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-search" aria-hidden="true"></i></a></th>
 </tr>
 </c:forEach>
 </table>

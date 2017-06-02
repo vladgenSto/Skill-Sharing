@@ -17,7 +17,7 @@
 <body class="formulario">
 <form:form class="form-horizontal" method="post" modelAttribute="colaboracion">
 <fieldset>
-<legend>Volara Colaboracion</legend>
+<legend>Valorar Colaboracion</legend>
 <div class="form-group">
 	<form:form path="codigoOferta"/>
 <!--     	<label for="codigoOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Codigo Oferta</label> -->
@@ -108,8 +108,10 @@
       	</div>
 	</div>
     <div class="form-group">
+         <div class="col-md-6 col-md-offset-2">
 		<button type="submit" class="btn btn-raised btn-primary">Terminar</button>
 		<a href="${pageContext.request.contextPath}/colaboracion/list.html" class="btn btn-raised btn-warning">Volver</a>
+		</div>
 	</div>
 </fieldset>
 </form:form>

@@ -41,8 +41,8 @@
       </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
         <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
+        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
       </div>
     </div>
   </fieldset>

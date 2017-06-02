@@ -8,6 +8,6 @@
 No autenticado <a href="${pageContext.request.contextPath}/login.html">Entrar</a> </c:when>
 <c:otherwise>
 Autenticado como ${user.username}
-<a href="${pageContext.request.contextPath}/logout.html">Salir</a> </c:otherwise>
+<a href="${pageContext.request.contextPath}/logout.html">Salir&nbsp<i class="fa fa-sign-out" aria-hidden="true"></i></a> </c:otherwise>
 </c:choose>
 </p>

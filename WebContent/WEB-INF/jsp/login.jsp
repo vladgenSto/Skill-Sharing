@@ -84,7 +84,7 @@
 						</div>
 						<br>
 						<div class="text-center">
-							<button class="btn btn-primary btn-lg">Entrar</button>
+							<button class="btn btn-primary btn-lg">Entrar&nbsp<i class="fa fa-sign-in" aria-hidden="true"></i></button>
 						</div>
 
 					</div>

@@ -27,8 +27,8 @@
 <th>${habilidad.nombre}</th>
 <th>${habilidad.nivel}</th>
 <th>${habilidad.descripcion}</th>
-<th><a href="update/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-raised btn-yellow">Editar</a></th>
-<th><a href="delete/${habilidad.nombre}_${habilidad.nivel}.html" class="btn btn-raised btn-warning">Borrar</a></th>
+<th><a href="update/${habilidad.nombre}_${habilidad.nivel}.html" class="teal-text"><i class="fa fa-pencil"></i></a></th>
+<th><a href="delete/${habilidad.nombre}_${habilidad.nivel}.html" class="teal-text"><i class="fa fa-remove"></i></a></th>
 </tr>
 </c:forEach>
 </table>
