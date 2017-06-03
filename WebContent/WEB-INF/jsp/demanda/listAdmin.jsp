@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>   
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,8 +30,8 @@
 <c:forEach items="${listdemanda.value}" var="demanda">
 <tr>
 <th>${demanda.descripcion}</th>
-<th>${demanda.fechaInicio}</th>
-<th>${demanda.fechaFin}</th>
+<th><fmt:formatDate value="${demanda.fechaInicio}" pattern="MM/dd/YYYY"/></th>
+<th><fmt:formatDate value="${demanda.fechaFin}" pattern="MM/dd/YYYY"/></th>
 <th>${listdemanda.key}</th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
