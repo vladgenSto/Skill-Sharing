@@ -68,7 +68,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model){
 		model.addAttribute("user",new UserDetails());
-//        this.ecriptarContrasenyas();
+        this.ecriptarContrasenyas();
 		return "login";
 	}
 	
@@ -138,12 +138,14 @@ public class LoginController {
 		}
 		return objetosValidos;
 	}
-//	private void ecriptarContrasenyas(){
-//		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
-//		List<UserDetails> usuarios=userDao.getUsuarios();
-//		for(UserDetails usuario:usuarios){
-//			usuario.setPassword(passwordEncryptor.encryptPassword(usuario.getPassword()));
-//			userDao.updateUsuario(usuario);
-//		}
-//	}
+	private void ecriptarContrasenyas(){
+		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
+		List<UserDetails> usuarios=userDao.getUsuarios();
+		for(UserDetails usuario:usuarios){
+			if(usuario.getPassword().length()<32){
+				usuario.setPassword(passwordEncryptor.encryptPassword(usuario.getPassword()));
+				userDao.updateUsuario(usuario);
+			}
+		}
+	}
 }
