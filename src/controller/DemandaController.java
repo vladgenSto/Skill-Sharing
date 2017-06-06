@@ -216,10 +216,6 @@ public class DemandaController {
 		Transport t=sesion.getTransport("smtp");
 		t.connect("ei102716ps@gmail.com","perisstoyanov");
 		t.sendMessage(message, message.getAllRecipients());
-//		message=new MimeMessage(sesion);
-//		
-//		message.setText("Se ha creado una colaboración con "+estudianteOferta.getNombre());
-//		t.sendMessage(message, message.getAllRecipients());
 		t.close();
 		return "redirect:/colaboracion/list.html";
 	}

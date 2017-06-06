@@ -6,7 +6,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,7 +169,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/crearColaboracion/{codigoOferta}")
-	public String crearColaboracion(@PathVariable int codigoOferta, Model model, HttpSession session){
+	public String crearColaboracion(@PathVariable int codigoOferta, Model model, HttpSession session) throws AddressException, MessagingException{
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
 		UserDetails user = (UserDetails) session.getAttribute("user");
 		if (user != null) {
@@ -190,6 +199,30 @@ public class OfertaController {
 				nuevaColaboracion.setFechaInicio(fecha);
 				nuevaColaboracion.setFechaFin(fecha2);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
+				Properties props=new Properties();
+				props.setProperty("mail.smtp.host", "smtp.gmail.com");
+				props.setProperty("mail.smtp.starttls.enable", "true");
+				props.setProperty("mail.smtp.port", "587");
+				props.setProperty("mail.smtp.user", "ei102716ps@gmail.com");
+				props.setProperty("mail.smtp.user", "true");
+				Session sesion = Session.getInstance(props, new javax.mail.Authenticator() {
+				    protected PasswordAuthentication getPasswordAuthentication() {
+				        return new PasswordAuthentication("ei102716ps@gmail.com", "perisstoyanov");
+				    }
+				});
+				sesion.setDebug(true);
+				MimeMessage message=new MimeMessage(sesion);
+				message.setFrom(new InternetAddress("ei102716ps@gmail.com"));
+				Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
+				Estudiante estudianteDemanda=estudianteDao.getEstudiante(nuevaDemanda.getDniEstudiante());
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteOferta.getCorreo()));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteDemanda.getCorreo()));
+				message.setSubject("Nueva colaboración");
+				message.setText("Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre());
+				Transport t=sesion.getTransport("smtp");
+				t.connect("ei102716ps@gmail.com","perisstoyanov");
+				t.sendMessage(message, message.getAllRecipients());
+				t.close();
 				return "redirect:/colaboracion/list.html";
 			} else if (demandasCompatibles.size() == 1) {
 				Demanda demanda = demandasCompatibles.get(0);
@@ -204,6 +237,30 @@ public class OfertaController {
 				nuevaColaboracion.setFechaInicio(fecha);
 				nuevaColaboracion.setFechaFin(fecha2);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
+				Properties props=new Properties();
+				props.setProperty("mail.smtp.host", "smtp.gmail.com");
+				props.setProperty("mail.smtp.starttls.enable", "true");
+				props.setProperty("mail.smtp.port", "587");
+				props.setProperty("mail.smtp.user", "ei102716ps@gmail.com");
+				props.setProperty("mail.smtp.user", "true");
+				Session sesion = Session.getInstance(props, new javax.mail.Authenticator() {
+				    protected PasswordAuthentication getPasswordAuthentication() {
+				        return new PasswordAuthentication("ei102716ps@gmail.com", "perisstoyanov");
+				    }
+				});
+				sesion.setDebug(true);
+				MimeMessage message=new MimeMessage(sesion);
+				message.setFrom(new InternetAddress("ei102716ps@gmail.com"));
+				Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
+				Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteOferta.getCorreo()));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteDemanda.getCorreo()));
+				message.setSubject("Nueva colaboración");
+				message.setText("Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre());
+				Transport t=sesion.getTransport("smtp");
+				t.connect("ei102716ps@gmail.com","perisstoyanov");
+				t.sendMessage(message, message.getAllRecipients());
+				t.close();
 				return "redirect:/colaboracion/list.html";
 			} else {
 				session.setAttribute("oferta", oferta);
