@@ -116,7 +116,7 @@ public class DemandaController {
 	}
 	
 	@RequestMapping(value="add",method=RequestMethod.POST)
-	public String processAddSubmit(@ModelAttribute("demanda")Demanda demanda,BindingResult bindingResult, HttpSession session){
+	public String processAddSubmit(@ModelAttribute("demanda")Demanda demanda,BindingResult bindingResult, HttpSession session) throws AddressException, MessagingException{
 		DemandaValidator demandaValidator = new DemandaValidator();
 		demandaValidator.validate(demanda, bindingResult);
 		if(bindingResult.hasErrors()){
@@ -129,6 +129,33 @@ public class DemandaController {
 		demanda.setFechaInicio(fecha);
 		demanda.setFechaFin(fecha2);
 		demandaDao.addDemanda(demanda);
+		Properties props=new Properties();
+		props.setProperty("mail.smtp.host", "smtp.gmail.com");
+		props.setProperty("mail.smtp.starttls.enable", "true");
+		props.setProperty("mail.smtp.port", "587");
+		props.setProperty("mail.smtp.user", "ei102716ps@gmail.com");
+		props.setProperty("mail.smtp.user", "true");
+		Session sesion = Session.getInstance(props, new javax.mail.Authenticator() {
+		    protected PasswordAuthentication getPasswordAuthentication() {
+		        return new PasswordAuthentication("ei102716ps@gmail.com", "perisstoyanov");
+		    }
+		});
+		sesion.setDebug(true);
+		MimeMessage message=new MimeMessage(sesion);
+		message.setFrom(new InternetAddress("ei102716ps@gmail.com"));
+		List<Oferta> listaOfertas=ofertaDao.getOfertas();
+		for(Oferta oferta:listaOfertas){
+			if(demanda.getNombreHabilidad().equals(oferta.getNombreHabilidad())){
+				Estudiante estudiante=estudianteDao.getEstudiante(oferta.getDniEstudiante());
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudiante.getCorreo()));
+			}
+		}
+		message.setSubject("Nueva demanda creada");
+		message.setText("Se ha creado una nueva demanda de "+demanda.getNombreHabilidad());
+		Transport t=sesion.getTransport("smtp");
+		t.connect("ei102716ps@gmail.com","perisstoyanov");
+		t.sendMessage(message, message.getAllRecipients());
+		t.close();
 		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
