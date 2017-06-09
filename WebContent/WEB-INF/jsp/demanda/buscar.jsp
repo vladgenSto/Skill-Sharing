@@ -31,8 +31,8 @@
 <c:forEach items="${listoferta.value}" var="oferta">
 <tr>
 <th>${oferta.descripcion}</th>
-<th><fmt:formatDate value="${oferta.fechaInicio}" pattern="MM/dd/YYYY"/></th>
-<th><fmt:formatDate value="${oferta.fechaFin}" pattern="MM/dd/YYYY"/></th>
+<th><fmt:formatDate value="${oferta.fechaInicio}" pattern="dd/MM/YYYY"/></th>
+<th><fmt:formatDate value="${oferta.fechaFin}" pattern="dd/MM/YYYY"/></th>
 <th>${listoferta.key}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>

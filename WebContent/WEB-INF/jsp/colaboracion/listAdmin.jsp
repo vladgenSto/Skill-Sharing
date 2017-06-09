@@ -34,8 +34,8 @@
 <th>${colaboracion.horas}</th>
 <th>${colaboracion.puntuacion}</th>
 <th>${colaboracion.comentarios}</th>
-<th><fmt:formatDate value="${colaboracion.fechaInicio}" pattern="MM/dd/YYYY"/></th>
-<th><fmt:formatDate value="${colaboracion.fechaFin}" pattern="MM/dd/YYYY"/></th>
+<th><fmt:formatDate value="${colaboracion.fechaInicio}" pattern="dd/MM/YYYY"/></th>
+<th><fmt:formatDate value="${colaboracion.fechaFin}" pattern="dd/MM/YYYY"/></th>
 </tr>
 </c:forEach>
 </table>

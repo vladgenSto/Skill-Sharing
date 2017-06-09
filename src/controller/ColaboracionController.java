@@ -73,7 +73,7 @@ public class ColaboracionController {
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
 	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
 		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
-		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
 		Date fecha=new Date();
 		model.addAttribute("fechaFin",formato.format(fecha));
 		return "colaboracion/update";

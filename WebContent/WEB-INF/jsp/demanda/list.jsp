@@ -29,8 +29,8 @@
 <c:forEach items="${listaDemandasUsuario}" var="demanda">
 <tr>
 <th>${demanda.descripcion}</th>
-<th><fmt:formatDate value="${demanda.fechaInicio}" pattern="MM/dd/YYYY"/></th>
-<th><fmt:formatDate value="${demanda.fechaFin}" pattern="MM/dd/YYYY"/></th>
+<th><fmt:formatDate value="${demanda.fechaInicio}" pattern="dd/MM/YYYY"/></th>
+<th><fmt:formatDate value="${demanda.fechaFin}" pattern="dd/MM/YYYY"/></th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
 <th><a href="update/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-pencil"></i></a>&nbsp

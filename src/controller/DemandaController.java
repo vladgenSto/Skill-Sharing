@@ -38,6 +38,7 @@ import dao.OfertaDAO;
 import domain.Colaboracion;
 import domain.Demanda;
 import domain.Estudiante;
+import domain.Mail;
 import domain.Oferta;
 import domain.UserDetails;
 
@@ -51,6 +52,7 @@ public class DemandaController {
 	private OfertaDAO ofertaDao;
 	private EstudianteDAO estudianteDao;
 	private ColaboracionDAO colaboracionDao;
+	private Mail enviadorMail=new Mail();
 	
 	@Autowired
 	public void setDemandaDao(DemandaDAO demandaDao){
@@ -102,7 +104,7 @@ public class DemandaController {
 	
 	@RequestMapping(value="/add")
 	public String addDemanda(Model model){
-		SimpleDateFormat formato=new SimpleDateFormat("MM/dd/yyy");
+		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
 		model.addAttribute("demanda",new Demanda());
 		model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 		Date fecha = new Date();
@@ -129,33 +131,15 @@ public class DemandaController {
 		demanda.setFechaInicio(fecha);
 		demanda.setFechaFin(fecha2);
 		demandaDao.addDemanda(demanda);
-		Properties props=new Properties();
-		props.setProperty("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.starttls.enable", "true");
-		props.setProperty("mail.smtp.port", "587");
-		props.setProperty("mail.smtp.user", "ei102716ps@gmail.com");
-		props.setProperty("mail.smtp.user", "true");
-		Session sesion = Session.getInstance(props, new javax.mail.Authenticator() {
-		    protected PasswordAuthentication getPasswordAuthentication() {
-		        return new PasswordAuthentication("ei102716ps@gmail.com", "perisstoyanov");
-		    }
-		});
-		sesion.setDebug(true);
-		MimeMessage message=new MimeMessage(sesion);
-		message.setFrom(new InternetAddress("ei102716ps@gmail.com"));
 		List<Oferta> listaOfertas=ofertaDao.getOfertas();
+		List<String> destinatarios=new ArrayList<String>();
 		for(Oferta oferta:listaOfertas){
 			if(demanda.getNombreHabilidad().equals(oferta.getNombreHabilidad())){
 				Estudiante estudiante=estudianteDao.getEstudiante(oferta.getDniEstudiante());
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudiante.getCorreo()));
+				destinatarios.add(estudiante.getCorreo());
 			}
 		}
-		message.setSubject("Nueva demanda creada");
-		message.setText("Se ha creado una nueva demanda de "+demanda.getNombreHabilidad());
-		Transport t=sesion.getTransport("smtp");
-		t.connect("ei102716ps@gmail.com","perisstoyanov");
-		t.sendMessage(message, message.getAllRecipients());
-		t.close();
+		enviadorMail.enviarMensaje("Nueva demanda creada", "Se ha creado una nueva demanda de "+demanda.getNombreHabilidad(), destinatarios);
 		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
@@ -220,30 +204,12 @@ public class DemandaController {
 		nuevaColaboracion.setFechaInicio(fecha);
 		nuevaColaboracion.setFechaFin(fecha2);
 		colaboracionDao.addColaboracion(nuevaColaboracion);
-		Properties props=new Properties();
-		props.setProperty("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.smtp.starttls.enable", "true");
-		props.setProperty("mail.smtp.port", "587");
-		props.setProperty("mail.smtp.user", "ei102716ps@gmail.com");
-		props.setProperty("mail.smtp.user", "true");
-		Session sesion = Session.getInstance(props, new javax.mail.Authenticator() {
-		    protected PasswordAuthentication getPasswordAuthentication() {
-		        return new PasswordAuthentication("ei102716ps@gmail.com", "perisstoyanov");
-		    }
-		});
-		sesion.setDebug(true);
-		MimeMessage message=new MimeMessage(sesion);
-		message.setFrom(new InternetAddress("ei102716ps@gmail.com"));
 		Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
 		Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteOferta.getCorreo()));
-		message.addRecipient(Message.RecipientType.TO, new InternetAddress(estudianteDemanda.getCorreo()));
-		message.setSubject("Nueva colaboración");
-		message.setText("Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre());
-		Transport t=sesion.getTransport("smtp");
-		t.connect("ei102716ps@gmail.com","perisstoyanov");
-		t.sendMessage(message, message.getAllRecipients());
-		t.close();
+		List<String> destinatarios=new ArrayList<String>();
+		destinatarios.add(estudianteOferta.getCorreo());
+		destinatarios.add(estudianteDemanda.getCorreo());
+		enviadorMail.enviarMensaje("Nueva colaboración", "Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
 		return "redirect:/colaboracion/list.html";
 	}
 	
