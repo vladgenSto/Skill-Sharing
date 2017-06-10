@@ -31,7 +31,7 @@
 	<footer>
 	<hr>
 	<p class="text-muted">
-	EI1027 - Diseño e Implementacioon de Sistemas de Informacion
+	<img style="width: 10%;" src="${pageContext.request.contextPath}/css/logo-uji.-DESARROLLO-SOCIAL-Y-PAZ.-030.png"> EI1027 - Diseño e Implementacioon de Sistemas de Informacion
 	</p>
 	</footer>
 </body>

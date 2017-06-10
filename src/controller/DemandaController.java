@@ -193,7 +193,7 @@ public class DemandaController {
 	public String crearColaboracion(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, HttpSession session) throws AddressException, MessagingException{
 		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
-		Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, demanda);
+		Colaboracion nuevaColaboracion = this.nuevaColaboracion(oferta, demanda);
 		if(colaboracionDao.getColaboracion(nuevaColaboracion.getCodigoOferta(), nuevaColaboracion.getCodigoDemanda()) == null)
 			colaboracionDao.addColaboracion(nuevaColaboracion);
 		Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
@@ -201,10 +201,10 @@ public class DemandaController {
 		List<String> destinatarios=new ArrayList<String>();
 		destinatarios.add(estudianteOferta.getCorreo());
 		destinatarios.add(estudianteDemanda.getCorreo());
-		enviadorMail.enviarMensaje("Nueva colaboración", "Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+		enviadorMail.enviarMensaje("Nueva colaboraciï¿½n", "Se ha creado una colaboraciï¿½n con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
 		return "redirect:/colaboracion/list.html";
 	}
-	private Colaboracion nuevaColaboración(Oferta oferta, Demanda demanda){
+	private Colaboracion nuevaColaboracion(Oferta oferta, Demanda demanda){
 		Colaboracion nuevaColaboracion = new Colaboracion();
 		nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
 		nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
