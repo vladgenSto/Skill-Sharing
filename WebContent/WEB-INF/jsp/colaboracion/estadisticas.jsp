@@ -37,7 +37,7 @@ var myChart = new Chart(ctx, {
     data: {
         labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [{
-            label: 'Colaboraciones de este año',
+            label: 'Colaboraciones',
             data: vector,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',
