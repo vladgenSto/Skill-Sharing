@@ -19,7 +19,7 @@
 <body>
 <canvas id="myChart" width="200" height="100"></canvas>
 <form>
-<select id="estadisticasMes">
+<select id="estadisticasMes"  style="visibility:hidden">
 <c:forEach items="${estadisticasMes}" var="elem">
 <option>${elem.value}</option>
 </c:forEach>
@@ -28,16 +28,16 @@
 <script>
 var ctx = document.getElementById("myChart");
 var v = document.getElementById("estadisticasMes");
-var vector=new Array();
+var vector=[];
 for(var pos=0;pos<v.options.length;pos++){
-	vector.push(v.options.item(pos));
+	vector.push(v.options.item(pos).value);
 }
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [{
-            label: '# of Votes',
+            label: 'Colaboraciones de este año',
             data: vector,
             backgroundColor: [
                 'rgba(54, 162, 235, 0.2)',

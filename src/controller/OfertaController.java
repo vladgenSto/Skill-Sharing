@@ -6,16 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,7 +141,9 @@ public class OfertaController {
 				destinatarios.add(estudiante.getCorreo());
 			}
 		}
-		enviadorMail.enviarMensaje("Nueva oferta creada", "Se ha creado una nueva oferta de "+oferta.getNombreHabilidad(), destinatarios);
+		if(!destinatarios.isEmpty()){
+			enviadorMail.enviarMensaje("Nueva oferta creada", "Se ha creado una nueva oferta de "+oferta.getNombreHabilidad(), destinatarios);
+		}
 		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());
 		this.actualizaListaOfertas(session);
 		return "redirect:list.html";
@@ -200,16 +195,7 @@ public class OfertaController {
 				nuevaDemanda.setNivelHabilidad(oferta.getNivelHabilidad());
 				nuevaDemanda.setCodigoDemanda();
 				demandaDao.addDemanda(nuevaDemanda);
-				Colaboracion nuevaColaboracion = new Colaboracion();
-				nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
-				nuevaColaboracion.setCodigoDemanda(nuevaDemanda.getCodigoDemanda());
-				nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
-				nuevaColaboracion.setDescripcionDemanda(nuevaDemanda.getDescripcion());
-				nuevaColaboracion.setHoras("--");
-				nuevaColaboracion.setPuntuacion("--");
-				nuevaColaboracion.setComentarios("--");
-				nuevaColaboracion.setFechaInicio(fecha);
-				nuevaColaboracion.setFechaFin(fecha2);
+				Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, nuevaDemanda);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
 				Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
 				Estudiante estudianteDemanda=estudianteDao.getEstudiante(nuevaDemanda.getDniEstudiante());
@@ -219,16 +205,7 @@ public class OfertaController {
 				return "redirect:/colaboracion/list.html";
 			} else if (demandasCompatibles.size() == 1) {
 				Demanda demanda = demandasCompatibles.get(0);
-				Colaboracion nuevaColaboracion = new Colaboracion();
-				nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
-				nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
-				nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
-				nuevaColaboracion.setDescripcionDemanda(demanda.getDescripcion());
-				nuevaColaboracion.setHoras("--");
-				nuevaColaboracion.setPuntuacion("--");
-				nuevaColaboracion.setComentarios("--");
-				nuevaColaboracion.setFechaInicio(fecha);
-				nuevaColaboracion.setFechaFin(fecha2);
+				Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, demanda);
 				colaboracionDao.addColaboracion(nuevaColaboracion);
 				Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
 				Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
@@ -283,6 +260,21 @@ public class OfertaController {
 		}
 		return ofertasPublicadas;
 	}
-	
-	
+	private Colaboracion nuevaColaboración(Oferta oferta, Demanda demanda){
+		Colaboracion nuevaColaboracion = new Colaboracion();
+		nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
+		nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
+		nuevaColaboracion.setDescripcionOferta(oferta.getDescripcion());
+		nuevaColaboracion.setDescripcionDemanda(demanda.getDescripcion());
+		nuevaColaboracion.setHoras("--");
+		nuevaColaboracion.setPuntuacion("--");
+		nuevaColaboracion.setComentarios("--");
+		Date fecha = new Date();
+		int year = fecha.getYear() + 1;
+		Date fecha2=new Date();
+		fecha2.setYear(year);
+		nuevaColaboracion.setFechaInicio(fecha);
+		nuevaColaboracion.setFechaFin(fecha2);
+		return nuevaColaboracion;
+	}
 }

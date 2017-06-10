@@ -6,16 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,7 +132,9 @@ public class DemandaController {
 				destinatarios.add(estudiante.getCorreo());
 			}
 		}
-		enviadorMail.enviarMensaje("Nueva demanda creada", "Se ha creado una nueva demanda de "+demanda.getNombreHabilidad(), destinatarios);
+		if(!destinatarios.isEmpty()){
+			enviadorMail.enviarMensaje("Nueva demanda creada", "Se ha creado una nueva demanda de "+demanda.getNombreHabilidad(), destinatarios);
+		}
 		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
@@ -189,6 +184,17 @@ public class DemandaController {
 	public String crearColaboracion(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, HttpSession session) throws AddressException, MessagingException{
 		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
+		Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, demanda);
+		colaboracionDao.addColaboracion(nuevaColaboracion);
+		Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
+		Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
+		List<String> destinatarios=new ArrayList<String>();
+		destinatarios.add(estudianteOferta.getCorreo());
+		destinatarios.add(estudianteDemanda.getCorreo());
+		enviadorMail.enviarMensaje("Nueva colaboración", "Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+		return "redirect:/colaboracion/list.html";
+	}
+	private Colaboracion nuevaColaboración(Oferta oferta, Demanda demanda){
 		Colaboracion nuevaColaboracion = new Colaboracion();
 		nuevaColaboracion.setCodigoOferta(oferta.getCodigoOferta());
 		nuevaColaboracion.setCodigoDemanda(demanda.getCodigoDemanda());
@@ -203,14 +209,7 @@ public class DemandaController {
 		fecha2.setYear(year);
 		nuevaColaboracion.setFechaInicio(fecha);
 		nuevaColaboracion.setFechaFin(fecha2);
-		colaboracionDao.addColaboracion(nuevaColaboracion);
-		Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
-		Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
-		List<String> destinatarios=new ArrayList<String>();
-		destinatarios.add(estudianteOferta.getCorreo());
-		destinatarios.add(estudianteDemanda.getCorreo());
-		enviadorMail.enviarMensaje("Nueva colaboración", "Se ha creado una colaboración con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
-		return "redirect:/colaboracion/list.html";
+		return nuevaColaboracion;
 	}
 	
 	private void actualizaListaDemandas(HttpSession session){
