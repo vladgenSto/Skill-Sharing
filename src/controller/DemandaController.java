@@ -118,12 +118,12 @@ public class DemandaController {
 		if(bindingResult.hasErrors()){
 			return "demanda/add";
 		}
-		Date fecha = new Date();
-		int year = fecha.getYear() + 1;
-		Date fecha2=new Date();
-		fecha2.setYear(year);
-		demanda.setFechaInicio(fecha);
-		demanda.setFechaFin(fecha2);
+//		Date fecha = new Date();
+//		int year = fecha.getYear() + 1;
+//		Date fecha2=new Date();
+//		fecha2.setYear(year);
+//		demanda.setFechaInicio(fecha);
+//		demanda.setFechaFin(fecha2);
 		Habilidad existe=habilidadDao.getHabilidad(demanda.getNombreHabilidad(), demanda.getNivelHabilidad());
 		if(existe == null){
 			existe=new Habilidad();
@@ -213,7 +213,12 @@ public class DemandaController {
 		nuevaColaboracion.setHoras("--");
 		nuevaColaboracion.setPuntuacion("--");
 		nuevaColaboracion.setComentarios("--");
-		Date fecha = new Date();
+		Date fecha;
+		if(oferta.getFechaInicio().before(demanda.getFechaInicio())){
+			fecha=oferta.getFechaInicio();
+		}else{
+			fecha=demanda.getFechaInicio();
+		}
 		int year = fecha.getYear() + 1;
 		Date fecha2=new Date();
 		fecha2.setYear(year);

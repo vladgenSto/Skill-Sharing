@@ -127,12 +127,6 @@ public class OfertaController {
 			model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 			return "oferta/add";
 		}
-		Date fecha = new Date();
-		int year = fecha.getYear() + 1;
-		Date fecha2=new Date();
-		fecha2.setYear(year);
-		oferta.setFechaInicio(fecha);
-		oferta.setFechaFin(fecha2);
 		Habilidad existe=habilidadDao.getHabilidad(oferta.getNombreHabilidad(), oferta.getNivelHabilidad());
 		if(existe == null){
 			existe=new Habilidad();
@@ -279,7 +273,12 @@ public class OfertaController {
 		nuevaColaboracion.setHoras("--");
 		nuevaColaboracion.setPuntuacion("--");
 		nuevaColaboracion.setComentarios("--");
-		Date fecha = new Date();
+		Date fecha;
+		if(oferta.getFechaInicio().before(demanda.getFechaInicio())){
+			fecha=oferta.getFechaInicio();
+		}else{
+			fecha=demanda.getFechaInicio();
+		}
 		int year = fecha.getYear() + 1;
 		Date fecha2=new Date();
 		fecha2.setYear(year);
