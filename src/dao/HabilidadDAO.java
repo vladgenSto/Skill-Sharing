@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,7 +46,13 @@ public class HabilidadDAO {
 	}
 	
 	public Habilidad getHabilidad(String nombre,String nivel){
-		return this.jdbcTemplate.queryForObject("SELECT * FROM habilidad WHERE nivel=? AND nombre=?", new Object[]{nivel,nombre},new HabilidadMapper());
+		Habilidad habilidad;
+		try{
+			habilidad=this.jdbcTemplate.queryForObject("SELECT * FROM habilidad WHERE nivel=? AND nombre=?", new Object[]{nivel,nombre},new HabilidadMapper());
+		}catch(EmptyResultDataAccessException e){
+			habilidad=null;
+		}
+		return habilidad;
 	}
 	
 	public void addHabilidad(Habilidad habilidad){
@@ -53,6 +60,9 @@ public class HabilidadDAO {
 			this.jdbcTemplate.update("INSERT INTO habilidad(nombre,nivel,descripcion)VALUES(?,?,?)",habilidad.getNombre(),niveles.dameNivelesDisponibles().get(i),habilidad.getDescripcion());
 		}
 		
+	}
+	public void addHabilidadIndividual(Habilidad habilidad){
+		this.jdbcTemplate.update("INSERT INTO habilidad(nombre,nivel,descripcion)VALUES(?,?,?)",habilidad.getNombre(),habilidad.getNivel(),habilidad.getDescripcion());
 	}
 	
 	public List<Habilidad> getHabilidadesSinRepeticiones(){

@@ -31,6 +31,7 @@ import dao.OfertaDAO;
 import domain.Colaboracion;
 import domain.Demanda;
 import domain.Estudiante;
+import domain.Habilidad;
 import domain.Mail;
 import domain.Oferta;
 import domain.UserDetails;
@@ -132,6 +133,14 @@ public class OfertaController {
 		fecha2.setYear(year);
 		oferta.setFechaInicio(fecha);
 		oferta.setFechaFin(fecha2);
+		Habilidad existe=habilidadDao.getHabilidad(oferta.getNombreHabilidad(), oferta.getNivelHabilidad());
+		if(existe == null){
+			existe=new Habilidad();
+			existe.setNombre(oferta.getNombreHabilidad());
+			existe.setNivel(oferta.getNivelHabilidad());
+			existe.setDescripcion(oferta.getNombreHabilidad()+", "+oferta.getNivelHabilidad());
+			habilidadDao.addHabilidadIndividual(existe);
+		}
 		ofertaDao.addOferta(oferta);
 		List<Demanda> listaDemandas=demandaDao.getDemandas();
 		List<String> destinatarios=new ArrayList<String>();
