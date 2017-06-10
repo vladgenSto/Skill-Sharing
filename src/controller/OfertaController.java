@@ -206,7 +206,8 @@ public class OfertaController {
 			} else if (demandasCompatibles.size() == 1) {
 				Demanda demanda = demandasCompatibles.get(0);
 				Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, demanda);
-				colaboracionDao.addColaboracion(nuevaColaboracion);
+				if(colaboracionDao.getColaboracion(nuevaColaboracion.getCodigoOferta(), nuevaColaboracion.getCodigoDemanda()) == null)
+					colaboracionDao.addColaboracion(nuevaColaboracion);
 				Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
 				Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
 				destinatarios.add(estudianteOferta.getCorreo());

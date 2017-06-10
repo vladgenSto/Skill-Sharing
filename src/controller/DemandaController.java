@@ -185,7 +185,8 @@ public class DemandaController {
 		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
 		Colaboracion nuevaColaboracion = this.nuevaColaboración(oferta, demanda);
-		colaboracionDao.addColaboracion(nuevaColaboracion);
+		if(colaboracionDao.getColaboracion(nuevaColaboracion.getCodigoOferta(), nuevaColaboracion.getCodigoDemanda()) == null)
+			colaboracionDao.addColaboracion(nuevaColaboracion);
 		Estudiante estudianteOferta=estudianteDao.getEstudiante(oferta.getDniEstudiante());
 		Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
 		List<String> destinatarios=new ArrayList<String>();

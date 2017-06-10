@@ -35,7 +35,7 @@
 
       <div class="col-md-2">
         <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicio}"></form:input>
-        <span class="help-block">(mm/dd/yyyy)</span>
+        <span class="help-block">(dd/mm/yyyy)</span>
       </div>
       <div>
       	<form:errors path="fechaInicio" cssClass="error"/>
@@ -46,7 +46,7 @@
 
       <div class="col-md-2">
         <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFin}"></form:input>
-        <span class="help-block">(mm/dd/yyyy)</span> 
+        <span class="help-block">(dd/mm/yyyy)</span> 
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
