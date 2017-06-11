@@ -19,13 +19,13 @@
   <fieldset>
     <legend>Actualiza Estudiante</legend>
     <div class="form-group">
-      <label for="dni" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI</label>
+<!--       <label for="dni" class="col-md-2 control-label" style="color: black; font-size: medium;">DNI</label> -->
 
       <div class="col-md-2">
-        <form:input path="dni" type="text" class="form-control" id="dni" placeholder="DNI"></form:input>
+        <form:input path="dni" type="text" class="form-control" id="dni" placeholder="DNI" hidden="true"></form:input>
       </div>
       <div>
-      	<form:errors path="dni" cssClass="error"/>
+<%--       	<form:errors path="dni" cssClass="error"/> --%>
       </div>
       </div>
       <div class="form-group">
@@ -71,7 +71,8 @@
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
         <button type="submit" class="btn btn-raised btn-primary">Actualizar</button>
-        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+		<button type="reset" class="btn btn-raised btn-default">Limpiar</button>
+        <a href="${pageContext.request.contextPath}/estudiante/list.html" class="btn btn-raised btn-warning">Volver</a>      
       </div>
     </div>
   </fieldset>

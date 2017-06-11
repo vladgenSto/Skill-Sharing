@@ -1,5 +1,5 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
-<div style="width: 20% left: 38%; position: relative;">
+<div style="width: 60%; left: 39%; position: relative;">
     <a style="" class="btn btn-primary" data-toggle="collapse" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
         Sobre
     </a>

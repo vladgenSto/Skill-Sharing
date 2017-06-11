@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -49,7 +50,14 @@ public class EstudianteDAO {
 	}
 	
 	public Estudiante getEstudiante(String dni){
-		return this.jdbcTemplate.queryForObject("select * from estudiante where dni=?", new Object[]{dni},new EstudianteMapper());
+		Estudiante estudiante;
+		try{
+			estudiante= this.jdbcTemplate.queryForObject("select * from estudiante where dni=?", new Object[]{dni},new EstudianteMapper());
+
+		}catch(EmptyResultDataAccessException e){
+			estudiante=null;
+		}
+		return estudiante;
 	}
 	
 	public void addEstudiante(Estudiante estudiante){

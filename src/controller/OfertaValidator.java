@@ -37,15 +37,13 @@ public class OfertaValidator implements Validator{
 		}else if(oferta.getDniEstudiante().length()>9){
 			errors.rejectValue("dniEstudiante", "obligatorio","Este campo supera los 9 caracteres");
 		}
-		if(oferta.getNombreHabilidad().trim().equals("")){
+		if(oferta.getNombreHabilidad().trim().equals("---Elige---")){
 			errors.rejectValue("nombreHabilidad", "obligatorio","Este campo es obligatorio");
 		}else if (oferta.getNombreHabilidad().length() > 30)
 			errors.rejectValue("nombreHabilidad", "obligatori", "Este campo supera los 30 caracteres");
 		
 		ArrayList<String> opcionesNivel=niveles.dameNivelesDisponibles();
-		if(oferta.getNivelHabilidad().trim().equals("")){
-			errors.rejectValue("nivelHabilidad", "obligatorio","Este campo es obligatorio");
-		}else if(!opcionesNivel.contains(oferta.getNivelHabilidad())){
+		if(!opcionesNivel.contains(oferta.getNivelHabilidad())){
 			errors.rejectValue("nivelHabilidad", "obligatorio","Este campo solo puede ser Iniciacion, Intermedio o Experto");
 		}else if (oferta.getNivelHabilidad().length() > 15)
 			errors.rejectValue("nivelHabilidad", "obligatori", "Este campo supera los 15 caracteres");

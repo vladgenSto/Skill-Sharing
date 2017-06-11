@@ -38,7 +38,7 @@ public class EstudianteController {
 	@RequestMapping(value="add",method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("estudiante")Estudiante estudiante,BindingResult bindingResult) {
 		EstudianteValidator estudianteValidaor = new EstudianteValidator();
-		estudianteValidaor.validate(estudiante, bindingResult);
+		estudianteValidaor.validate(estudiante, estudianteDao, bindingResult);
 		if(bindingResult.hasErrors())
 			return "estudiante/add";
 		estudianteDao.addEstudiante(estudiante);

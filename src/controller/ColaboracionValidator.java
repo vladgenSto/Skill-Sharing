@@ -20,17 +20,22 @@ public class ColaboracionValidator implements Validator{
 				errors.rejectValue("puntuacion", "obligatorio","Este campo tiene que estar entre 1 y 5");
 			}
 		}
-		if(colaboracion.getComentarios().trim().equals("")){
+		if(colaboracion.getHoras().trim().equals("--"))
+			errors.rejectValue("horas", "obligatorio","Este campo es obligatorio");
+		if(colaboracion.getHoras().contains("-"))
+			errors.rejectValue("horas", "obligatorio","Las horas no pueden ser negativas");
+		if(colaboracion.getComentarios().trim().equals(""))
 			errors.rejectValue("comentarios", "obligatorio","Este campo es obligatorio");
-		}
+		if(colaboracion.getComentarios().length() > 200)
+			errors.rejectValue("comentarios", "obligatorio","Este campo supera los 200 caracteres");
 		if (colaboracion.getDescripcionDemanda().trim().equals(""))
-			errors.rejectValue("descripcion", "obligatori", "Este campo es obligatorio");
+			errors.rejectValue("descripcionDemanda", "obligatori", "Este campo es obligatorio");
 		if (colaboracion.getDescripcionDemanda().length() > 200)
-			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
+			errors.rejectValue("descripcionDemanda", "obligatori", "Este campo supera los 200 caracteres");
 		if (colaboracion.getDescripcionOferta().trim().equals(""))
-			errors.rejectValue("descripcion", "obligatori", "Este campo es obligatorio");
+			errors.rejectValue("descripcionOferta", "obligatori", "Este campo es obligatorio");
 		if (colaboracion.getDescripcionOferta().length() > 200)
-			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
+			errors.rejectValue("descripcionOferta", "obligatori", "Este campo supera los 200 caracteres");
 		
 	}
 

@@ -36,8 +36,15 @@
 <th>${colaboracion.comentarios}</th>
 <th><fmt:formatDate value="${colaboracion.fechaInicio}" pattern="dd/MM/YYYY"/></th>
 <th><fmt:formatDate value="${colaboracion.fechaFin}" pattern="dd/MM/YYYY"/></th>
-<th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-primary">Terminar</a></th>
-<th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th>
+<c:choose>
+    <c:when test="${colaboracion.horas != '--'}">
+        <th><a style="visibility: hidden;" href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-primary">Valorar</a></th>
+    </c:when>    
+    <c:otherwise>
+        <th><a href="update/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-primary">Valorar</a></th>
+    </c:otherwise>
+</c:choose>
+<%-- <th><a href="delete/${colaboracion.codigoOferta}, ${colaboracion.codigoDemanda}.html" class="btn btn-raised btn-warning">Borrar</a></th> --%>
 </tr>
 </c:forEach>
 </table>

@@ -108,6 +108,8 @@ public class DemandaController {
 		Date fecha2=new Date();
 		fecha2.setYear(year);
 		model.addAttribute("fechaFin", formato.format(fecha));
+		model.addAttribute("nombreHabilidad","---Elige---");
+		model.addAttribute("nivelHabilidad","---Elige---");
 		return "demanda/add";
 	}
 	
@@ -116,14 +118,11 @@ public class DemandaController {
 		DemandaValidator demandaValidator = new DemandaValidator();
 		demandaValidator.validate(demanda, bindingResult);
 		if(bindingResult.hasErrors()){
+			session.setAttribute("nombreHabilidad",demanda.getNombreHabilidad());
+			session.setAttribute("nivelHabilidad",demanda.getNivelHabilidad());
+			session.setAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 			return "demanda/add";
 		}
-//		Date fecha = new Date();
-//		int year = fecha.getYear() + 1;
-//		Date fecha2=new Date();
-//		fecha2.setYear(year);
-//		demanda.setFechaInicio(fecha);
-//		demanda.setFechaFin(fecha2);
 		Habilidad existe=habilidadDao.getHabilidad(demanda.getNombreHabilidad(), demanda.getNivelHabilidad());
 		if(existe == null){
 			existe=new Habilidad();
@@ -159,6 +158,8 @@ public class DemandaController {
 	
 	@RequestMapping(value="update/{codigoDemanda}",method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable int codigoDemanda,@ModelAttribute("demanda") Demanda demanda, BindingResult bindingResult, HttpSession session){
+		DemandaValidator demandaValidator = new DemandaValidator();
+		demandaValidator.validate(demanda, bindingResult);
 		if(bindingResult.hasErrors())
 			return "demanda/update";
 		demandaDao.updateDemanda(demanda);

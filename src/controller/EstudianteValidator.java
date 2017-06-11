@@ -2,16 +2,22 @@ package controller;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import dao.EstudianteDAO;
 import domain.Estudiante;
 
-public class EstudianteValidator implements Validator {
+public class EstudianteValidator {
 
 	public boolean supports(Class<?> cls) {
 		return Estudiante.class.equals(cls);
 	}
 	
-	public void validate(Object obj, Errors errors) {
+	public void validate(Object obj, EstudianteDAO estudianteDao, Errors errors) {
 		Estudiante estudiante = (Estudiante) obj;
+		Estudiante otroEstudiante = estudianteDao.getEstudiante(estudiante.getDni());
+		if (otroEstudiante != null) {
+			errors.rejectValue("dni", "obligatorio", "Este estudiante ya esta en la base de datos");
+		}
 		if (estudiante.getDni().trim().equals(""))
 			errors.rejectValue("dni", "obligatori", "Este campo es obligatorio");
 		if (estudiante.getDni().length() > 9)
@@ -24,7 +30,7 @@ public class EstudianteValidator implements Validator {
 		
 		if (estudiante.getLicenciatura().trim().equals(""))
 			errors.rejectValue("licenciatura", "obligatori", "Este campo es obligatorio");
-		if (estudiante.getNombre().length() > 50)
+		if (estudiante.getLicenciatura().length() > 50)
 			errors.rejectValue("licenciatura", "obligatori", "Este campo supera los 50 caracteres");
 		
 		if (estudiante.getCurso().trim().equals(""))

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
     <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
@@ -38,28 +39,28 @@
 <%--       		<form:errors path="codigoDemanda" cssClass="error"/> --%>
       	</div>
 	</div>
-<div class="form-group">
-	<form:form path="descripcionOferta"/>
-    	<label for="descripcionOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Oferta</label>
-		<div class="col-md-4">
-        	<form:textarea path="descripcionOferta" class="form-control" rows="3" id="descripcionOferta"></form:textarea>
-        	<span class="help-block">Una pequeña descripcion sobre lo que ira la oferta.</span>
-      	</div>
-    	<div>
-      		<form:errors path="descripcionOferta" cssClass="error"/>
-      	</div>
-	</div>
-<div class="form-group">
-	<form:form path="descripcionDemanda" />
-    	<label for="descripcionDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Demanda</label>
-		<div class="col-md-4">
-        	<form:textarea path="descripcionDemanda" class="form-control" rows="3" id="descripcionDemanda"></form:textarea>
-        	<span class="help-block">Una pequeña descripcion sobre lo que ira la demanda.</span>
-      	</div>
-    	<div>
-      		<form:errors path="descripcionDemanda" cssClass="error"/>
-      	</div>
-	</div>
+<!-- <div class="form-group"> -->
+<%-- 	<form:form path="descripcionOferta"/> --%>
+<!--     	<label for="descripcionOferta" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Oferta</label> -->
+<!-- 		<div class="col-md-4"> -->
+        	<form:textarea path="descripcionOferta" class="form-control" rows="3" id="descripcionOferta" hidden="true"></form:textarea>
+<!--         	<span class="help-block">Una pequeña descripcion sobre lo que ira la oferta.</span> -->
+<!--       	</div> -->
+<!--     	<div> -->
+<%--       		<form:errors path="descripcionOferta" cssClass="error"/> --%>
+<!--       	</div> -->
+<!-- 	</div> -->
+<!-- <div class="form-group"> -->
+<%-- 	<form:form path="descripcionDemanda" /> --%>
+<!--     	<label for="descripcionDemanda" class="col-md-2 control-label" style="color: black; font-size: medium;">Descripcion Demanda</label> -->
+<!-- 		<div class="col-md-4"> -->
+        	<form:textarea path="descripcionDemanda" class="form-control" rows="3" id="descripcionDemanda" hidden="true"></form:textarea>
+<!--         	<span class="help-block">Una pequeña descripcion sobre lo que ira la demanda.</span> -->
+<!--       	</div> -->
+<!--     	<div> -->
+<%--       		<form:errors path="descripcionDemanda" cssClass="error"/> --%>
+<!--       	</div> -->
+<!-- 	</div> -->
 <div class="form-group">
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
@@ -75,7 +76,7 @@
 	<form:form path="horas"/>
     	<label for="horas" class="col-md-2 control-label" style="color: black; font-size: medium;">Horas</label>
 		<div class="col-md-4">
-        	<form:input path="horas" class="form-control" rows="3" id="horas"></form:input>
+        	<form:input path="horas" class="form-control" rows="3" id="horas" value="${horas}"></form:input>
       	</div>
     	<div>
       		<form:errors path="horas" cssClass="error"/>
@@ -85,6 +86,7 @@
       <label for="puntuacion" class="col-md-2 control-label" style="color: black; font-size: medium;">Puntuacion</label>
       <div class="col-md-2">      
         <form:select id="puntuacion" class="form-control" name="nivel" path="puntuacion">
+        	<option>${puntuacion}</option>
         	<option>1</option>
         	<option>2</option>
         	<option>3</option>

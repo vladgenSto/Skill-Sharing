@@ -37,14 +37,12 @@ public class DemandaValidator {
 		if (demanda.getDniEstudiante().length() > 9)
 			errors.rejectValue("dniEstudiante", "obligatori", "Este campo supera los 9 caracteres");
 		
-		if (demanda.getNombreHabilidad().trim().equals(""))
+		if (demanda.getNombreHabilidad().trim().equals("---Elige---"))
 			errors.rejectValue("nombreHabilidad", "obligatori", "Este campo es obligatorio");
 		if (demanda.getNombreHabilidad().length() > 30)
 			errors.rejectValue("nombreHabilidad", "obligatori", "Este campo supera los 30 caracteres");
 		
 		ArrayList<String> opcionesNivel=niveles.dameNivelesDisponibles();
-		if (demanda.getNivelHabilidad().trim().equals(""))
-			errors.rejectValue("nivelHabilidad", "obligatori", "Este campo es obligatorio");
 		if (demanda.getNivelHabilidad().length() > 15)
 			errors.rejectValue("nivelHabilidad", "obligatori", "Este campo supera los 15 caracteres");
 		if(!opcionesNivel.contains(demanda.getNivelHabilidad())){

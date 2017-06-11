@@ -116,6 +116,8 @@ public class OfertaController {
 		Date fecha2=new Date();
 		fecha2.setYear(year);
 		model.addAttribute("fechaFin", formato.format(fecha2));
+		model.addAttribute("nombreHabilidad","---Elige---");
+		model.addAttribute("nivelHabilidad","---Elige---");
 		return "oferta/add";
 	}
 	
@@ -124,6 +126,8 @@ public class OfertaController {
 		OfertaValidator ofertaValidator=new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if(bindingResult.hasErrors()){
+			model.addAttribute("nombreHabilidad",oferta.getNombreHabilidad());
+			model.addAttribute("nivelHabilidad",oferta.getNivelHabilidad());
 			model.addAttribute("listaHabilidades", habilidadDao.getHabilidadesSinRepeticiones());
 			return "oferta/add";
 		}
@@ -161,6 +165,8 @@ public class OfertaController {
 	
 	@RequestMapping(value="update/{codigoOferta}",method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable String codigoOferta,@ModelAttribute("oferta") Oferta oferta, BindingResult bindingResult, HttpSession session){
+		OfertaValidator ofertaValidator=new OfertaValidator();
+		ofertaValidator.validate(oferta, bindingResult);
 		if(bindingResult.hasErrors())
 			return "oferta/update";
 		ofertaDao.updateOferta(oferta);

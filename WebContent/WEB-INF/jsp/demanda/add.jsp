@@ -67,18 +67,21 @@
 
       <div class="col-md-2">
         <form:select id="nombre" class="form-control" name="nombre" path="nombreHabilidad">
-        	<option>---Elige---</option>
+        	<option>${nombreHabilidad}</option>
         	<c:forEach items="${listaHabilidades}" var="habilidad">
         	<option>${habilidad.nombre}</option>
         	</c:forEach>
         </form:select>
+      </div>
+      <div>
+      	<form:errors path="nombreHabilidad" cssClass="error"/>
       </div>
     </div>
     <div class="form-group">
       <label for="nivelHabilidad" class="col-md-2 control-label" style="color: black; font-size: medium;">Nivel Habilidad</label>
       <div class="col-md-2">
         <form:select id="nivelHabilidad" class="form-control" name="nivel" path="nivelHabilidad">
-        	<option>---Elige---</option>
+        	<option>${nivelHabilidad}</option>
         	<option>Iniciacion</option>
         	<option>Intermedio</option>
         	<option>Experto</option>

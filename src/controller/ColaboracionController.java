@@ -72,17 +72,28 @@ public class ColaboracionController {
 	
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
 	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
-		model.addAttribute("colaboracion", colaboracionDao.getColaboracion(codigoOferta, codigoDemanda));
+		Colaboracion colaboracion=colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
+		model.addAttribute("colaboracion", colaboracion);
 		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
 		Date fecha=new Date();
 		model.addAttribute("fechaFin",formato.format(fecha));
+		model.addAttribute("horas",colaboracion.getHoras());
+		model.addAttribute("puntuacion",colaboracion.getPuntuacion());
 		return "colaboracion/update";
 	}
 	
 	@RequestMapping(value="update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable int codigoOferta, @PathVariable int codigoDemanda, @ModelAttribute("colaboracion")Colaboracion colaboracion, BindingResult bindingResult,HttpSession session) {
-		if (bindingResult.hasErrors())
+		ColaboracionValidator colaboracionValidador = new ColaboracionValidator();
+		colaboracionValidador.validate(colaboracion, bindingResult);
+		if (bindingResult.hasErrors()){
+			SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
+			Date fecha=new Date();
+			session.setAttribute("fechaFin",formato.format(fecha));
+			session.setAttribute("horas",colaboracion.getHoras());
+			session.setAttribute("puntuacion",colaboracion.getPuntuacion());
 			return "colaboracion/update";
+		}
 		colaboracionDao.updateColaboracion(colaboracion);
 		Oferta ofertaEstudiante=ofertaDao.getOferta(codigoOferta);
 		Demanda demandaEstudiante=demandaDao.getDemanda(codigoDemanda);

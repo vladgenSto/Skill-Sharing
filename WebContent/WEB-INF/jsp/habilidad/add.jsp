@@ -11,7 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/material.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ripples.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
-<title>Anyadir Habilidad</title>
+<title>Añadir Habilidad</title>
 </head>
 
 <body class="formulario">
@@ -42,7 +42,8 @@
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
         <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
-        <button type="reset" class="btn btn-raised btn-warning">Cancel</button>
+       	<button type="reset" class="btn btn-raised btn-default">Limpiar</button>
+        <a href="list.html" class="btn btn-raised btn-warning">Volver</a>
       </div>
     </div>
   </fieldset>
