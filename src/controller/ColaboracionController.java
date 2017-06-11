@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.EstudianteDAO;
+import dao.HabilidadDAO;
 import dao.OfertaDAO;
 import domain.CalculadorEstadisticas;
 import domain.Colaboracion;
@@ -34,6 +35,7 @@ public class ColaboracionController {
 	private OfertaDAO ofertaDao;
 	private DemandaDAO demandaDao;
 	private EstudianteDAO estudianteDao;
+	private HabilidadDAO habilidadDao;
 
 	@Autowired
 	public void setColaboracionDao(ColaboracionDAO colaboracionDao) {
@@ -53,6 +55,11 @@ public class ColaboracionController {
 	@Autowired
 	public void setEstudianteDao(EstudianteDAO estudianteDao){
 		this.estudianteDao=estudianteDao;
+	}
+	
+	@Autowired
+	public void setHabilidadDao(HabilidadDAO habilidadDao) {
+		this.habilidadDao = habilidadDao;
 	}
 	
 	@RequestMapping(value="/listAdmin")
@@ -130,6 +137,8 @@ public class ColaboracionController {
 			CalculadorEstadisticas calculador=new CalculadorEstadisticas();
 			Map<Integer,Integer> colaboracionesPorAnyo=calculador.colaboracionesPorAnyo(colaboracionDao.getColaboraciones());
 			model.addAttribute("estadisticasMes",colaboracionesPorAnyo);
+			Map<String,Integer> colaboracionesHabilidad = calculador.colaboracionesPorHabilidad(colaboracionDao.getColaboraciones(), habilidadDao.getHabilidadesSinRepeticiones(), ofertaDao);
+			model.addAttribute("estadisticasHabilidades", colaboracionesHabilidad);
 			return "colaboracion/estadisticas";
 			
 	}

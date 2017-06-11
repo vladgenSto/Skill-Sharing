@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import dao.OfertaDAO;
 
@@ -40,7 +41,7 @@ public class CalculadorEstadisticas {
 	}
 	
 	private Map<String,Integer> crearDiccionarioHabilidades(List<Habilidad> habilidadesDisponibles){
-		HashMap<String,Integer> diccionarioHabilidad=new HashMap<String,Integer>();
+		TreeMap<String,Integer> diccionarioHabilidad=new TreeMap<String,Integer>();
 		for(Habilidad habilidad:habilidadesDisponibles)
 			diccionarioHabilidad.put(habilidad.getNombre(), 0);
 		return diccionarioHabilidad;
