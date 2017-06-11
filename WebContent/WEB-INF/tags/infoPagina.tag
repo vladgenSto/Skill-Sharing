@@ -1,6 +1,6 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
-<p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
+<div style="width: 20% left: 38%; position: relative;">
+    <a style="" class="btn btn-primary" data-toggle="collapse" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
         Sobre
     </a>
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseHelp" aria-expanded="false" aria-controls="collapseHelp">
@@ -9,9 +9,10 @@
     <a class="btn btn-primary" data-toggle="collapse" href="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
         Contacto
     </a>
-</p>
+</div>
 <div class="collapse" id="collapseAbout">
     <div class="card card-block">
+    	<b>SOBRE LA PAGINA WEB:</b><br>
         <p>La iniciativa de este portal web es del Consejo de Estudiantes de la Universidad Jaime I.
         Su finalidad es promover la colaboracion altruista entre los estudiantes y mejorar los resultados y el aprendizaje
         de aquellos que necesitan soporte en alguna materia o competencia transversal.</p>
@@ -27,16 +28,19 @@
 </div>
 <div class="collapse" id="collapseHelp">
     <div class="card card-block">
+    	<b>AYUDA:</b><br>
 		<p>En caso de dudas manden un correo al que se ha indicado en el apartado de Contacto.</p>
 	</div>
 </div>
 <div class="collapse" id="collapseContact">
     <div class="card card-block">
-		<p>Nombre: Universidad Jaime I<br>
-        Telefono: +34 964 72 80 00<br>
-        Fax: +34 964 72 90 16<br>
-        Correo electronico: info@uji.es<br>
-        Direccion: Av. de Vicent Sos Baynat, s/n 12071 Castelló de la Plana, Espanya<br>
-        Pagina Web: <a href="http://www.uji.es">UJI</a></p>	
+    	<b>CONTACTO:</b><br>
+		<p>
+		<b>Nombre:</b> Universidad Jaime I<br>
+        <b>Telefono:</b> +34 964 72 80 00<br>
+        <b>Fax:</b> +34 964 72 90 16<br>
+        <b>Correo electronico:</b> info@uji.es<br>
+        <b>Direccion:</b> Av. de Vicent Sos Baynat, s/n 12071 Castelló de la Plana, Espanya<br>
+        <b>Pagina Web:</b> <a href="http://www.uji.es">UJI</a></p>	
 	</div>
 </div>
