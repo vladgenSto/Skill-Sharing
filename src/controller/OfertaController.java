@@ -210,7 +210,9 @@ public class OfertaController {
 				Estudiante estudianteDemanda=estudianteDao.getEstudiante(nuevaDemanda.getDniEstudiante());
 				destinatarios.add(estudianteOferta.getCorreo());
 				destinatarios.add(estudianteDemanda.getCorreo());
-				enviadorMail.enviarMensaje("Nueva colaboraci�n", "Se ha creado una colaboraci�n con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+				enviadorMail.enviarMensaje("Nueva colaboracion", "Se ha creado una colaboracion con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+				session.setAttribute("numDemandas",demandaDao.getDemandasUsuario(user.getDniEstudiante()).size());
+				session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
 				return "redirect:/colaboracion/list.html";
 			} else if (demandasCompatibles.size() == 1) {
 				Demanda demanda = demandasCompatibles.get(0);
@@ -221,7 +223,8 @@ public class OfertaController {
 				Estudiante estudianteDemanda=estudianteDao.getEstudiante(demanda.getDniEstudiante());
 				destinatarios.add(estudianteOferta.getCorreo());
 				destinatarios.add(estudianteDemanda.getCorreo());
-				enviadorMail.enviarMensaje("Nueva colaboraci�n", "Se ha creado una colaboraci�n con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+				enviadorMail.enviarMensaje("Nueva colaboracion", "Se ha creado una colaboracion con "+estudianteDemanda.getNombre()+" y "+estudianteOferta.getNombre(), destinatarios);
+	        	session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
 				return "redirect:/colaboracion/list.html";
 			} else {
 				session.setAttribute("oferta", oferta);
