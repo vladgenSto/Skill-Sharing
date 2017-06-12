@@ -178,8 +178,9 @@ public class DemandaController {
 	@RequestMapping(value="/delete/{codigoDemanda}")
 	public String processDelete(@PathVariable int codigoDemanda, HttpSession session){
 		Demanda demanda = demandaDao.getDemanda(codigoDemanda);
-		demandaDao.deleteDemanda(demanda);
+		boolean borrado = demandaDao.deleteDemanda(demanda);
 		session.setAttribute("numDemandas", demandaDao.getDemandasUsuario(demanda.getDniEstudiante()).size());
+		session.setAttribute("borrado", borrado);
 		this.actualizaListaDemandas(session);
 		this.actualizaListaOfertasRelacionadas(session);
 		return "redirect:../list.html";

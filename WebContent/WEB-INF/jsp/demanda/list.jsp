@@ -33,9 +33,9 @@
 <th><fmt:formatDate value="${demanda.fechaFin}" pattern="dd/MM/YYYY"/></th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
-<th><a href="update/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-pencil"></i></a>&nbsp
-<a href="delete/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-remove"></i></a>&nbsp
-<a href="buscar/${demanda.codigoDemanda}.html" class="teal-text"><i class="fa fa-search" aria-hidden="true"></i></a></th>
+<th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+<a href="delete/${demanda.codigoDemanda}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a>
+<a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></a></th>
 </tr>
 </c:forEach>
 </table>

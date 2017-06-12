@@ -1,3 +1,4 @@
+<%@page import="domain.GeneradorPDF"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>     
@@ -34,6 +35,9 @@
 					aria-labelledby="headingOne">
 					<div class="card-block">
 						<canvas id="myChartColaboraciones" width="200" height="60"></canvas>
+						<form action="${pageContext.request.contextPath}/colaboracion/generaPDF.html">
+						<input type="submit" value="Genera PDF">
+						</form>
 						<form>
 							<select id="estadisticasMes" style="visibility: hidden">
 								<c:forEach items="${estadisticasMes}" var="elem">
@@ -113,7 +117,7 @@
             </h5>
             </a>
         </div>
-				<div id="collapseTwo" class="collapse show" role="tabpanel"
+				<div id="collapseTwo" class="collapse" role="tabpanel"
 					aria-labelledby="headingTwo">
 					<div class="card-block">
 					<canvas id="myChartHabilidades" width="200" height="60"></canvas>
@@ -177,8 +181,6 @@
 				</div>
 			</div>
 		</div>
-
-
 </body>
 </t:paginabasicaAdmin>
 </html>
