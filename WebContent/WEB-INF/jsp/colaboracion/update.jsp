@@ -77,6 +77,7 @@
     	<label for="horas" class="col-md-2 control-label" style="color: black; font-size: medium;">Horas</label>
 		<div class="col-md-4">
         	<form:input path="horas" class="form-control" rows="3" id="horas" value="${horas}"></form:input>
+        	<span class="help-block">¿Cuanto ha durado la colaboracion?</span>
       	</div>
     	<div>
       		<form:errors path="horas" cssClass="error"/>

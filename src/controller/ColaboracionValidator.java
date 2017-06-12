@@ -22,7 +22,7 @@ public class ColaboracionValidator implements Validator{
 		}
 		if(colaboracion.getHoras().trim().equals("--"))
 			errors.rejectValue("horas", "obligatorio","Este campo es obligatorio");
-		if(colaboracion.getHoras().contains("-"))
+		else if(colaboracion.getHoras().contains("-"))
 			errors.rejectValue("horas", "obligatorio","Las horas no pueden ser negativas");
 		if(colaboracion.getComentarios().trim().equals(""))
 			errors.rejectValue("comentarios", "obligatorio","Este campo es obligatorio");

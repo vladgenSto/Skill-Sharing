@@ -32,8 +32,8 @@
 <th><fmt:formatDate value="${oferta.fechaFin}" pattern="dd/MM/YYYY"/></th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
-<th><a href="update/${oferta.codigoOferta}.html" class="teal-text"><i class="fa fa-pencil"></i></a></th>
-<th><a href="delete/${oferta.codigoOferta}.html" class="teal-text"><i class="fa fa-remove"></i></a></th>
+<th><a href="update/${oferta.codigoOferta}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a>
+<a href="delete/${oferta.codigoOferta}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
 
 <!-- <th><a href="update/${oferta.codigoOferta}.html" class="btn btn-raised btn-yellow">Editar</a></th>
 <th><a href="delete/${oferta.codigoOferta}.html" class="btn btn-raised btn-warning">Borrar</a></th>-->
