@@ -1,10 +1,13 @@
 package controller;
 
+import java.awt.Canvas;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.itextpdf.text.DocumentException;
-
 import dao.ColaboracionDAO;
 import dao.DemandaDAO;
 import dao.EstudianteDAO;
@@ -27,7 +28,6 @@ import domain.CalculadorEstadisticas;
 import domain.Colaboracion;
 import domain.Demanda;
 import domain.Estudiante;
-import domain.GeneradorPDF;
 import domain.Oferta;
 import domain.UserDetails;
 
@@ -145,13 +145,6 @@ public class ColaboracionController {
 			model.addAttribute("estadisticasHabilidades", colaboracionesHabilidad);
 			return "colaboracion/estadisticas";
 			
-	}
-	
-	@RequestMapping(value="/generaPDF", method=RequestMethod.POST)
-	public String generaPDF(Model model, HttpSession session) throws FileNotFoundException, DocumentException {
-			GeneradorPDF generador = new GeneradorPDF();
-			generador.generarPDF(session);
-			return "colaboracion/estadisticas";
 	}
 	
 }

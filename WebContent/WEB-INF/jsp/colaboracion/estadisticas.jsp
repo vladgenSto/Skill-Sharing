@@ -13,6 +13,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/material.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ripples.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/estilo.css">
 <title>Estadisticas</title>
 </head>
@@ -20,7 +21,7 @@
 <body>
 
 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
-			<div class="card">
+			<div id="colaboracionMes"class="card">
 				<div class="card-header" role="tab" id="headingOne">
 					<a data-toggle="collapse" data-parent="#accordion"
 						href="#collapseOne" aria-expanded="true"
@@ -35,16 +36,17 @@
 					aria-labelledby="headingOne">
 					<div class="card-block">
 						<canvas id="myChartColaboraciones" width="200" height="60"></canvas>
-						<form action="${pageContext.request.contextPath}/colaboracion/generaPDF.html">
-						<input type="submit" value="Genera PDF">
-						</form>
-						<form>
+<%-- 						<form action="${pageContext.request.contextPath}/colaboracion/generaPDF.html" method=GET> --%>
+<!-- 						<input type="submit" value="Genera PDF"> -->
+<%-- 						</form> --%>
+<%-- 						<form> --%>
 							<select id="estadisticasMes" style="visibility: hidden">
 								<c:forEach items="${estadisticasMes}" var="elem">
 									<option>${elem.value}</option>
 								</c:forEach>
 							</select>
 						</form>
+						<button id="download">download</button>
 						<script>
 							var chartColaboraciones = document.getElementById("myChartColaboraciones");
 							var v = document.getElementById("estadisticasMes");
@@ -105,12 +107,20 @@
 									}
 								}
 							});
+							var download=document.getElementById("download");
+							download.addEventListener("click", function() {
+								var pdf = new jsPDF('p','pt','a4');
+								pdf.addHTML(document.getElementById("colaboracionMes"),function() {	
+									
+								    pdf.save('estadisticasPorMes.pdf');
+								});
+							}, false);
 						</script>
 					</div>
 				</div>
 			</div>
-			<div class="card">
-        <div class="card-header" role="tab" id="headingTwo">
+			<div id="colaboracionesHabilidad"class="card">
+        <div  class="card-header" role="tab" id="headingTwo">
             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <h5 class="mb-0">
                 Habilidades <i class="fa fa-angle-down rotate-icon"></i>
@@ -133,6 +143,7 @@
 								</c:forEach>
 							</select>
 						</form>
+						<button id="download2">download</button>
 						<script>
 					var chartHabilidades = document.getElementById("myChartHabilidades").getContext('2d');
 					var valores = document.getElementById("estadisticasHabilidades");
@@ -176,11 +187,21 @@
 					        }]
 					    }
 					});
+					var download2=document.getElementById("download2");
+					download2.addEventListener("click", function() {
+						var pdf = new jsPDF('p','pt','a4');
+						pdf.addHTML(document.getElementById("colaboracionesHabilidad"),function() {	
+							
+						    pdf.save('estadisticasPorHabilidades.pdf');
+						});
+					}, false);
 					</script>					
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 </body>
 </t:paginabasicaAdmin>
 </html>
