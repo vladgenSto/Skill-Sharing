@@ -25,7 +25,7 @@
 <div>
 <a href="${pageContext.request.contextPath}/login.html" style="left: 46%; position: relative;" type="submit" class="btn btn-raised btn-primary">Entrar</a>
 </div>
-<footer>
+	<footer style="position: relative; top: 85%;">
 	<hr>
 	<p class="text-muted">
 	<img style="width: 10%;" src="${pageContext.request.contextPath}/css/logo-uji.-DESARROLLO-SOCIAL-Y-PAZ.-030.png"> EI1027 - Diseño e Implementacioon de Sistemas de Informacion  &nbsp&nbsp 

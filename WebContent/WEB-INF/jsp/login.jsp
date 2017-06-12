@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -92,8 +92,7 @@
 		</div>
 	</div>
 	<!--/.Mask-->
-	
-	<footer>
+	<footer style="position: relative; top: 85%;">
 	<hr>
 	<p class="text-muted">
 	<img style="width: 10%;" src="${pageContext.request.contextPath}/css/logo-uji.-DESARROLLO-SOCIAL-Y-PAZ.-030.png"> EI1027 - Diseño e Implementacioon de Sistemas de Informacion &nbsp&nbsp 
@@ -106,7 +105,6 @@
 	<t:infoPagina/>
 	</p>
 	</footer>
-	
 </body>
 </html>
 

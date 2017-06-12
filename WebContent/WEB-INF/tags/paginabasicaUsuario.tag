@@ -28,7 +28,7 @@
 		<jsp:doBody />
 	</div>
 	<br>
-	<footer style="top: 200px;">
+	<footer style="position: relative; top: 85%;">
 	<hr>
 	<p class="text-muted">
 	<img style="width: 10%;" src="${pageContext.request.contextPath}/css/logo-uji.-DESARROLLO-SOCIAL-Y-PAZ.-030.png"> EI1027 - Diseño e Implementacioon de Sistemas de Informacion &nbsp&nbsp 

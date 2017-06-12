@@ -1,4 +1,3 @@
-<%@page import="domain.GeneradorPDF"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>     
@@ -36,17 +35,14 @@
 					aria-labelledby="headingOne">
 					<div class="card-block">
 						<canvas id="myChartColaboraciones" width="200" height="60"></canvas>
-<%-- 						<form action="${pageContext.request.contextPath}/colaboracion/generaPDF.html" method=GET> --%>
-<!-- 						<input type="submit" value="Genera PDF"> -->
-<%-- 						</form> --%>
-<%-- 						<form> --%>
 							<select id="estadisticasMes" style="visibility: hidden">
 								<c:forEach items="${estadisticasMes}" var="elem">
 									<option>${elem.value}</option>
 								</c:forEach>
 							</select>
 						</form>
-						<button id="download">download</button>
+						<br>
+						<button style="left: 44%; position: relative;" id="download" class="btn btn-raised btn-primary">Generar PDF</button>
 						<script>
 							var chartColaboraciones = document.getElementById("myChartColaboraciones");
 							var v = document.getElementById("estadisticasMes");
@@ -143,7 +139,7 @@
 								</c:forEach>
 							</select>
 						</form>
-						<button id="download2">download</button>
+						<button style="left: 44%; position: relative;" id="download2" class="btn btn-raised btn-primary">Generar PDF</button>
 						<script>
 					var chartHabilidades = document.getElementById("myChartHabilidades").getContext('2d');
 					var valores = document.getElementById("estadisticasHabilidades");
@@ -200,8 +196,6 @@
 				</div>
 			</div>
 		</div>
-
-
 </body>
 </t:paginabasicaAdmin>
 </html>
