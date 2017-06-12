@@ -19,10 +19,12 @@ public class OfertaValidator implements Validator{
 	@Override
 	public void validate(Object obj, Errors errors) {
 		Oferta oferta=(Oferta) obj;
-		if(oferta.getDescripcion().trim().equals("")){
+		if(oferta.getDescripcion().trim().equals(""))
 			errors.rejectValue("descripcion", "obligatorio","Este campo es obligatorio");
-		}else if (oferta.getDescripcion().length() > 200)
-			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
+		else if (oferta.getDescripcion().length() > 100)
+			errors.rejectValue("descripcion", "obligatorio", "Este campo supera los 100 caracteres");
+		else if (!oferta.getDescripcion().contains(" "))
+			errors.rejectValue("descripcion", "obligatorio", "Descripcion no valida");
 		
 		if(oferta.getFechaInicio()==null){
 			errors.rejectValue("fechaInicio", "obligatorio","Este campo es obligatorio");

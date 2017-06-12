@@ -119,7 +119,7 @@
         <div  class="card-header" role="tab" id="headingTwo">
             <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <h5 class="mb-0">
-                Habilidades <i class="fa fa-angle-down rotate-icon"></i>
+                Colaboraciones por habilidad <i class="fa fa-angle-down rotate-icon"></i>
             </h5>
             </a>
         </div>

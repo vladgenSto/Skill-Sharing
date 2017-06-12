@@ -24,7 +24,9 @@
 <th>Fecha Fin</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
-<th>Opciones</th>
+<th>Editar</th>
+<th>Borrar</th>
+<th>Buscar</th>
 </tr>
 <c:forEach items="${listaDemandasUsuario}" var="demanda">
 <tr>
@@ -33,9 +35,9 @@
 <th><fmt:formatDate value="${demanda.fechaFin}" pattern="dd/MM/YYYY"/></th>
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
-<th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-<a href="delete/${demanda.codigoDemanda}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a>
-<a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></a></th>
+<th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
+<th><a href="delete/${demanda.codigoDemanda}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
+<th><a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></a></th>
 </tr>
 </c:forEach>
 </table>

@@ -53,6 +53,8 @@ public class EstudianteController {
 	
 	@RequestMapping(value="update/{dni}",method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable String dni,@ModelAttribute("estudiante") Estudiante estudiante, BindingResult bindingResult ){
+		EstudianteValidator estudianteValidaor = new EstudianteValidator();
+		estudianteValidaor.validate(estudiante, estudianteDao, bindingResult);
 		if(bindingResult.hasErrors())
 			return "estudiante/update";
 		estudianteDao.updateEstudiante(estudiante);

@@ -52,6 +52,8 @@ public class HabilidadController {
 	
 	@RequestMapping(value="update/{nombre}_{nivel}",method=RequestMethod.POST)
 	public String processUpdateSubmit(@PathVariable String nombre,@PathVariable String nivel,@ModelAttribute("habilidad") Habilidad habilidad, BindingResult bindingResult ){
+		HabilidadValidator hv=new HabilidadValidator();
+		hv.validate(habilidad, bindingResult);
 		if(bindingResult.hasErrors())
 			return "habilidad/update";
 		habilidadDao.updateHabilidad(habilidad);

@@ -23,8 +23,12 @@ public class HabilidadValidator implements Validator{
 			errors.rejectValue("nombre", "obligatorio","Este campo supera los 30 caracteres");
 		if(habilidad.getDescripcion().trim().equals(""))
 			errors.rejectValue("descripcion", "obligatorio","Este campo es obligatorio");
-		if(habilidad.getDescripcion().length() > 200)
-			errors.rejectValue("descripcion", "obligatorio","Este campo supera los 200 caracteres");
+		else if(habilidad.getDescripcion().length() > 100)
+			errors.rejectValue("descripcion", "obligatorio","Este campo supera los 100 caracteres");
+		else if (!habilidad.getDescripcion().contains(" "))
+			errors.rejectValue("descripcion", "obligatorio", "Descripcion no valida");
+		if (!habilidad.getDescripcion().contains(" "))
+			errors.rejectValue("descripcion", "obligatori", "Descripcion no valida");
 	}
 	
 }

@@ -20,8 +20,10 @@ public class DemandaValidator {
 		Demanda demanda = (Demanda) obj;
 		if (demanda.getDescripcion().trim().equals(""))
 			errors.rejectValue("descripcion", "obligatori", "Este campo es obligatorio");
-		if (demanda.getDescripcion().length() > 200)
-			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 200 caracteres");
+		else if (demanda.getDescripcion().length() > 100)
+			errors.rejectValue("descripcion", "obligatori", "Este campo supera los 100 caracteres");
+		else if (!demanda.getDescripcion().contains(" "))
+			errors.rejectValue("descripcion", "obligatori", "Descripcion no valida");
 
 		if (demanda.getFechaInicio() == null) {
 			errors.rejectValue("fechaInicio", "obligatori", "Este campo es obligatorio");

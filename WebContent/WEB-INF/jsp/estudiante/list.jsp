@@ -23,6 +23,8 @@
 <th>Licenciatura</th>
 <th>Curso</th>
 <th>Correo</th>
+<th>Editar</th>
+<th>Borrar</th>
 </tr>
 <c:forEach items="${estudiantes}" var="estudiante">
 <tr>
@@ -31,8 +33,8 @@
 <th>${estudiante.licenciatura}</th>
 <th>${estudiante.curso}</th>
 <th>${estudiante.correo}</th>
-<th><a href="update/${estudiante.dni}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-<a href="delete/${estudiante.dni}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
+<th><a href="update/${estudiante.dni}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
+<th><a href="delete/${estudiante.dni}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
 </tr>
 </c:forEach>
 </table>
