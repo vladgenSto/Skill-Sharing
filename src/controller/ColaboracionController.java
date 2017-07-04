@@ -1,13 +1,11 @@
 package controller;
 
-import java.awt.Canvas;
-import java.io.FileNotFoundException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,15 +80,15 @@ public class ColaboracionController {
 	}
 	
 	@RequestMapping(value="/update/{codigoOferta}, {codigoDemanda}", method=RequestMethod.GET)
-	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda) {
+	public String editColaboracion(Model model, @PathVariable int codigoOferta, @PathVariable int codigoDemanda, HttpSession session) {
 		Colaboracion colaboracion=colaboracionDao.getColaboracion(codigoOferta, codigoDemanda);
 		model.addAttribute("colaboracion", colaboracion);
-		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
+		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 		Date fecha=new Date();
-		model.addAttribute("fechaInicio",formato.format(colaboracion.getFechaInicio()));
-		model.addAttribute("fechaFin",formato.format(fecha));
-		model.addAttribute("horas",colaboracion.getHoras());
-		model.addAttribute("puntuacion",colaboracion.getPuntuacion());
+		session.setAttribute("fechaInicio",formato.format(colaboracion.getFechaInicio()));
+		session.setAttribute("fechaFin",formato.format(fecha));
+		session.setAttribute("horas",colaboracion.getHoras());
+		session.setAttribute("puntuacion",colaboracion.getPuntuacion());
 		return "colaboracion/update";
 	}
 	
@@ -99,12 +97,6 @@ public class ColaboracionController {
 		ColaboracionValidator colaboracionValidador = new ColaboracionValidator();
 		colaboracionValidador.validate(colaboracion, bindingResult);
 		if (bindingResult.hasErrors()){
-			SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyy");
-			Date fecha=new Date();
-			session.setAttribute("fechaInicio",formato.format(colaboracion.getFechaInicio()));
-			session.setAttribute("fechaFin",formato.format(fecha));
-			session.setAttribute("horas",colaboracion.getHoras());
-			session.setAttribute("puntuacion",colaboracion.getPuntuacion());
 			return "colaboracion/update";
 		}
 		colaboracionDao.updateColaboracion(colaboracion);
