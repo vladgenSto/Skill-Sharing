@@ -85,8 +85,8 @@ public class ColaboracionController {
 		model.addAttribute("colaboracion", colaboracion);
 		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
 		Date fecha=new Date();
-		session.setAttribute("fechaInicio",formato.format(colaboracion.getFechaInicio()));
-		session.setAttribute("fechaFin",formato.format(fecha));
+		session.setAttribute("fechaInicioColaboracion",formato.format(colaboracion.getFechaInicio()));
+		session.setAttribute("fechaFinColaboracion",formato.format(fecha));
 		session.setAttribute("horas",colaboracion.getHoras());
 		session.setAttribute("puntuacion",colaboracion.getPuntuacion());
 		return "colaboracion/update";

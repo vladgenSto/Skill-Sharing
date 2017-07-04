@@ -81,7 +81,7 @@ public class DemandaController {
 	
 	@RequestMapping(value="/listAdmin")
 	public String listDemanda(Model model){
-			this.filtrarDemandas(new Date(), demandaDao.getDemandas());
+			//this.filtrarDemandas(new Date(), demandaDao.getDemandas());
 			model.addAttribute("listaDemandas",this.getOfertasByEstudiantes());
 		return "demanda/listAdmin";
 	}
@@ -90,7 +90,7 @@ public class DemandaController {
 	public String listDemanda(Model model,HttpSession session){
 		UserDetails user=(UserDetails)session.getAttribute("user");
 		if(user != null){
-			List<Demanda> demandasValidasUsuario=this.filtrarDemandas(new Date(), demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+			List<Demanda> demandasValidasUsuario=demandaDao.getDemandasUsuario(user.getDniEstudiante());//this.filtrarDemandas(new Date(), demandaDao.getDemandasUsuario(user.getDniEstudiante()));
 			model.addAttribute("listaDemandasUsuario",demandasValidasUsuario);
 		}
 		return "demanda/list";
@@ -218,12 +218,7 @@ public class DemandaController {
 		nuevaColaboracion.setHoras("--");
 		nuevaColaboracion.setPuntuacion("--");
 		nuevaColaboracion.setComentarios("--");
-		Date fecha;
-		if(oferta.getFechaInicio().before(demanda.getFechaInicio())){
-			fecha=oferta.getFechaInicio();
-		}else{
-			fecha=demanda.getFechaInicio();
-		}
+		Date fecha= new Date();
 		int year = fecha.getYear() + 1;
 		Date fecha2=new Date();
 		fecha2.setYear(year);
@@ -264,18 +259,18 @@ public class DemandaController {
             }
         }
     }
-	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
-		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
-		if(!listaDemandas.isEmpty()){
-		for(Demanda demanda:listaDemandas){
-			if(!demanda.getFechaFin().before(fecha))
-				demandasValidas.add(demanda);
-			else if(!demandaDao.deleteDemanda(demanda))
-				demandasValidas.add(demanda);
-		}
-		}
-		return demandasValidas;
-	}
+//	private List<Demanda> filtrarDemandas(Date fecha,List<Demanda>listaDemandas){
+//		ArrayList<Demanda>demandasValidas=new ArrayList<Demanda>();
+//		if(!listaDemandas.isEmpty()){
+//		for(Demanda demanda:listaDemandas){
+//			if(!demanda.getFechaFin().before(fecha))
+//				demandasValidas.add(demanda);
+//			else if(!demandaDao.deleteDemanda(demanda))
+//				demandasValidas.add(demanda);
+//		}
+//		}
+//		return demandasValidas;
+//	}
 	private Map<String, List<Oferta>> getOfertasByEstudiante(String dni,String habilidad) {
 		List<Estudiante> listaEstudiantes=estudianteDao.getEstudiantesDistintos(dni);
 		HashMap<String,List<Oferta>> ofertasPorEstudiante=new HashMap<String,List<Oferta>>();

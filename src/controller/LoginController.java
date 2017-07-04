@@ -96,8 +96,8 @@ public class LoginController {
         	session.setAttribute("horasRecibidas", est.getHorasRecibidas());
         	session.setAttribute("saldo", est.getHorasDadas()-est.getHorasRecibidas());
         	session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
-            List<Demanda> listaDemandas=this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
-            List<Oferta> listaOfertas=this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
+            List<Demanda> listaDemandas=demandaDao.getDemandasUsuario(user.getDniEstudiante());//this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
+            List<Oferta> listaOfertas=ofertaDao.getOfertasUsuario(user.getDniEstudiante());//this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
             session.setAttribute("listaOfertasUsuario", listaOfertas);
             session.setAttribute("numOfertas", listaOfertas.size());
             session.setAttribute("numDemandas", listaDemandas.size());
@@ -121,23 +121,23 @@ public class LoginController {
 		return "redirect:index.jsp";
 	}
 	
-	private <T extends MetodosFecha> List<T> filtro(Date fecha,List<T> lista){
-		ArrayList<T> objetosValidos=new ArrayList<T>();
-		if(!lista.isEmpty()){
-			for(T elem:lista){
-				if(!elem.getFechaFin().before(fecha))
-					objetosValidos.add(elem);
-				else if(elem.getClass().equals(Oferta.class)){
-					if(!ofertaDao.deleteOferta((Oferta)elem))
-							objetosValidos.add(elem);
-				}else if(elem.getClass().equals(Demanda.class)){
-					if(!demandaDao.deleteDemanda((Demanda)elem))
-						objetosValidos.add(elem);
-				}
-			}
-		}
-		return objetosValidos;
-	}
+//	private <T extends MetodosFecha> List<T> filtro(Date fecha,List<T> lista){
+//		ArrayList<T> objetosValidos=new ArrayList<T>();
+//		if(!lista.isEmpty()){
+//			for(T elem:lista){
+//				if(!elem.getFechaFin().before(fecha))
+//					objetosValidos.add(elem);
+//				else if(elem.getClass().equals(Oferta.class)){
+//					if(!ofertaDao.deleteOferta((Oferta)elem))
+//							objetosValidos.add(elem);
+//				}else if(elem.getClass().equals(Demanda.class)){
+//					if(!demandaDao.deleteDemanda((Demanda)elem))
+//						objetosValidos.add(elem);
+//				}
+//			}
+//		}
+//		return objetosValidos;
+//	}
 	private void ecriptarContrasenyas(){
 		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
 		List<UserDetails> usuarios=userDao.getUsuarios();

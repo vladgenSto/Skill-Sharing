@@ -65,18 +65,14 @@
       <label for="fechaInicio" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Inicio</label>
 
       <div class="col-md-2">
-        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicio}"></form:input>
-        <span class="help-block">(dd/mm/yyyy)</span>
-      </div>
-      <div>
-      	<form:errors path="fechaInicio" cssClass="error"/>
+        <form:input path="fechaInicio" type="text" class="form-control" id="fechaInicio" value="${fechaInicioColaboracion}" hiddeb="true"></form:input>
       </div>
     </div>
 <div class="form-group">
       <label for="fechaFin" class="col-md-2 control-label" style="color: black; font-size: medium;">Fecha Fin</label>
 
       <div class="col-md-2">
-        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFin}"></form:input>
+        <form:input path="fechaFin" type="text" class="form-control" id="fechaFin" value="${fechaFinColaboracion}"></form:input>
         <span class="help-block">(dd/mm/yyyy)</span>
       </div>
       <div>

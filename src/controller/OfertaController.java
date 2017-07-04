@@ -80,7 +80,7 @@ public class OfertaController {
 	
 	@RequestMapping(value="/listAdmin")
 	public String listOfertaAdmin(Model model){
-			this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+			//this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
 			model.addAttribute("listaOfertas",this.getOfertasByEstudiantes());
 		return "oferta/listAdmin";
 	}
@@ -89,7 +89,7 @@ public class OfertaController {
 	public String listOferta(Model model, HttpSession session){
 		UserDetails user=(UserDetails)session.getAttribute("user");
 		if(user != null){
-			List<Oferta> ofertasValidasUsuarios=this.filtrarOfertas(new Date(), ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
+			List<Oferta> ofertasValidasUsuarios=ofertaDao.getOfertasUsuario(user.getDniEstudiante());//this.filtrarOfertas(new Date(), ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
 			model.addAttribute("listaOfertasUsuario",ofertasValidasUsuarios);
 		}
 		return "oferta/list";
@@ -99,7 +99,7 @@ public class OfertaController {
 	public String listarTodasLasOfertas(Model model,HttpSession session){
 		UserDetails user=(UserDetails)session.getAttribute("user");
 		if(user!=null){
-			this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
+//			this.filtrarOfertas(new Date(), ofertaDao.getOfertas());
 			model.addAttribute("ofertas",this.getOfertasPublicadasOtrosEstudiantes(user.getDniEstudiante()));
 		}
 		return "oferta/buscar";
@@ -242,18 +242,18 @@ public class OfertaController {
         session.setAttribute("listaOfertasUsuario", listaOfertas);
     }
 	
-	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
-		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
-		if(!listaOfertas.isEmpty()){
-		for(Oferta oferta:listaOfertas){
-			if(!oferta.getFechaFin().before(fecha))
-				ofertasValidas.add(oferta);
-			else if(!ofertaDao.deleteOferta(oferta))
-				ofertasValidas.add(oferta);
-		}
-		}
-		return ofertasValidas;
-	}
+//	private List<Oferta> filtrarOfertas(Date fecha,List<Oferta>listaOfertas){
+//		ArrayList<Oferta>ofertasValidas=new ArrayList<Oferta>();
+//		if(!listaOfertas.isEmpty()){
+//		for(Oferta oferta:listaOfertas){
+//			if(!oferta.getFechaFin().before(fecha))
+//				ofertasValidas.add(oferta);
+//			else if(!ofertaDao.deleteOferta(oferta))
+//				ofertasValidas.add(oferta);
+//		}
+//		}
+//		return ofertasValidas;
+//	}
 	private Map<String, List<Oferta>> getOfertasByEstudiantes() {
 		List<Estudiante> listaEstudiantes=estudianteDao.getEstudiantes();
 		HashMap<String,List<Oferta>> ofertasPorEstudiante=new HashMap<String,List<Oferta>>();
@@ -283,12 +283,7 @@ public class OfertaController {
 		nuevaColaboracion.setHoras("--");
 		nuevaColaboracion.setPuntuacion("--");
 		nuevaColaboracion.setComentarios("--");
-		Date fecha;
-		if(oferta.getFechaInicio().before(demanda.getFechaInicio())){
-			fecha=oferta.getFechaInicio();
-		}else{
-			fecha=demanda.getFechaInicio();
-		}
+		Date fecha=new Date();
 		int year = fecha.getYear() + 1;
 		Date fecha2=new Date();
 		fecha2.setYear(year);
