@@ -47,7 +47,7 @@
 
       <div class="col-md-2">
         <form:input path="fechaFin" type="text" class="form-control" id="fechaFin"></form:input>
-        <span class="help-block">(mm/dd/yyyy)</span>
+        <span class="help-block">(dd/mm/yyyy)</span>
       </div>
       <div>
       	<form:errors path="fechaFin" cssClass="error"/>
@@ -74,6 +74,9 @@
         	</c:forEach>
         </form:select>
       </div>
+      <div>
+<%--       	<form:errors path="nombreHabilidad" cssClass="error"/> --%>
+      </div>
     </div>
     <div class="form-group">
       <label for="nivelHabilidad" class="col-md-2 control-label" style="color: black; font-size: medium;">Nivel Habilidad</label>
@@ -91,9 +94,9 @@
     </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="submit" class="btn btn-raised btn-primary">Actualizar</button>
-        <button type="reset" class="btn btn-raised btn-default">Limpiar</button>
         <a href="${pageContext.request.contextPath}/demanda/list.html" class="btn btn-raised btn-warning">Volver</a>
+        <button type="reset" class="btn btn-raised btn-default">Limpiar</button>
+        <button type="submit" class="btn btn-raised btn-primary">Actualizar</button>
       </div>
     </div>
   </fieldset>

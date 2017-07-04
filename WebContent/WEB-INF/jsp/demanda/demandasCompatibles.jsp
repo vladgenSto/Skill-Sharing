@@ -25,7 +25,7 @@
 <th>Fecha Fin</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
-<th>Opciones</th>
+<th>Escoge</th>
 </tr>
 <c:forEach items="${listaDemandasCompatibles}" var="demanda">
 <tr>

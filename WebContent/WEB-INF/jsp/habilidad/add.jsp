@@ -41,9 +41,9 @@
       </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
-       	<button type="reset" class="btn btn-raised btn-default">Limpiar</button>
         <a href="list.html" class="btn btn-raised btn-warning">Volver</a>
+       	<button type="reset" class="btn btn-raised btn-default">Limpiar</button>
+        <button type="submit" class="btn btn-raised btn-primary">Añadir</button>
       </div>
     </div>
   </fieldset>

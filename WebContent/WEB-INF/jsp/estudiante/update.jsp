@@ -70,9 +70,9 @@
     </div>
     <div class="form-group">
       <div class="col-md-6 col-md-offset-2">
-        <button type="submit" class="btn btn-raised btn-primary">Actualizar</button>
+        <a href="${pageContext.request.contextPath}/estudiante/list.html" class="btn btn-raised btn-warning">Volver</a>
 		<button type="reset" class="btn btn-raised btn-default">Limpiar</button>
-        <a href="${pageContext.request.contextPath}/estudiante/list.html" class="btn btn-raised btn-warning">Volver</a>      
+        <button type="submit" class="btn btn-raised btn-primary">Actualizar</button>      
       </div>
     </div>
   </fieldset>

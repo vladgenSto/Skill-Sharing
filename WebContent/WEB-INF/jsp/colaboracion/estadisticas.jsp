@@ -35,6 +35,7 @@
 					aria-labelledby="headingOne">
 					<div class="card-block">
 						<canvas id="myChartColaboraciones" width="200" height="60"></canvas>
+						<form>
 							<select id="estadisticasMes" style="visibility: hidden">
 								<c:forEach items="${estadisticasMes}" var="elem">
 									<option>${elem.value}</option>

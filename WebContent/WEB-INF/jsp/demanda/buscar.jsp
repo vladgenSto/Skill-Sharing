@@ -26,6 +26,7 @@
 <th>Estudiante</th>
 <th>Nombre de la habilidad</th>
 <th>Nivel de la habilidad</th>
+<th>Escoge</th>
 </tr>
 <c:forEach items="${listaOfertasRelacionadas}" var="listoferta">
 <c:forEach items="${listoferta.value}" var="oferta">

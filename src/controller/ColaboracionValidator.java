@@ -27,6 +27,16 @@ public class ColaboracionValidator implements Validator{
 			errors.rejectValue("horas", "obligatorio","Este campo es obligatorio");
 		else if(colaboracion.getHoras().contains("-"))
 			errors.rejectValue("horas", "obligatorio","Las horas no pueden ser negativas");
+		
+		if (colaboracion.getFechaInicio() == null) {
+			errors.rejectValue("fechaInicio", "obligatori", "Este campo es obligatorio");
+		} else if (colaboracion.getFechaFin() == null) {
+			errors.rejectValue("fechaFin", "obligatori", "Este campo es obligatorio");
+		} else if (colaboracion.getFechaInicio().after(colaboracion.getFechaFin())) {
+			errors.rejectValue("fechaInicio", "obligatori", "Fecha posterior a la final");
+			errors.rejectValue("fechaFin", "obligatori", "Fecha inferior a la inicial");
+		}
+		
 		if(colaboracion.getComentarios().trim().equals(""))
 			errors.rejectValue("comentarios", "obligatorio","Este campo es obligatorio");
 		else if(colaboracion.getComentarios().length() > 100)
