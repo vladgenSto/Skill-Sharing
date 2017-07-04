@@ -8,6 +8,7 @@ public class Estudiante{
 	private String correo;
 	private int horasDadas;
 	private int horasRecibidas;
+	private boolean baneado;
 	
 	public Estudiante(){
 		this.dni="";
@@ -17,6 +18,7 @@ public class Estudiante{
 		this.correo="";
 		this.horasDadas=0;
 		this.horasRecibidas=0;
+		this.baneado = false;
 	}
 	
 	public Estudiante(String dni, String nombre, String licenciatura, String curso,
@@ -28,6 +30,7 @@ public class Estudiante{
 		this.correo = correo;
 		this.horasDadas=horasDadas;
 		this.horasRecibidas=horasRecibidas;
+		this.baneado = false;
 	}
 
 	public String getDni() {
@@ -85,6 +88,14 @@ public class Estudiante{
 
 	public void setHorasRecibidas(int horasRecibidas) {
 		this.horasRecibidas = horasRecibidas;
+	}
+	
+	public boolean getBaneado() {
+		return baneado;
+	}
+	
+	public void setBaneado(boolean banear) {
+		this.baneado = banear;
 	}
 
 	@Override

@@ -66,5 +66,13 @@ public class EstudianteController {
 		estudianteDao.deleteEstudiante(estudianteDao.getEstudiante(dni));
 		return "redirect:../list.html";
 	}
+	
+	@RequestMapping(value="/banear/{dni}")
+	public String processBanner(@PathVariable String dni){
+		Estudiante estudiante = estudianteDao.getEstudiante(dni);
+		estudiante.setBaneado(true);
+		estudianteDao.updateEstudianteBaneado(estudiante);
+		return "redirect:../list.html";
+	}
 
 }

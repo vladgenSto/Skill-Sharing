@@ -91,6 +91,9 @@ public class LoginController {
         	return "redirect:perfilAdmin.jsp";
         }else{
         	Estudiante est=estudianteDao.getEstudiante(user.getDniEstudiante());
+        	if (est.getBaneado()){
+        		return "redirect:paginaBaneado.jsp";
+        	} else {
         	session.setAttribute("estudiante", est);
         	session.setAttribute("horasDadas", est.getHorasDadas());
         	session.setAttribute("horasRecibidas", est.getHorasRecibidas());
@@ -113,6 +116,7 @@ public class LoginController {
             }
             return "redirect:perfilUsuario.jsp";
             }
+        }
     }
 	
 	@RequestMapping("/logout")

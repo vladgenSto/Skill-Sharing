@@ -24,6 +24,7 @@
 <th>Curso</th>
 <th>Correo</th>
 <th>Editar</th>
+<th>Banear</th>
 <th>Borrar</th>
 </tr>
 <c:forEach items="${estudiantes}" var="estudiante">
@@ -34,6 +35,7 @@
 <th>${estudiante.curso}</th>
 <th>${estudiante.correo}</th>
 <th><a href="update/${estudiante.dni}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
+<th><a href="banear/${estudiante.dni}.html" class="btn btn-warning"><i class="fa fa-ban"></i></a></th>
 <th><a href="delete/${estudiante.dni}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
 </tr>
 </c:forEach>
