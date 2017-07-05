@@ -1,5 +1,7 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import dao.EstudianteDAO;
 import domain.Estudiante;
+import domain.UserDetails;
 //
 @Controller
 @RequestMapping(value="/estudiante")
@@ -24,8 +27,11 @@ public class EstudianteController {
 	}
 	
 	@RequestMapping(value="/list")
-	public String listEstudiante(Model model){
-		model.addAttribute("estudiantes",estudianteDao.getEstudiantes());
+	public String listEstudiante(Model model,HttpSession session){
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user != null)
+			model.addAttribute("estudiantes",estudianteDao.getEstudiantesDistintos(user.getDniEstudiante()));
+		
 		return "estudiante/list";
 	}
 	
@@ -70,7 +76,10 @@ public class EstudianteController {
 	@RequestMapping(value="/banear/{dni}")
 	public String processBanner(@PathVariable String dni){
 		Estudiante estudiante = estudianteDao.getEstudiante(dni);
-		estudiante.setBaneado(true);
+		if(estudiante.getBaneado())
+			estudiante.setBaneado(false);
+		else
+			estudiante.setBaneado(true);
 		estudianteDao.updateEstudianteBaneado(estudiante);
 		return "redirect:../list.html";
 	}

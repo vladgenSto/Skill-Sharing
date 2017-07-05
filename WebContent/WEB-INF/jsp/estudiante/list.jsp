@@ -23,6 +23,7 @@
 <th>Licenciatura</th>
 <th>Curso</th>
 <th>Correo</th>
+<th>¿Baneado?</th>
 <th>Editar</th>
 <th>Banear</th>
 <th>Borrar</th>
@@ -34,6 +35,14 @@
 <th>${estudiante.licenciatura}</th>
 <th>${estudiante.curso}</th>
 <th>${estudiante.correo}</th>
+<c:choose>
+    <c:when test="${estudiante.baneado}">
+        <th>Si</th>
+    </c:when>    
+    <c:otherwise>
+        <th>No</th>
+    </c:otherwise>
+</c:choose>
 <th><a href="update/${estudiante.dni}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
 <th><a href="banear/${estudiante.dni}.html" class="btn btn-warning"><i class="fa fa-ban"></i></a></th>
 <th><a href="delete/${estudiante.dni}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
