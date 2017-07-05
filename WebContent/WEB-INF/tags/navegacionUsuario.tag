@@ -10,6 +10,7 @@
   		<li><a href="${pageContext.request.contextPath}/demanda/list.html">Mis Demandas</a></li>
         <li><a href="${pageContext.request.contextPath}/colaboracion/list.html">Mis Colaboraciones</a></li>
         <li><a href="${pageContext.request.contextPath}/oferta/buscar.html">Ofertas disponibles</a></li>
+        <li><a href="${pageContext.request.contextPath}/demanda/buscarDemandasDisponibles.html">Demandas disponibles</a></li>
       </ul>
     </div>
   </div>

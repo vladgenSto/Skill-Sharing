@@ -95,6 +95,14 @@ public class DemandaController {
 		}
 		return "demanda/list";
 	}
+	@RequestMapping(value="/buscarDemandasDisponibles")
+	public String listarTodasLasDemandas(Model model,HttpSession session){
+		UserDetails user=(UserDetails)session.getAttribute("user");
+		if(user!=null){
+			model.addAttribute("demandas",this.getDemandasPublicadasOtrosEstudiantes(user.getDniEstudiante()));
+		}
+		return "demanda/buscarDemandasDisponibles";
+	}
 	
 	@RequestMapping(value="/add")
 	public String addDemanda(Model model){
@@ -290,5 +298,16 @@ public class DemandaController {
 			}
 		}
 		return ofertasPorEstudiante;
+	}
+	private Map<String,List<Demanda>> getDemandasPublicadasOtrosEstudiantes(String dniUsuario){
+		List<Estudiante>otrosEstudiantes=estudianteDao.getEstudiantesDistintos(dniUsuario);
+		HashMap<String,List<Demanda>> demandasPublicadas=new HashMap<String,List<Demanda>>();
+		for(Estudiante estudiante: otrosEstudiantes){
+			if(!demandasPublicadas.containsKey(estudiante.getNombre())){
+				demandasPublicadas.put(estudiante.getNombre(),demandaDao.getDemandasUsuario(estudiante.getDni()));
+			}
+		}
+		return demandasPublicadas;
+
 	}
 }
