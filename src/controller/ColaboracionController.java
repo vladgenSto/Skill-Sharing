@@ -116,7 +116,12 @@ public class ColaboracionController {
 			session.setAttribute("horasDadas", horasDadas);
 		else if(user.getDniEstudiante().equals(estRecibeHoras.getDni()))
 			session.setAttribute("horasRecibidas", horasRecibidas);
-		session.setAttribute("saldo", est.getHorasDadas()-est.getHorasRecibidas());
+		int saldo=est.getHorasDadas()-est.getHorasRecibidas();
+		boolean baneoHoras=false;
+		session.setAttribute("saldo", saldo);
+		if(saldo < -20)
+			baneoHoras=true;
+		session.setAttribute("baneoHoras", baneoHoras);
 		return "redirect:../list.html";
 	}
 	

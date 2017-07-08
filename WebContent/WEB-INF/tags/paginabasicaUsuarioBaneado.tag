@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ attribute name="title" required="false"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,14 +22,7 @@
 		<h1 style="width: 50%; left: 37%; position: relative;"> <i id="icon" class="fa fa-pencil" style="text-shadow: rgb(179, 43, 43) 0px 0px 0px, rgb(188, 45, 45) 1px 1px 0px, rgb(198, 47, 47) 2px 2px 0px, rgb(207, 50, 50) 3px 3px 0px, rgb(217, 52, 52) 4px 4px 0px, rgb(226, 54, 54) 5px 5px 0px, rgb(236, 56, 56) 6px 6px 0px, rgb(245, 59, 59) 7px 7px 0px; font-size: 31px; color: rgb(255, 255, 255); height: 53px; width: 53px; line-height: 53px; border-radius: 19%; text-align: center; background-color: rgb(255, 61, 61);"></i> 
 		Skill Sharing </h1>
 	</header>
-	<c:choose>
-    <c:when test="${baneoHoras}">
-        <t:navegacionUsuarioBaneado/>
-    </c:when>    
-    <c:otherwise>
-        <t:navegacionUsuario/>
-    </c:otherwise>
-	</c:choose>
+	<t:navegacionUsuarioBaneado/>
 	<div class="loggeduser" style="width:20%; left: 80%; position: relative;"><t:logininfo /></div>
 	<div class="container">
 		<jsp:doBody />

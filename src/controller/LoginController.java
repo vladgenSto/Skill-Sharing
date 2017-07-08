@@ -97,7 +97,8 @@ public class LoginController {
         	session.setAttribute("estudiante", est);
         	session.setAttribute("horasDadas", est.getHorasDadas());
         	session.setAttribute("horasRecibidas", est.getHorasRecibidas());
-        	session.setAttribute("saldo", est.getHorasDadas()-est.getHorasRecibidas());
+        	int saldo=est.getHorasDadas()-est.getHorasRecibidas();
+        	session.setAttribute("saldo", saldo);
         	session.setAttribute("numColaboraciones", colaboracionDao.getColaboracionesUsuario(user.getDniEstudiante()).size());
             List<Demanda> listaDemandas=demandaDao.getDemandasUsuario(user.getDniEstudiante());//this.filtro(new Date(),demandaDao.getDemandasUsuario(user.getDniEstudiante()));
             List<Oferta> listaOfertas=ofertaDao.getOfertasUsuario(user.getDniEstudiante());//this.filtro(new Date(),  ofertaDao.getOfertasUsuario(user.getDniEstudiante()));
@@ -114,7 +115,13 @@ public class LoginController {
                 }
                 session.setAttribute("listaOfertasRelacionadas", listaOfertasRelacionadas);
             }
-            return "redirect:perfilUsuario.jsp";
+            boolean baneoHoras=false;
+            if (saldo < -20){
+            	baneoHoras=true;
+            	session.setAttribute("baneoHoras", baneoHoras);
+            	return "redirect:perfilUsuarioBaneado.jsp";
+            }else
+            	return "redirect:perfilUsuario.jsp";
             }
         }
     }
