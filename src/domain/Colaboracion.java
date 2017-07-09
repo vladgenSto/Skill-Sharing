@@ -71,7 +71,6 @@ public class Colaboracion implements MetodosFecha{
 		this.comentarios = comentarios;
 	}
 
-	
 	public String getDescripcionOferta() {
 		return descripcionOferta;
 	}
@@ -108,5 +107,4 @@ public class Colaboracion implements MetodosFecha{
 	public String toString() {
 		return "Colaboracion [codigoOferta=" + codigoOferta + ", codigoDemanda=" + codigoDemanda + ", horas=" + horas + ", puntuacion=" + puntuacion + ", comentarios=" + comentarios + "]";
 	}
-//bu
 }

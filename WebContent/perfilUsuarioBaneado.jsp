@@ -33,7 +33,7 @@
 			<div class="col-md-4 mb-r">
 <%-- 				<h4 style="left: 70%; position: relative;">Horas dadas: ${horasDadas}</h4> --%>
 <%-- 				<h4 style="left: 70%; position: relative;">Horas recibidas: ${horasRecibidas}</h4> --%>
-				<h4 style="left: 85%; position: relative; font-size: xx-large; font-weight: bold;">Saldo: ${saldo}</h4>
+				<h4 style="left: 85%; color: red; position: relative; font-size: xx-large; font-weight: bold;">Saldo: ${saldo + 20}</h4>
 			</div>
 			<div class="col-md-12 mb-r">
 				<hr>
@@ -46,7 +46,8 @@
 			<h5>Correo: ${estudiante.correo}</h5>
 			<h5>Licenciatura: ${estudiante.licenciatura}</h5>
 			<h5>Curso: ${estudiante.curso}</h5>
-			<h5>Tu balance de horas supera las 20 horas negativas. Hasta que equilibres dicho balance, solo podras ofrecer servicios a traves de la web.</h5>
+			<br>
+			<h5 style="color: red; font-weight: bold;">Tu saldo es negativo, debido a eso estas baneado y solo puedes ofrecer servicios.</h5>
 			<br>
 			<table class="table">
 				<thead>
