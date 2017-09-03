@@ -16,6 +16,14 @@
 </head>
 <t:paginabasicaUsuario>
 <body class="fondo">
+<script type="text/javascript">
+function confirmar(codigoOferta){
+	var respuesta=confirm("¿Deseas crear una colaboracion con esta oferta?");
+	if(respuesta){
+		window.location="../oferta/crearColaboracion/"+codigoOferta+".html";
+		}
+}
+</script>
 <h1>Todas las ofertas existentes</h1>
 <table class="table table-hover">
 <tr>
@@ -36,7 +44,7 @@
 <th>${listoferta.key}</th>
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
-<th><a href="${pageContext.request.contextPath}/oferta/crearColaboracion/${oferta.codigoOferta}.html" class="btn btn-raised btn-primary">Crear colaboracion</a></th>
+<th><a href="javascript:confirmar(${oferta.codigoOferta})" class="btn btn-raised btn-primary">Crear colaboracion</a></th>
 </tr>
 </c:forEach>
 </c:forEach>
