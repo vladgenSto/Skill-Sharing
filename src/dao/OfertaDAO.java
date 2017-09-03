@@ -90,12 +90,13 @@ public class OfertaDAO {
 				new Object[] { codigoOferta }, new OfertaMapper());
 	}
 
-	public void addOferta(Oferta oferta) {
+	public boolean addOferta(Oferta oferta) {
 		oferta.setCodigoOferta();
 		this.jdbcTemplate.update(
 				"insert into Oferta(descripcion, fechaInicio, fechaFin, dniEstudiante,nombreHabilidad,nivelHabilidad, codigoOferta) values(?, ?, ?, ?, ? ,? ,?)",
 				oferta.getDescripcion(), oferta.getFechaInicio(), oferta.getFechaFin(),
 				oferta.getDniEstudiante(), oferta.getNombreHabilidad(), oferta.getNivelHabilidad(), oferta.getCodigoOferta());
+		return true;
 	}
 
 	public void updateOferta(Oferta oferta) {

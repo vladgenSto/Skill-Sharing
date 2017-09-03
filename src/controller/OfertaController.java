@@ -123,6 +123,7 @@ public class OfertaController {
 	
 	@RequestMapping(value="add",method=RequestMethod.POST)
 	public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta,BindingResult bindingResult,Model model,HttpSession session) throws AddressException, MessagingException{
+		boolean ofertaAnyadida=false;
 		OfertaValidator ofertaValidator=new OfertaValidator();
 		ofertaValidator.validate(oferta, bindingResult);
 		if(bindingResult.hasErrors()){
@@ -139,9 +140,10 @@ public class OfertaController {
 			existe.setDescripcion(oferta.getNombreHabilidad()+", "+oferta.getNivelHabilidad());
 			habilidadDao.addHabilidadIndividual(existe);
 		}
-		ofertaDao.addOferta(oferta);
+		ofertaAnyadida=ofertaDao.addOferta(oferta);
 		List<Demanda> listaDemandas=demandaDao.getDemandas();
 		List<String> destinatarios=new ArrayList<String>();
+		session.setAttribute("ofertaCreada", ofertaAnyadida);
 		for(Demanda demanda:listaDemandas){
 			if(demanda.getNombreHabilidad().equals(oferta.getNombreHabilidad())){
 				Estudiante estudiante=estudianteDao.getEstudiante(demanda.getDniEstudiante());
@@ -175,7 +177,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping(value="/delete/{codigoOferta}")
-	public String processDelete(@PathVariable int codigoOferta, HttpSession session){
+	public String processDelete(@PathVariable int codigoOferta,HttpSession session){
 		Oferta oferta = ofertaDao.getOferta(codigoOferta);
 		ofertaDao.deleteOferta(oferta);
 		session.setAttribute("numOfertas", ofertaDao.getOfertasUsuario(oferta.getDniEstudiante()).size());

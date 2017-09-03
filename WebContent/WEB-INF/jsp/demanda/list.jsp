@@ -16,6 +16,14 @@
 </head>
 <t:paginabasicaUsuario title="Lista Demandas">
 <jsp:body>
+<script type="text/javascript">
+function confirmarBorrado(codDemanda){
+	var respuesta=confirm("¿Estas seguro de que quieres borrar la demanda?");
+	if(respuesta){
+		window.location="delete/"+codDemanda+".html";
+		}
+}
+</script>
 <h1>Lista de Demandas</h1>
 <table class="table table-hover">
 <tr>
@@ -36,7 +44,7 @@
 <th>${demanda.nombreHabilidad}</th>
 <th>${demanda.nivelHabilidad}</th>
 <th><a href="update/${demanda.codigoDemanda}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
-<th><a href="delete/${demanda.codigoDemanda}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
+<th><a href="javascript:confirmarBorrado(${demanda.codigoDemanda})" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
 <th><a href="buscar/${demanda.codigoDemanda}.html" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></a></th>
 </tr>
 </c:forEach>

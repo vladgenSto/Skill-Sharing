@@ -79,7 +79,6 @@ public class LoginController {
         if(bindingResult.hasErrors())
             return "login";
         
-//		BasicPasswordEncryptor passwordEncryptor=new BasicPasswordEncryptor();
         user=userDao.loadUserByName(user.getUsername(), user.getPassword());
         if(user == null){
             bindingResult.rejectValue("password", "badpw","Usuario o contrasenya incorrectos");

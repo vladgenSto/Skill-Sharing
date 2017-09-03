@@ -16,6 +16,14 @@
 </head>
 <t:paginabasicaUsuario title="Lista Ofertas">
 <jsp:body>
+<script type="text/javascript">
+function confirmarBorrado(codOferta){
+	var respuesta=confirm("¿Estas seguro de que quieres borrar la oferta?");
+	if(respuesta){
+		window.location="delete/"+codOferta+".html";
+		}
+}
+</script>
 <h1>Lista de Ofertas</h1>
 <table class="table table-hover">
 <tr>
@@ -35,7 +43,7 @@
 <th>${oferta.nombreHabilidad}</th>
 <th>${oferta.nivelHabilidad}</th>
 <th><a href="update/${oferta.codigoOferta}.html" class="btn btn-success"><i class="fa fa-pencil"></i></a></th>
-<th><a href="delete/${oferta.codigoOferta}.html" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
+<th><a href="javascript:confirmarBorrado(${oferta.codigoOferta})" class="btn btn-danger"><i class="fa fa-remove"></i></a></th>
 
 <!-- <th><a href="update/${oferta.codigoOferta}.html" class="btn btn-raised btn-yellow">Editar</a></th>
 <th><a href="delete/${oferta.codigoOferta}.html" class="btn btn-raised btn-warning">Borrar</a></th>-->

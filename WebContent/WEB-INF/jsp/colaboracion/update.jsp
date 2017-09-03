@@ -16,6 +16,17 @@
 <title>Actualizar Colaboracion</title>
 </head>
 <body class="formulario">
+<script type="text/javascript">
+function confirmarValoracion(){
+	var respuesta=confirm("Una vez terminado el proceso, no podras modificar los datos ¿Seguro que quieres terminar?");
+	var codOferta=document.getElementById("codigoOferta");
+	var codDemanda=document.getElementById("codigoDemanda");
+	if(!respuesta){
+		window.location="colaboracion/update/"+codOferta.value+", "+codDemanda.value+".html"
+		}
+	
+}
+</script>
 <form:form class="form-horizontal" method="post" modelAttribute="colaboracion">
 <fieldset>
 <legend>Valorar Colaboracion</legend>
@@ -120,7 +131,7 @@
     <div class="form-group">
     	<div class="col-md-6 col-md-offset-2">
         	<a href="${pageContext.request.contextPath}/colaboracion/list.html" class="btn btn-raised btn-warning">Volver</a>
-			<button type="submit" class="btn btn-raised btn-primary">Terminar</button>
+			<button type="submit" class="btn btn-raised btn-primary" onClick="confirmarValoracion()">Terminar</button>
 		</div>
 	</div>
 </fieldset>
